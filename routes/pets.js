@@ -1,7 +1,7 @@
-const express=reqiure('express');
+const express=require('express');
 const router=express.Router();
 router.get('/',(req,res)=>{
-res.render('searchPage');
+res.send('pets page')
 })
 
 module.exports=router;
