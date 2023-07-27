@@ -30,7 +30,8 @@ global.db = new sqlite3.Database('./database.db', function (err) {
 app.use('/public', express.static(__dirname + '/public'))
 
 const homeRoutes = require('./routes/homeRoute')
-app.use('/', homeRoutes)
+app.use('/', homeRoutes);
+
 
 const port = 3000;
 
