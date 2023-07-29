@@ -1,7 +1,6 @@
 const express=require('express');
 const router=express.Router();
-router.get('/',(req,res)=>{
-res.send('pets page')
-})
+const petsController=require('../controllers/petsController');
+router.get('/',petsController.index);
 
 module.exports=router;
