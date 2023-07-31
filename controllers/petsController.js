@@ -21,8 +21,11 @@ class PetsController {
   static new_pet(req, res) {
     res.send("pets new post");
   }
-  static edit_pet(req,res){
-    res.send('pets edit post');
+  static edit_pet(req, res) {
+    res.send("pets edit post");
+  }
+  static delete_pet(req, res) {
+    res.send("pets delete");
   }
 }
 
