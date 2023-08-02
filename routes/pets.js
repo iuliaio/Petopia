@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const petsController = require("../controllers/petsController");
+const petsRepository=require('../repositories/petsRepository');
 router.get("/", petsController.index);
 router.get("/search", petsController.search);
 router.post("/search",petsController.search);
