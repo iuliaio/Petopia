@@ -1,13 +1,83 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shelter Profile</title>
+    <link rel="stylesheet" href="../shelterProfile.css" />
+    <script
+      src="https://kit.fontawesome.com/974a5cd720.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var readURL = function (input) {
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              $(".profile-pic").attr("src", e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+          }
+        };
+
+        $(".file-upload").on("change", function () {
+          readURL(this);
+        });
+
+        $(".profile-pic").on("click", function () {
+          $(".file-upload").click();
+        });
+      });
+    </script>
+    <title>Shelter Account</title>
+    <!-- TODO: Can we add the name of the Shelter here? -->
   </head>
   <body>
-    <main>
-      <h1>SHELTER PROFILE</h1>
-    </main>
+    <header>
+      <div class="navbar">
+        <span>
+          <img src="../png/logo-no-background.png" alt="Petopia Logo" />
+        </span>
+        <nav>
+          <ul>
+            <li><a href="">Some</a></li>
+            <li><a href="">Menu</a></li>
+            <li>
+              <a href="">Here</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="square-container">
+      <div class="square">
+        <div class="content">
+          <!-- taken from here: https://codepen.io/shantikumarsingh/pen/RRmWxo -->
+          <div id="circle">
+            <img
+              class="profile-pic"
+              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+            />
+            <input class="file-upload" type="file" accept="image/*" />
+          </div>
+        </div>
+      </div>
+
+      <div class="square">
+        <div class="content"><form id="profile-square-big"></form></div>
+      </div>
+
+      <div class="square">
+        <div class="content"><form id="profile-square"></form></div>
+      </div>
+
+      <div class="square">
+        <div class="content"><form id="profile-square"></form></div>
+      </div>
+    </div>
   </body>
 </html>
