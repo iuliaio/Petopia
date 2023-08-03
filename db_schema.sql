@@ -38,7 +38,7 @@ create table users
     county          text,
     zip_code        text,
     address         text,
-    created_at      text    not null
+    created_at      date default current_date    not null
 );
 
 create table chats
@@ -49,7 +49,7 @@ create table chats
         references users,
     user2_id   integer not null
         references users,
-    created_at text    not null
+    created_at date default current_date    not null
 );
 
 create table feedback
@@ -62,7 +62,7 @@ create table feedback
         references users,
     rating      INTEGER not null,
     comment     TEXT    not null,
-    created_at  text    not null
+    created_at  date default current_date    not null
 );
 
 create table messages
@@ -74,7 +74,7 @@ create table messages
     recipient_id integer not null
         references users,
     message      text    not null,
-    created_at   text    not null
+    created_at   date default current_date    not null
 );
 
 create table pets
@@ -134,7 +134,7 @@ create table posts
     media_url  TEXT,
     user_id    INTEGER not null
         references users,
-    created_at TEXT    not null
+    created_at date default current_date    not null
 );
 
 create table comments
@@ -146,7 +146,7 @@ create table comments
     user_id    INTEGER not null
         references users,
     content    TEXT    not null,
-    created_at text    not null
+    created_at date default current_date    not null
 );
 
 create table likes
@@ -159,7 +159,7 @@ create table likes
         references comments,
     user_id    INTEGER not null
         references users (Id),
-    created_at text    not null
+    created_at date default current_date    not null
 );
 
 create table requests
@@ -172,7 +172,7 @@ create table requests
         references pets,
     owner_id   integer not null
         references users,
-    created_at TEXT    not null
+    created_at date default current_date    not null
 );
 
 create table wish_list
