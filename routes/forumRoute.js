@@ -8,18 +8,18 @@ router.get("/:id", forumController.show);
 
 router.get("/create", forumController.create);
 
-router.get("/create", forumController.store);
+router.post("/store", forumController.store);
 
 router.get("/:id/edit", forumController.edit);
 
-router.get("/:id/update", forumController.update);
+router.post("/:id/update", forumController.update);
 
-router.get("/:id/delete", forumController.destroy);
+router.post("/:id/delete", forumController.destroy);
 
-router.get("/:id/like", forumController.like);
+router.post("/:id/like", forumController.like);
 
-router.get("/:id/dislike", forumController.dislike);
+router.post("/:id/dislike", forumController.dislike);
 
-router.get("/:id/comment", forumController.comment);
+router.post("/:id/comment", forumController.add_comment);
 
 module.exports = router;

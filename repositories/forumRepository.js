@@ -1,3 +1,5 @@
+const commentRepository = require('../repositories/commentRepository')
+
 class ForumRepository {
     static all() {
         return new Promise((resolve, reject) => {
@@ -62,7 +64,9 @@ class ForumRepository {
         })
     }
 
-    static delete(post_id) {
+    static async delete(post_id) {
+        await commentRepository.deleteAllByPost(post_id)
+
         return new Promise((resolve, reject) => {
             db.run('DELETE FROM posts WHERE id = ?', [post_id], function (err) {
                 if (err) {
@@ -72,7 +76,30 @@ class ForumRepository {
                 }
             })
         })
+    }
 
+    static add_like(post_id) {
+        return new Promise((resolve, reject) => {
+            db.run('UPDATE posts SET likes = likes + 1 WHERE id = ?', [post_id], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
+        })
+    }
+
+    static add_dislike(post_id) {
+        return new Promise((resolve, reject) => {
+            db.run('UPDATE posts SET dislikes = dislikes + 1 WHERE id = ?', [post_id], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
+        })
     }
 }
 

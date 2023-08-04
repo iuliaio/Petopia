@@ -1,97 +1,115 @@
-class ForumController {
+const forumRepository = require('../repositories/forumRepository')
+const commentRepository = require('../repositories/commentRepository')
 
-    // The main page where all posts are listed ordered descending by the publication date
-    static index(req, res, next) {
+class ForumController {
+    static async index(req, res, next) {
         try {
-            //Get all posts
-            res.render('TODO');
+            const posts = await forumRepository.all();
+            res.render('TODO', {posts: posts});
         } catch (err) {
             next(err)
         }
     }
 
-    // A form to create a new post
     static create(req, res) {
         res.render('TODO');
     }
 
-    // Function to store the newly created post
-    static store(req, res, next) {
-        // Get the post from the req body
+    static async store(req, res, next) {
+        const post = {
+            title: req.body.title, content: req.body.content, user_id: req.session.user.id
+        }
+
         try {
-            // Insert the post
-            // Redirect
+            await forumRepository.insert(post)
+            res.redirect('TODO')
         } catch (err) {
             next(err)
         }
     }
 
-    // Show a single post
-    static show(req, res, next) {
+    static async show(req, res, next) {
+        const post_id = req.params.id
+
         try {
-            // Get the post
-            // Get all the comments
-            res.render('TODO');
+            const post = await forumRepository.get(post_id)
+            const comments = commentRepository.allByPost(post_id);
+            res.render('TODO', {post: post, comments: comments});
         } catch (err) {
             next(err)
         }
     }
 
-    // Form to edit the post
-    static edit(req, res, next) {
+    static async edit(req, res, next) {
+        const post_id = req.params.id
+
         try {
-            //Get the post
-            res.render('TODO');
+            const post = await forumRepository.get(post_id)
+            res.render('TODO', {post: post});
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async update(req, res, next) {
+        const post = {
+            id: req.params.id, title: req.body.title, content: req.body.content, user_id: req.session.user.id
+        }
+
+        try {
+            await forumRepository.update(post)
+            res.redirect('TODO')
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async destroy(req, res, next) {
+        const post_id = req.params.id
+
+        try {
+            await forumRepository.delete(post_id)
+            res.redirect('TODO')
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async like(req, res, next) {
+        const post_id = req.params.id
+
+        try {
+            await forumRepository.add_like(post_id)
+            res.redirect('TODO')
         } catch (err) {
             next(err)
         }
 
     }
 
-    // Function to update the post
-    static update(req, res, next) {
-        // Get the post from the req body
+    static async dislike(req, res, next) {
+        const post_id = req.params.id
+
         try {
-            // Update the post
-            // Redirect
+            await forumRepository.add_dislike(post_id)
+            res.redirect('TODO')
         } catch (err) {
             next(err)
         }
 
     }
 
-    // Function to delete the post
-    static destroy(req, res, next) {
+    static async add_comment(req, res, next) {
+        const comment = {
+            post_id: req.params.id, user_id: req.session.user.id, content: req.body.content
+        }
+
         try {
-            // Delete the post
-            // Redirect
+            await forumRepository.insert(comment)
+            res.redirect('TODO')
         } catch (err) {
             next(err)
         }
-
-    }
-
-    // Function to add a like
-    static like(req, res, next) {
-        try {
-            // Add like from user to the post
-            // Redirect
-        } catch (err) {
-            next(err)
-        }
-
-    }
-
-    // Function to add a comments to a post
-    static comment(req, res, next) {
-        // Get the comment from the req body
-        try {
-            // Add comment to post
-            // Redirect
-        } catch (err) {
-            next(err)
-        }
-
     }
 
 }
