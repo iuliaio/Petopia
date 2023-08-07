@@ -5,50 +5,45 @@ body {
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
+    align-items: center; 
     background-color: #C154C1;
-    height: 100vh;
+    min-height: 100vh; 
 }
 
 .box {
-    width: 27%;
-    height: 60vh;
-    background-color: #ffffff;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 150%; 
+    max-width: 500px; 
     background-color: orange;
-    transform: translate(-50%, -50%); 
+    padding: 20px;
+    margin: 50px auto 50px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    transform: translate(-21%,1%);
 }
 
 h2 {
     text-align: center;
-    padding-right: 18px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    padding-left: 60px;
-    
+    padding: 0 20px; 
 }
 
 label {
     margin-bottom: 5px;
-    font-size: 18px; 
-    font-weight: bold; 
+    font-size: 18px;
+    font-weight: bold;
 }
 
 input[type="email"],
 input[type="password"] {
-    padding: 15px;
-    margin-bottom: 17px;
-    width: 65%;
-    padding-right: 85px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
     border-radius: 5px;
-     
     border: 1px solid grey;
-    
 }
 
 .forgot-password {
@@ -60,16 +55,11 @@ input[type="submit"] {
     background-color: black;
     color: #fff;
     border: none;
-    padding: 15px 5px;
+    padding: 10px;
     cursor: pointer;
-    width: 35%;
-    
-    text-align: center;
-    /* margin: 20px auto; */
-    margin-left: 110px;
+    width: 50%;
+    margin: 10px auto; 
     border-radius: 5px;
-     
-    border: 1px solid black;
 }
 
 input[type="submit"]:hover {
@@ -78,7 +68,8 @@ input[type="submit"]:hover {
 }
 
 #signup-text {
-    padding-right: 60px; 
+    padding-right: 120px; 
+    padding-right: 10px; 
     font-size: 20px; 
     
 }
@@ -89,4 +80,18 @@ input[type="password"]::placeholder {
 
 input[type="email"]::placeholder {
     font-size: 17px;
+}
+
+#box1 {
+    width: 27%;
+    height: 50vh;
+    background-color: #ffffff;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: orange;
+    transform: translate(-50%, -50%); 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
