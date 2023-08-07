@@ -72,10 +72,9 @@ img {
 
 /* GRID */
 
-.square-container {
+/* .square-container {
   display: grid;
-  grid-template-columns: repeat(2, minmax(100px, 800px));
-  grid-gap: 10px;
+  grid-template-columns: 2fr 4fr;
 }
 
 .square {
@@ -87,13 +86,44 @@ img {
 .square::before {
   content: "";
   display: block;
-  padding-top: 100%;
+  padding-top: 60%;
 }
 
 .square .content {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+} */
+
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 100px 100px 100px;
+  background-color: #af7dff;
+}
+
+.a {
+  background-color: chartreuse;
+  grid-column: 1;
+}
+.b {
+  background-color: yellow;
+  grid-column: 4;
+  grid-row: 1 / 3;
+}
+.c {
+  background-color: red;
+  grid-column: 1;
+  grid-row: 2;
+}
+.d {
+  background-color: blue;
+  grid-column: 2;
+  grid-row: 2;
 }
