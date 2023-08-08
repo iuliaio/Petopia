@@ -38,18 +38,18 @@ create table users
     county          text,
     zip_code        text,
     address         text,
-    created_at      text    not null
+    created_at      date default current_date    not null
 );
 
 create table chats
 (
-    id         integer not null
+    id         integer                   not null
         primary key autoincrement,
-    user1_id   integer not null
+    user1_id   integer                   not null
         references users,
-    user2_id   integer not null
+    user2_id   integer                   not null
         references users,
-    created_at text    not null
+    created_at date default current_date not null
 );
 
 create table feedback
@@ -62,19 +62,21 @@ create table feedback
         references users,
     rating      INTEGER not null,
     comment     TEXT    not null,
-    created_at  text    not null
+    created_at  date default current_date    not null
 );
 
 create table messages
 (
     id           integer not null
         primary key autoincrement,
+    chat_id      integer not null
+        references chats,
     sender_id    integer not null
         references users,
     recipient_id integer not null
         references users,
     message      text    not null,
-    created_at   text    not null
+    created_at   date default current_date    not null
 );
 
 create table pets
@@ -111,7 +113,7 @@ create table adoptions
         references users,
     pet_id     integer not null
         references pets,
-    adopted_at text    not null
+    adopted_at date default current_date    not null
 );
 
 create table pets_relationships
@@ -134,7 +136,7 @@ create table posts
     media_url  TEXT,
     user_id    INTEGER not null
         references users,
-    created_at TEXT    not null
+    created_at date default current_date    not null
 );
 
 create table comments
@@ -146,7 +148,7 @@ create table comments
     user_id    INTEGER not null
         references users,
     content    TEXT    not null,
-    created_at text    not null
+    created_at date default current_date    not null
 );
 
 create table likes
@@ -159,7 +161,7 @@ create table likes
         references comments,
     user_id    INTEGER not null
         references users (Id),
-    created_at text    not null
+    created_at date default current_date    not null
 );
 
 create table requests
@@ -172,7 +174,7 @@ create table requests
         references pets,
     owner_id   integer not null
         references users,
-    created_at TEXT    not null
+    created_at date default current_date    not null
 );
 
 create table wish_list
@@ -183,6 +185,6 @@ create table wish_list
         references users,
     pet_id     INTEGER not null
         references pets,
-    date_added text    not null
+    date_added date default current_date    not null
 );
 
