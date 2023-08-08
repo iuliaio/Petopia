@@ -69,10 +69,14 @@ create table messages
 (
     id           integer                   not null
         primary key autoincrement,
-    sender_id    integer                   not null
+
+    chat_id      integer not null
+        references chats,
+    sender_id    integer not null
         references users,
     recipient_id integer                   not null
         references users,
+
     message      text                      not null,
     created_at   date default current_date not null
 );
@@ -111,7 +115,7 @@ create table adoptions
         references users,
     pet_id     integer not null
         references pets,
-    adopted_at text    not null
+    adopted_at date default current_date    not null
 );
 
 create table pets_relationships
@@ -174,6 +178,6 @@ create table wish_list
         references users,
     pet_id     INTEGER not null
         references pets,
-    date_added text    not null
+    date_added date default current_date    not null
 );
 
