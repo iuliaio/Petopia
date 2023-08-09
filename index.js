@@ -1,6 +1,7 @@
 const express = require("express");
 const sqlite3 = require("sqlite3");
 const session = require("express-session");
+const bodyParser=require('body-parser');
 const expressLayouts = require("express-ejs-layouts");
 
 const app = express();
@@ -19,6 +20,7 @@ app.set("views", __dirname + "/views/");
 app.set("layout", "shared/layout");
 
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 global.db = new sqlite3.Database("./database.db", function (err) {
