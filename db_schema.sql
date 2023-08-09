@@ -23,13 +23,13 @@ create table breeds
 
 create table users
 (
-    id              INTEGER not null
+    id              INTEGER                   not null
         primary key autoincrement,
-    first_name      TEXT    not null,
-    last_name       TEXT    not null,
-    phone           TEXT    not null,
-    email           TEXT    not null,
-    password        TEXT    not null,
+    first_name      TEXT                      not null,
+    last_name       TEXT                      not null,
+    phone           TEXT                      not null,
+    email           TEXT                      not null,
+    password        TEXT                      not null,
     profile_picture BLOB,
     charity_name    TEXT,
     charity_id      INTEGER,
@@ -38,43 +38,47 @@ create table users
     county          text,
     zip_code        text,
     address         text,
-    created_at      text    not null
+    created_at      date default current_date not null
 );
 
 create table chats
 (
-    id         integer not null
+    id         integer                   not null
         primary key autoincrement,
-    user1_id   integer not null
+    user1_id   integer                   not null
         references users,
-    user2_id   integer not null
+    user2_id   integer                   not null
         references users,
-    created_at text    not null
+    created_at date default current_date not null
 );
 
 create table feedback
 (
-    id          INTEGER not null
+    id          INTEGER                   not null
         primary key autoincrement,
-    receiver_id INTEGER not null
+    receiver_id INTEGER                   not null
         references users,
-    sender_id   INTEGER not null
+    sender_id   INTEGER                   not null
         references users,
-    rating      INTEGER not null,
-    comment     TEXT    not null,
-    created_at  text    not null
+    rating      INTEGER                   not null,
+    comment     TEXT                      not null,
+    created_at  date default current_date not null
 );
 
 create table messages
 (
-    id           integer not null
+    id           integer                   not null
         primary key autoincrement,
+
+    chat_id      integer not null
+        references chats,
     sender_id    integer not null
         references users,
-    recipient_id integer not null
+    recipient_id integer                   not null
         references users,
-    message      text    not null,
-    created_at   text    not null
+
+    message      text                      not null,
+    created_at   date default current_date not null
 );
 
 create table pets
@@ -111,7 +115,7 @@ create table adoptions
         references users,
     pet_id     integer not null
         references pets,
-    adopted_at text    not null
+    adopted_at date default current_date    not null
 );
 
 create table pets_relationships
@@ -126,53 +130,44 @@ create table pets_relationships
 
 create table posts
 (
-    id         INTEGER not null
+    id         INTEGER                      not null
         primary key autoincrement,
-    title      TEXT    not null,
-    content    TEXT    not null,
+    title      TEXT                         not null,
+    content    TEXT                         not null,
     image_url  TEXT,
     media_url  TEXT,
-    user_id    INTEGER not null
+    user_id    INTEGER                      not null
         references users,
-    created_at TEXT    not null
+    likes      integer default 0            not null,
+    dislikes   integer default 0            not null,
+    created_at date    default current_date not null
 );
 
 create table comments
 (
-    id         INTEGER not null
+    id         INTEGER                      not null
         primary key autoincrement,
-    post_id    INTEGER not null
+    post_id    INTEGER                      not null
         references posts,
-    user_id    INTEGER not null
+    user_id    INTEGER                      not null
         references users,
-    content    TEXT    not null,
-    created_at text    not null
-);
-
-create table likes
-(
-    id         INTEGER not null
-        primary key autoincrement,
-    post_id    INTEGER not null
-        references posts (Id),
-    comment_id INTEGER not null
-        references comments,
-    user_id    INTEGER not null
-        references users (Id),
-    created_at text    not null
+    content    TEXT                         not null,
+    likes      integer default 0            not null,
+    dislikes   integer default 0            not null,
+    created_at date    default current_date not null
 );
 
 create table requests
 (
-    id         integer not null
+    id         integer                   not null
         primary key autoincrement,
-    user_id    integer not null
+    user_id    integer                   not null
         references users,
-    pet_id     integer not null
+    pet_id     integer                   not null
         references pets,
-    owner_id   integer not null
+    owner_id   integer                   not null
         references users,
-    created_at TEXT    not null
+    created_at date default current_date not null
 );
 
 create table wish_list
@@ -183,6 +178,6 @@ create table wish_list
         references users,
     pet_id     INTEGER not null
         references pets,
-    date_added text    not null
+    date_added date default current_date    not null
 );
 
