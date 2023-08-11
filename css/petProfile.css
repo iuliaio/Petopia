@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "Kufi";
+  src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
+    format("truetype");
+}
+
+body {
+  background-color: #af7dff;
+  font-family: "Kufi";
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+ul {
+  display: flex;
+}
+
+li {
+  margin-right: 40px;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #272635;
+  cursor: pointer;
+}
+
+h3 {
+  margin-bottom: 2px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 420px 414px 260px;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.square {
+  background-color: #ffcf24;
+  border: 1px solid #272635;
+}
+
+.square1 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 229px;
+  height: 708px;
+}
+
+.square2 {
+  grid-column: 2;
+  grid-row: 1;
+  width: 653px;
+  height: 414px;
+  position: relative;
+}
+
+.inner-rectangle {
+  background-color: white;
+  width: 450px;
+  height: 246px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.square3 {
+  grid-column: 2;
+  grid-row: 2;
+  width: 653px;
+  height: 260px;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.filters,
+.description {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #272635;
+}
+
+.square4 {
+  grid-column: 3;
+  grid-row: 1, 2;
+  width: 229px;
+  height: 708px;
+}
