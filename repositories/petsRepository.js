@@ -1,4 +1,5 @@
-class PetsRepository{
+class PetsRepository {
 
 }
-module.exports=PetsRepository;
+
+module.exports = PetsRepository;

@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const chatController = require("../controllers/chatController");
 
-router.get("/", chatController.index);
+const ChatController = require("../controllers/chatController");
+const ChatsRepository = require("../repositories/chatRepository");
 
-router.get("/:id", chatController.show);
+const chatsRepository = new ChatsRepository(db);
+const chatController = new ChatController(chatsRepository);
 
-router.post("/:id/message", chatController.add_message);
+router.get("/", chatController.index.bind(chatController));
 
-router.post('/store', chatController.store)
+router.get("/:id", chatController.show.bind(chatController));
+
+router.post("/:id/message", chatController.add_message.bind(chatController));
+
+router.post('/store', chatController.store.bind(chatController));
 
 module.exports = router;

@@ -1,17 +1,19 @@
-const userRepository = require('../repositories/UserRepository');
-
 class UserController {
-    static index(req, res) {
+    constructor(userRepository) {
+        this.userRepository = userRepository
+    }
+
+    index(req, res) {
         res.render('loginChoice');
     }
 
-    static login(req, res) {
+    login(req, res) {
         res.render('login');
     }
 
-    static async authenticate(req, res, next) {
+    async authenticate(req, res, next) {
         try {
-            const user = await userRepository.getByEmailPassword(req.body);
+            const user = await this.userRepository.getByEmailPassword(req.body);
 
             if (user) {
                 req.session.user = {
@@ -26,46 +28,46 @@ class UserController {
         }
     }
 
-    static shelterRegister(req, res) {
+    shelterRegister(req, res) {
         res.render('shelterRegister');
     }
 
-    static async shelterStore(req, res, next) {
+    async shelterStore(req, res, next) {
         try {
-            await userRepository.insert(req.body);
+            await this.userRepository.insert(req.body);
             res.redirect('/auth/login');
         } catch (err) {
             next(err);
         }
     }
 
-    static adopterRegister(req, res) {
+    adopterRegister(req, res) {
         res.render('adopterRegister');
     }
 
-    static async adopterStore(req, res, next) {
+    async adopterStore(req, res, next) {
         try {
-            await userRepository.insert(req.body);
+            await this.userRepository.insert(req.body);
             res.redirect('/');
         } catch (err) {
             next(err);
         }
     }
 
-    static edit(req, res) {
+    edit(req, res) {
         res.render('editProfile');
     }
 
-    static async update(req, res, next) {
+    async update(req, res, next) {
         try {
-            await userRepository.update(req.body);
+            await this.userRepository.update(req.body);
             res.redirect('/');
         } catch (err) {
             next(err);
         }
     }
 
-    static logout(req, res, next) {
+    logout(req, res, next) {
         req.session.destroy((err) => {
             if (err) {
                 next(err)

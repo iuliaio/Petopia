@@ -101,5 +101,73 @@ describe('ForumController', () => {
         });
     });
 
-    // Other tests for different methods
+    describe('.edit', () => {
+        it('should render the appropriate view with post', async () => {
+            const mockPost = { /* Create a mock post object here */ };
+            const req = { params: { id: 123 } };
+            const res = { render: sandbox.stub() };
+            sandbox.stub(forumRepository, 'get').resolves(mockPost);
+
+            await ForumController.edit(req, res);
+
+            expect(res.render.calledWith('TODO', { post: mockPost })).to.be.true;
+        });
+
+        it('should handle errors and call next', async () => {
+            const req = { params: { id: 123 } };
+            const res = { render: sandbox.stub() };
+            const next = sandbox.stub();
+            sandbox.stub(forumRepository, 'get').throws(new Error('Some error'));
+
+            await ForumController.edit(req, res, next);
+
+            expect(next.called).to.be.true;
+        });
+    });
+
+    describe('.update', () => {
+        it('should update a post and redirect on success', async () => {
+            const req = { params: { id: 123 }, body: { title: 'Updated Title', content: 'Updated Content' } };
+            const res = { redirect: sandbox.stub() };
+            sandbox.stub(forumRepository, 'update').resolves();
+
+            await ForumController.update(req, res);
+
+            expect(res.redirect.calledWith('TODO')).to.be.true;
+        });
+
+        it('should handle errors and call next', async () => {
+            const req = { params: { id: 123 }, body: { title: 'Updated Title', content: 'Updated Content' } };
+            const res = { redirect: sandbox.stub() };
+            const next = sandbox.stub();
+            sandbox.stub(forumRepository, 'update').throws(new Error('Some error'));
+
+            await ForumController.update(req, res, next);
+
+            expect(next.called).to.be.true;
+        });
+    });
+
+    describe('.destroy', () => {
+        it('should delete a post and redirect on success', async () => {
+            const req = { params: { id: 123 } };
+            const res = { redirect: sandbox.stub() };
+            sandbox.stub(forumRepository, 'delete').resolves();
+
+            await ForumController.destroy(req, res);
+
+            expect(res.redirect.calledWith('TODO')).to.be.true;
+        });
+
+        it('should handle errors and call next', async () => {
+            const req = { params: { id: 123 } };
+            const res = { redirect: sandbox.stub() };
+            const next = sandbox.stub();
+            sandbox.stub(forumRepository, 'delete').throws(new Error('Some error'));
+
+            await ForumController.destroy(req, res, next);
+
+            expect(next.called).to.be.true;
+        });
+    });
 });

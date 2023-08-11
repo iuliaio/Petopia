@@ -36,15 +36,9 @@ global.db = new sqlite3.Database("./database.db", function (err) {
 app.use("/public", express.static(__dirname + "/public"));
 
 const homeRoutes = require("./routes/homeRoute");
-const searchRoutes = require("./routes/search");
-const petsRoutes = require("./routes/pets");
-const shelterRoutes = require("./routes/shelter");
-const adoptersRoutes=require('./routes/adopters');
+const petsRoutes = require("./routes/petsRoute");
 app.use("/", homeRoutes);
-app.use("/search", searchRoutes);
 app.use('/pets',petsRoutes);
-app.use('/shelter',shelterRoutes);
-app.use('/adopter',adoptersRoutes);
 
 const port = 3000;
 

@@ -107,6 +107,4 @@ describe('CommentController', () => {
             expect(next.called).to.be.true;
         });
     });
-
-    // Other tests for other methods if needed
 });
