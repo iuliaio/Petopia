@@ -59,7 +59,7 @@ body {
   grid-column: 1;
   grid-row: 1 / span 2;
   width: 229px;
-  height: 708px;
+  height: 100%;
 }
 
 .square2 {
@@ -85,7 +85,7 @@ body {
   grid-column: 2;
   grid-row: 2;
   width: 653px;
-  height: 260px;
+  height: 100%;
   display: grid;
   grid-template-rows: 1fr 2fr;
   grid-gap: 20px;
@@ -97,11 +97,165 @@ body {
   background-color: white;
   padding: 20px;
   border: 1px solid #272635;
+  
 }
 
 .square4 {
   grid-column: 3;
   grid-row: 1, 2;
   width: 229px;
-  height: 708px;
+  height: 100%;
 }
+.butttonReturn {
+  width: 159px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #fff;
+  font-size: large;
+  margin-left: 53px;
+}
+.container {
+  padding-block: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+.card {
+  width: 80%;
+  height: 80%;
+ 
+  border: none;
+  display: flex;
+  align-items: flex-start; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+article {
+  --img-scale: 1.001;
+  --title-color: black;
+  --link-icon-translate: -20px;
+  --link-icon-opacity: 0;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: none;
+  background: #fff;
+  transform-origin: center;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  
+}
+
+article a::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0;
+  cursor: pointer;
+  content: "";
+}
+
+/* basic article elements styling */
+
+
+figure {
+  margin: 0;
+  padding: 0;
+  
+  overflow: hidden;
+}
+
+article img {
+  max-width: 100%;
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  transition: transform 0.4s ease-in-out;
+}
+
+.article-body {
+  padding: 24px;
+}
+
+article a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #28666e;
+}
+
+article a:focus {
+  outline: 1px dotted #28666e;
+}
+
+article a .icon {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  transform: translateX(var(--link-icon-translate));
+  opacity: var(--link-icon-opacity);
+  transition: all 0.3s;
+}
+
+/* using the has() relational pseudo selector to update our custom properties */
+article:has(:hover, :focus) {
+  --img-scale: 1.1;
+  --title-color: #28666e;
+  --link-icon-translate: 0;
+  --link-icon-opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.articles{
+  margin-top: 10%;
+}
+
+
+
+
+
+
+
