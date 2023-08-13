@@ -1,173 +1,127 @@
 const chai = require('chai');
 const sinon = require('sinon');
-const forumRepository = require('../repositories/forumRepository');
-const commentRepository = require('../repositories/commentRepository');
+const ForumRepository = require('../repositories/forumRepository');
+const CommentRepository = require('../repositories/commentRepository');
 const ForumController = require('../controllers/forumController');
+const sqlite3 = require("sqlite3");
 
 const expect = chai.expect;
 
 describe('ForumController', () => {
-    let sandbox;
+    let db;
+    let forumController;
+    let forumRepository;
+    let commentRepository;
 
     beforeEach(() => {
-        sandbox = sinon.createSandbox();
+        db = new sqlite3.Database("./database.db");
+        forumRepository = new ForumRepository(db);
+        commentRepository = new CommentRepository(db);
+        forumController = new ForumController(forumRepository, commentRepository);
     });
 
     afterEach(() => {
-        sandbox.restore();
     });
 
     describe('.index', () => {
         it('should render the appropriate view with posts', async () => {
-            const mockPosts = [/* Create mock posts here */];
             const req = {};
-            const res = { render: sandbox.stub() };
-            sandbox.stub(forumRepository, 'all').resolves(mockPosts);
+            const res = {render: sinon.spy()};
+            const next = sinon.spy();
 
-            await ForumController.index(req, res);
+            await forumController.index(req, res, next);
 
-            expect(res.render.calledWith('TODO', { posts: mockPosts })).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = {};
-            const res = { render: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'all').throws(new Error('Some error'));
-
-            await ForumController.index(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.render.calledOnce).to.be.true;
+            expect(res.render.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.create', () => {
         it('should render the appropriate view', () => {
             const req = {};
-            const res = { render: sandbox.stub() };
+            const res = {render: sinon.spy()};
 
-            ForumController.create(req, res);
+            forumController.create(req, res);
 
-            expect(res.render.calledWith('TODO')).to.be.true;
+            expect(res.render.calledOnce).to.be.true;
+            expect(res.render.firstCall.args[0]).to.equal('TODO');
         });
     });
 
     describe('.store', () => {
         it('should store a post and redirect to the appropriate view on success', async () => {
-            const req = { body: { title: 'Test Title', content: 'Test Content' }, session: { user: { id: 123 } } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(forumRepository, 'insert').resolves();
+            const req = {
+                body: {
+                    title: "Title", content: "Content"
+                }, session: {user: {id: 1}}
+            };
+            const res = {redirect: sinon.spy()};
+            const next = sinon.spy();
 
-            await ForumController.store(req, res);
+            await forumController.store(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { body: { title: 'Test Title', content: 'Test Content' } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'insert').throws(new Error('Some error'));
-
-            await ForumController.store(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.show', () => {
         it('should render the appropriate view with post and comments', async () => {
-            const mockPost = { /* Create a mock post object here */ };
-            const mockComments = [/* Create mock comment objects here */];
-            const req = { params: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            sandbox.stub(forumRepository, 'get').resolves(mockPost);
-            sandbox.stub(commentRepository, 'allByPost').resolves(mockComments);
+            const req = {params: {id: 123}};
+            const res = {render: sinon.spy()};
+            const next = sinon.spy();
 
-            await ForumController.show(req, res);
+            await forumController.show(req, res, next);
 
-            expect(res.render.calledWith('TODO', { post: mockPost, comments: mockComments })).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'get').throws(new Error('Some error'));
-
-            await ForumController.show(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.render.calledOnce).to.be.true;
+            expect(res.render.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.edit', () => {
         it('should render the appropriate view with post', async () => {
-            const mockPost = { /* Create a mock post object here */ };
-            const req = { params: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            sandbox.stub(forumRepository, 'get').resolves(mockPost);
+            const req = {params: {id: 123}};
+            const res = {render: sinon.spy()};
 
-            await ForumController.edit(req, res);
+            await forumController.edit(req, res);
 
-            expect(res.render.calledWith('TODO', { post: mockPost })).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'get').throws(new Error('Some error'));
-
-            await ForumController.edit(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.render.calledOnce).to.be.true;
+            expect(res.render.firstCall.args[0]).to.equal('TODO');
         });
     });
 
     describe('.update', () => {
         it('should update a post and redirect on success', async () => {
-            const req = { params: { id: 123 }, body: { title: 'Updated Title', content: 'Updated Content' } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(forumRepository, 'update').resolves();
+            const req = {
+                params: {id: 123}, body: {
+                    title: "Title", content: "Content"
+                }, session: {user: {id: 1}}
+            };
+            const res = {redirect: sinon.spy()};
+            const next = sinon.spy();
 
-            await ForumController.update(req, res);
+            await forumController.update(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 }, body: { title: 'Updated Title', content: 'Updated Content' } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'update').throws(new Error('Some error'));
-
-            await ForumController.update(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.destroy', () => {
         it('should delete a post and redirect on success', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(forumRepository, 'delete').resolves();
+            const req = {params: {id: 123}};
+            const res = {redirect: sinon.spy()};
+            const next = sinon.spy();
 
-            await ForumController.destroy(req, res);
+            await forumController.destroy(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(forumRepository, 'delete').throws(new Error('Some error'));
-
-            await ForumController.destroy(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 });

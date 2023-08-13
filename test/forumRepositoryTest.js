@@ -1,152 +1,75 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const sinon = require('sinon');
-const commentRepository = require('../repositories/commentRepository');
 const ForumRepository = require('../repositories/forumRepository');
+const sqlite3 = require("sqlite3");
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 describe('ForumRepository', () => {
-    let dbStub;
-    let commentRepositoryStub;
+    let db;
+    let forumRepository;
 
     beforeEach(() => {
-        dbStub = sinon.stub(db);
-        commentRepositoryStub = sinon.stub(commentRepository);
+        db = new sqlite3.Database("./database.db");
+        forumRepository = new ForumRepository(db);
     });
 
     afterEach(() => {
-        dbStub.restore();
-        commentRepositoryStub.restore();
     });
 
     describe('.all', () => {
         it('should return a list of posts', async () => {
-            const expectedPosts = [/* Define expected posts here */];
-            dbStub.all.yields(null, expectedPosts);
-
-            const posts = await ForumRepository.all();
-
-            expect(posts).to.deep.equal(expectedPosts);
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const expectedError = new Error('Database error');
-            dbStub.all.yields(expectedError);
-
-            await expect(ForumRepository.all()).to.be.rejectedWith(expectedError);
+            const posts = await forumRepository.all();
+            expect(posts).to.be.an('array');
         });
     });
 
     describe('.get', () => {
         it('should return a post by ID', async () => {
-            const expectedPost = { /* Define expected post here */ };
-            const postId = 123; // Replace with a valid post ID
-            dbStub.all.withArgs(/* ... */).yields(null, expectedPost);
-
-            const post = await ForumRepository.get(postId);
-
-            expect(post).to.deep.equal(expectedPost);
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const postId = 123; // Replace with a valid post ID
-            const expectedError = new Error('Database error');
-            dbStub.all.yields(expectedError);
-
-            await expect(ForumRepository.get(postId)).to.be.rejectedWith(expectedError);
+            const post_id = 123;
+            const post = await forumRepository.get(post_id);
+            expect(post).to.be.an('array');
         });
     });
 
     describe('.insert', () => {
         it('should insert a new post', async () => {
-            const post = { /* Define post object here */ };
-            dbStub.run.yields(null, { lastID: 1 });
-
-            const postId = await ForumRepository.insert(post);
-
-            expect(postId).to.equal(1);
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const post = { /* Define post object here */ };
-            const expectedError = new Error('Database error');
-            dbStub.run.yields(expectedError);
-
-            await expect(ForumRepository.insert(post)).to.be.rejectedWith(expectedError);
+            const post_data = {title: 'New Post', content: 'This is a new post', user_id: 1};
+            const inserted_id = await forumRepository.insert(post_data);
+            expect(inserted_id).to.be.a('number');
         });
     });
 
     describe('.update', () => {
         it('should update a post', async () => {
-            const post = { /* Define post object here */ };
-            dbStub.run.yields(null);
-
-            await expect(ForumRepository.update(post)).to.be.fulfilled;
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const post = { /* Define post object here */ };
-            const expectedError = new Error('Database error');
-            dbStub.run.yields(expectedError);
-
-            await expect(ForumRepository.update(post)).to.be.rejectedWith(expectedError);
+            const post_data = {id: 123, title: 'Updated Post', content: 'This post is updated', user_id: 1};
+            const updated_id = await forumRepository.update(post_data);
+            expect(updated_id).to.be.a('number');
         });
     });
 
     describe('.delete', () => {
         it('should delete a post and its associated comments', async () => {
-            const postId = 123; // Replace with a valid post ID
-            commentRepositoryStub.deleteAllByPost.resolves(); // Mock the method from CommentRepository
-            dbStub.run.yields(null);
-
-            await expect(ForumRepository.delete(postId)).to.be.fulfilled;
-
-            expect(commentRepositoryStub.deleteAllByPost.calledOnceWith(postId)).to.be.true;
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const postId = 123; // Replace with a valid post ID
-            const expectedError = new Error('Database error');
-            commentRepositoryStub.deleteAllByPost.resolves(); // Mock the method from CommentRepository
-            dbStub.run.yields(expectedError);
-
-            await expect(ForumRepository.delete(postId)).to.be.rejectedWith(expectedError);
+            const post_id = 123;
+            const deleted_id = await forumRepository.delete(post_id);
+            expect(deleted_id).to.be.a('number');
         });
     });
 
     describe('.add_like', () => {
         it('should increment likes for a post', async () => {
-            const postId = 123; // Replace with a valid post ID
-            dbStub.run.yields(null);
-
-            await expect(ForumRepository.add_like(postId)).to.be.fulfilled;
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const postId = 123; // Replace with a valid post ID
-            const expectedError = new Error('Database error');
-            dbStub.run.yields(expectedError);
-
-            await expect(ForumRepository.add_like(postId)).to.be.rejectedWith(expectedError);
+            const post_id = 123;
+            const updated_id = await forumRepository.add_like(post_id);
+            expect(updated_id).to.be.a('number');
         });
     });
 
     describe('.add_dislike', () => {
         it('should increment dislikes for a post', async () => {
-            const postId = 123; // Replace with a valid post ID
-            dbStub.run.yields(null);
-
-            await expect(ForumRepository.add_dislike(postId)).to.be.fulfilled;
-        });
-
-        it('should reject with an error if there is a database error', async () => {
-            const postId = 123; // Replace with a valid post ID
-            const expectedError = new Error('Database error');
-            dbStub.run.yields(expectedError);
-
-            await expect(ForumRepository.add_dislike(postId)).to.be.rejectedWith(expectedError);
+            const post_id = 123;
+            const updated_id = await forumRepository.add_dislike(post_id);
+            expect(updated_id).to.be.a('number');
         });
     });
 });

@@ -62,7 +62,7 @@ class ForumRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })
@@ -77,7 +77,7 @@ class ForumRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })
@@ -89,7 +89,7 @@ class ForumRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })
@@ -101,7 +101,7 @@ class ForumRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })

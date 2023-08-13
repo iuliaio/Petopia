@@ -30,11 +30,11 @@ class ChatRepository {
     insert(user1_id, user2_id) {
         return new Promise((resolve, reject) => {
             this.db.run(`INSERT INTO chats (user1_id, user2_id)
-                         values (?, ?)`, [user1_id, user2_id], (err) => {
+                         values (?, ?)`, [user1_id, user2_id], function (err) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(this.lastId)
+                    resolve(this.lastID)
                 }
             })
         })
@@ -45,11 +45,11 @@ class ChatRepository {
 
         return new Promise((resolve, reject) => {
             this.db.run(`INSERT INTO messages (chat_id, sender_id, recipient_id, message)
-                         values (?, ?, ?, ?)`, [chat_id, sender_id, recipient_id, message], (err) => {
+                         values (?, ?, ?, ?)`, [chat_id, sender_id, recipient_id, message], function (err) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(this.lastId)
+                    resolve(this.lastID)
                 }
             })
         })

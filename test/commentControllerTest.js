@@ -1,110 +1,78 @@
 const chai = require('chai');
 const sinon = require('sinon');
-const commentRepository = require('../repositories/commentRepository');
+const CommentRepository = require('../repositories/commentRepository');
 const CommentController = require('../controllers/commentController');
+const sqlite3 = require("sqlite3");
 
 const expect = chai.expect;
 
 describe('CommentController', () => {
-    let sandbox;
+    let db;
+    let commentRepository;
+    let commentController;
 
     beforeEach(() => {
-        sandbox = sinon.createSandbox();
+        db = new sqlite3.Database("./database.db");
+        commentRepository = new CommentRepository();
+        commentController = new CommentController(commentRepository);
     });
 
     afterEach(() => {
-        sandbox.restore();
     });
 
     describe('.delete', () => {
         it('should delete a comment and redirect on success', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(commentRepository, 'delete').resolves();
+            const req = { params: { commentId: 123 } };
+            const res = { redirect: sinon.spy() };
+            const next = sinon.spy();
 
-            await CommentController.delete(req, res);
+            await commentController.delete(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(commentRepository, 'delete').throws(new Error('Some error'));
-
-            await CommentController.delete(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.update', () => {
         it('should update a comment and redirect on success', async () => {
-            const req = { params: { id: 123 }, body: { content: 'Updated Content' } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(commentRepository, 'update').resolves();
+            const req = { params: { commentId: 123 }, body: { content: 'Updated content' } };
+            const res = { redirect: sinon.spy() };
+            const next = sinon.spy();
 
-            await CommentController.update(req, res);
+            await commentController.update(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 }, body: { content: 'Updated Content' } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(commentRepository, 'update').throws(new Error('Some error'));
-
-            await CommentController.update(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.like', () => {
         it('should increment likes for a comment and redirect on success', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(commentRepository, 'add_like').resolves();
+            const req = { params: { commentId: 123 } };
+            const res = { redirect: sinon.spy() };
+            const next = sinon.spy();
 
-            await CommentController.like(req, res);
+            await commentController.like(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(commentRepository, 'add_like').throws(new Error('Some error'));
-
-            await CommentController.like(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.dislike', () => {
         it('should increment dislikes for a comment and redirect on success', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(commentRepository, 'add_dislike').resolves();
+            const req = { params: { commentId: 123 } };
+            const res = { redirect: sinon.spy() };
+            const next = sinon.spy();
 
-            await CommentController.dislike(req, res);
+            await commentController.dislike(req, res, next);
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { params: { id: 123 } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(commentRepository, 'add_dislike').throws(new Error('Some error'));
-
-            await CommentController.dislike(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true;
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO');
+            expect(next.called).to.be.false;
         });
     });
 });

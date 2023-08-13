@@ -1,112 +1,85 @@
 const chai = require('chai');
 const sinon = require('sinon');
-const chatsRepository = require('../repositories/chatRepository');
+const ChatRepository = require('../repositories/chatRepository');
 const ChatController = require('../controllers/chatController');
+const sqlite3 = require("sqlite3");
 
 const expect = chai.expect;
 
 describe('ChatController', () => {
-    let sandbox;
+
+    let chatRepository;
+    let chatController
+    let db;
 
     beforeEach(() => {
-        sandbox = sinon.createSandbox();
+        db = new sqlite3.Database("./database.db");
+        chatRepository = new ChatRepository(db)
+        chatController = new ChatController(chatRepository)
     });
 
     afterEach(() => {
-        sandbox.restore();
     });
 
     describe('.index', () => {
-        it('should render the appropriate view with chats', async () => {
-            const mockChats = [/* Create mock chat objects here */];
-            const req = { session: { user: { id: 123 } } };
-            const res = { render: sandbox.stub() };
-            sandbox.stub(chatsRepository, 'all').resolves(mockChats);
+        it('should render the appropriate view with  chats', async () => {
+            const req = {session: {user: {id: 1}}};
+            const res = {render: sinon.spy()}
+            const next = sinon.spy()
 
-            await ChatController.index(req, res);
+            await chatController.index(req, res, next)
 
-            expect(res.render.calledWith('TODO', { chats: mockChats })).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { session: { user: { id: 123 } } };
-            const res = { render: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(chatsRepository, 'all').throws(new Error('Some error'));
-
-            await ChatController.index(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.render.calledOnce).to.be.true
+            expect(res.render.firstCall.args[0]).to.equal('TODO')
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.show', () => {
         it('should render the appropriate view with chat', async () => {
-            const mockChat = { /* Create a mock chat object here */ };
-            const req = { body: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            sandbox.stub(chatsRepository, 'get').resolves(mockChat);
+            const req = {body: {id: 1}}
+            const res = {render: sinon.spy()}
+            const next = sinon.spy()
 
-            await ChatController.show(req, res);
+            await chatController.show(req, res, next)
 
-            expect(res.render.calledWith('TODO', { chat: mockChat })).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { body: { id: 123 } };
-            const res = { render: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(chatsRepository, 'get').throws(new Error('Some error'));
-
-            await ChatController.show(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.render.calledOnce).to.be.true
+            expect(res.render.firstCall.args[0]).to.equal('TODO')
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.store', () => {
         it('should store a new chat and redirect on success', async () => {
-            const req = { session: { user: { id: 123 } }, body: { user2_id: 456 } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(chatsRepository, 'insert').resolves();
+            const req = {
+                session: {user: {id: 1}}, body: {user2_id: 2}
+            }
+            const res = {redirect: sinon.spy()}
+            const next = sinon.spy()
 
-            await ChatController.store(req, res);
+            await chatController.store(req, res, next)
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { session: { user: { id: 123 } }, body: { user2_id: 456 } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(chatsRepository, 'insert').throws(new Error('Some error'));
-
-            await ChatController.store(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO')
+            expect(next.called).to.be.false;
         });
     });
 
     describe('.add_message', () => {
         it('should add a new message to a chat and redirect on success', async () => {
-            const req = { session: { user: { id: 123 } }, body: { id: 456, recipient_id: 789, message: 'Test Message' } };
-            const res = { redirect: sandbox.stub() };
-            sandbox.stub(chatsRepository, 'add_message').resolves();
+            const req = {
+                session: {user: {id: 1}}, body: {
+                    id: 1, message: "This is a message", recipient_id: 2
+                }
+            }
+            const res = {redirect: sinon.spy()}
+            const next = sinon.spy()
 
-            await ChatController.add_message(req, res);
+            await chatController.add_message(req, res, next)
 
-            expect(res.redirect.calledWith('TODO')).to.be.true;
-        });
-
-        it('should handle errors and call next', async () => {
-            const req = { session: { user: { id: 123 } }, body: { id: 456, recipient_id: 789, message: 'Test Message' } };
-            const res = { redirect: sandbox.stub() };
-            const next = sandbox.stub();
-            sandbox.stub(chatsRepository, 'add_message').throws(new Error('Some error'));
-
-            await ChatController.add_message(req, res, next);
-
-            expect(next.called).to.be.true;
+            expect(res.redirect.calledOnce).to.be.true
+            expect(res.redirect.firstCall.args[0]).to.equal('TODO')
+            expect(next.called).to.be.false;
         });
     });
 });

@@ -28,7 +28,7 @@ create table users
     first_name      TEXT                      not null,
     last_name       TEXT                      not null,
     phone           TEXT                      not null,
-    email           TEXT                      not null,
+    email           TEXT                      not null unique,
     password        TEXT                      not null,
     profile_picture BLOB,
     charity_name    TEXT,
@@ -70,9 +70,9 @@ create table messages
     id           integer                   not null
         primary key autoincrement,
 
-    chat_id      integer not null
+    chat_id      integer                   not null
         references chats,
-    sender_id    integer not null
+    sender_id    integer                   not null
         references users,
     recipient_id integer                   not null
         references users,
@@ -109,13 +109,13 @@ create table pets
 
 create table adoptions
 (
-    id         integer not null
+    id         integer                   not null
         primary key autoincrement,
-    user_id    integer not null
+    user_id    integer                   not null
         references users,
-    pet_id     integer not null
+    pet_id     integer                   not null
         references pets,
-    adopted_at date default current_date    not null
+    adopted_at date default current_date not null
 );
 
 create table pets_relationships
@@ -172,12 +172,12 @@ create table requests
 
 create table wish_list
 (
-    id         INTEGER not null
+    id         INTEGER                   not null
         primary key autoincrement,
-    user_id    INTEGER not null
+    user_id    INTEGER                   not null
         references users,
-    pet_id     INTEGER not null
+    pet_id     INTEGER                   not null
         references pets,
-    date_added date default current_date    not null
+    date_added date default current_date not null
 );
 

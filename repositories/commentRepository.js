@@ -6,11 +6,11 @@ class CommentRepository {
 
     delete(comment_id) {
         return new Promise((resolve, reject) => {
-            this.db.run('DELETE FROM comments WHERE id = ?', comment_id, (err) => {
+            this.db.run('DELETE FROM comments WHERE id = ?', comment_id, function (err) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve()
+                    resolve(this.lastID)
                 }
             })
         })
@@ -31,11 +31,11 @@ class CommentRepository {
     update(comment) {
         const {comment_id, content} = comment
         return new Promise((resolve, reject) => {
-            this.db.run('UPDATE comments SET content = ? where id = ?', [content, comment_id], (err) => {
+            this.db.run('UPDATE comments SET content = ? where id = ?', [content, comment_id], function (err) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve()
+                    resolve(this.lastID)
                 }
             })
         })
@@ -47,7 +47,7 @@ class CommentRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })
@@ -59,7 +59,7 @@ class CommentRepository {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             })
         })
@@ -87,11 +87,11 @@ class CommentRepository {
         const {post_id, user_id, content} = comment;
         return new Promise((resolve, reject) => {
             this.db.run(`INSERT INTO comments (post_id, user_id, content, likes, dislikes)
-                         values (?, ?, ?, ?, ?)`, [post_id, user_id, content, 0, 0], (err) => {
+                         values (?, ?, ?, ?, ?)`, [post_id, user_id, content, 0, 0], function (err) {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve()
+                    resolve(this.lastID)
                 }
             })
         })
