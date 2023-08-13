@@ -41,6 +41,10 @@
     float:left;
    width: 20%;
     margin-top:6%;
+    background-color: #FFCF24;
+    height:35rem;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
   .pets{
     float:left;
@@ -76,10 +80,39 @@ overflow: auto;
     padding: 2px 16px;
   }
   select{
-    display:block;
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 24%;
+    margin-top:5%;
+    font-size: larger;
+  }
+  label{
+    font-size: larger;
+    margin:5%;
   }
   .filterButton{
     display:block;
+    margin-top: 26%;
+    text-align: center;
+    margin-left:26%;
+    border-radius: 16px;
+    background-color: #272635 ; 
+color:#FFFFFF;
+padding:5%;
+width: 57%;
+height: 56.559px;
+color: #FFF;
+text-align: center;
+font-family: Roboto;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+flex-shrink: 0;
+
+
+    
   }
   
    
