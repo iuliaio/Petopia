@@ -36,6 +36,16 @@
   h3 {
     margin-bottom: 2px;
   }
+  
+  .filter{
+    float:left;
+   width: 20%;
+    margin-top:6%;
+  }
+  .pets{
+    float:left;
+    width: 80%;
+  }
   .outer-container{
 display:grid;
 grid-template-columns: repeat(3, 1fr);
@@ -65,4 +75,11 @@ overflow: auto;
   .container {
     padding: 2px 16px;
   }
+  select{
+    display:block;
+  }
+  .filterButton{
+    display:block;
+  }
+  
    
