@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Kufi";
+    src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
+      format("truetype");
+  }
+  
+  body {
+    background-color: #af7dff;
+    font-family: "Kufi";
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+  }
+  
+  ul {
+    display: flex;
+  }
+  
+  li {
+    margin-right: 40px;
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #272635;
+    cursor: pointer;
+  }
+  
+  h3 {
+    margin-bottom: 2px;
+  }
