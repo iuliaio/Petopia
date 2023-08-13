@@ -37,11 +37,6 @@ h3 {
   margin-bottom: 2px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -58,44 +53,45 @@ body {
 .square1 {
   grid-column: 1;
   grid-row: 1 / span 2;
-  width: 229px;
+  width: 80%;
   height: 100%;
+  margin-left: 5%;
 }
 
 .square2 {
   grid-column: 2;
   grid-row: 1;
-  width: 653px;
-  height: 414px;
-  position: relative;
+  width: 89%;
+  height: 98%;
+  position:relative;
+  margin-left: 5%;
 }
 
-.inner-rectangle {
+.inner-rectangle  {
   background-color: white;
-  width: 450px;
-  height: 246px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  margin-left:10%;
+  margin-top:7%;
+  
 }
 
 .square3 {
   grid-column: 2;
   grid-row: 2;
-  width: 653px;
-  height: 94%;
+  width: 83.5%;
+  height: 95%;
   display: grid;
   grid-template-rows: 1fr 2fr;
   grid-gap: 20px;
   padding: 20px;
+  margin-left: 5%;
 }
 
 .filters,
 .description {
   background-color: white;
-  padding: 20px;
+  padding: 5%;
   border: 1px solid #272635;
   
 }
@@ -103,17 +99,18 @@ body {
 .square4 {
   grid-column: 3;
   grid-row: 1, 2;
-  width: 229px;
-  height: 202%;
+  width: 80%;
+  height: 203%;
+  margin-left: 9%;
 }
 .butttonReturn {
-  width: 159px;
-  height: 52px;
-  flex-shrink: 0;
+  width: 8rem;
+  height: 4rem;
+
   border-radius: 5px;
   background: #fff;
-  font-size: large;
-  margin-left: 53px;
+  font-size: 1.5rem;
+  margin-left: 2.5rem;
 }
 .container {
   padding-block: 10px;
@@ -126,54 +123,12 @@ body {
 .card {
   width: 80%;
   height: 80%;
- 
+
   border: none;
   display: flex;
   align-items: flex-start; /* Center vertically */
   justify-content: center; /* Center horizontally */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 article {
   --img-scale: 1.001;
@@ -187,7 +142,6 @@ article {
   transform-origin: center;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  
 }
 
 article a::after {
@@ -200,11 +154,10 @@ article a::after {
 
 /* basic article elements styling */
 
-
 figure {
   margin: 0;
   padding: 0;
-  
+
   overflow: hidden;
 }
 
@@ -216,7 +169,7 @@ article img {
 }
 
 .article-body {
-  padding: 24px;
+  padding: 5%;
 }
 
 article a {
@@ -246,16 +199,11 @@ article:has(:hover, :focus) {
   --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-.articles{
-  margin-top: 10%;
+.articles {
+  margin-top: 6%;
+  margin-bottom: 5%;
 }
-
-
-
-
-
-
-
