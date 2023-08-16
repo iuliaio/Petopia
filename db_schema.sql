@@ -5,22 +5,6 @@ create table relationships
     name text    not null
 );
 
-create table species
-(
-    id   INTEGER not null
-        primary key autoincrement,
-    name TEXT    not null
-);
-
-create table breeds
-(
-    id         INTEGER not null
-        primary key autoincrement,
-    species_id INTEGER not null
-        references species,
-    name       TEXT    not null
-);
-
 create table users
 (
     id              INTEGER                   not null
@@ -83,28 +67,26 @@ create table messages
 
 create table pets
 (
-    id                 INTEGER not null
+    id                 INTEGER                   not null
         primary key autoincrement,
-    name               TEXT    not null,
-    species_id         INTEGER not null
-        references species,
-    breed_id           INTEGER not null
-        references breeds,
-    age                INTEGER not null,
-    gender             TEXT    not null,
-    size               TEXT    not null,
-    color              TEXT    not null,
-    weight             REAL    not null,
-    description        TEXT    not null,
-    vaccination_status TEXT    not null,
-    neutered           BOOLEAN not null,
+    name               TEXT                      not null,
+    species            text                      not null,
+    breed              text                      not null,
+    age                INTEGER                   not null,
+    gender             TEXT                      not null,
+    size               TEXT                      not null,
+    color              TEXT                      not null,
+    weight             REAL                      not null,
+    description        TEXT                      not null,
+    vaccination_status TEXT                      not null,
+    neutered           BOOLEAN                   not null,
     health_condition   TEXT,
     personality_traits TEXT,
-    available          BOOLEAN not null,
-    user_id            INTEGER not null
+    available          BOOLEAN                   not null,
+    user_id            INTEGER                   not null
         references users,
-    born_at            text    not null,
-    profile_photo      BLOB    not null
+    born_at            date default current_date not null,
+    profile_photo      BLOB
 );
 
 create table adoptions
