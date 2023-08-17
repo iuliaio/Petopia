@@ -1,3 +1,14 @@
+@media screen and (max-width: 600px) {
+  footer {
+    display: none;
+  }
+  .list {
+    display: none;
+  }
+  .circle-container {
+    display: none;
+  }
+}
 @font-face {
   font-family: "Kufi";
   src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
@@ -136,4 +147,59 @@ label {
   font-size: 1.5rem;
   border-radius: 5px;
   border: 1px solid #272635;
+}
+.outermost {
+  display: relative;
+}
+footer {
+  width: 100%;
+
+  display: flow-root;
+  background-color: black;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer nav ul li {
+  display: inline-block;
+  margin: 0 4%;
+  margin-right: 6%;
+}
+
+footer nav ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid lightblue;
+  margin: 0 10px;
+  background-color: transparent;
+}
+
+.list li a {
+  color: lightblue;
+  font-size: large;
+}
+
+.list li#petopia a {
+  font-size: x-large;
 }
