@@ -13,14 +13,11 @@ describe('ForumController', () => {
     let forumRepository;
     let commentRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         forumRepository = new ForumRepository(db);
         commentRepository = new CommentRepository(db);
         forumController = new ForumController(forumRepository, commentRepository);
-    });
-
-    afterEach(() => {
     });
 
     describe('.index', () => {

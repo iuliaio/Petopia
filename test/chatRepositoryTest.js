@@ -10,12 +10,9 @@ describe('ChatRepository', () => {
     let db;
     let chatRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         chatRepository = new ChatRepository(db)
-    });
-
-    afterEach(() => {
     });
 
     describe('.all', () => {

@@ -10,12 +10,9 @@ describe('PetsRepository', () => {
     let db;
     let petsRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         petsRepository = new PetsRepository(db);
-    });
-
-    afterEach(() => {
     });
 
     describe('.all', () => {

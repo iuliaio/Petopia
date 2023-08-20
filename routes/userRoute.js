@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const UserController = require("../controllers/userController");
+const UserRepository = require("../repositories/userRepository")
 
-const userController = new UserController(db)
+const userRepository = new UserRepository(db)
+const userController = new UserController(userRepository)
 
 router.get("/", userController.index.bind(userController));
 

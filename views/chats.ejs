@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <title>Petopia - Chats</title>
+
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        #left-panel {
+            width: 30%;
+            border-right: 1px solid #ccc;
+            padding: 20px;
+        }
+        #right-panel {
+            flex: 1;
+            padding: 20px;
+        }
+        .chat-option {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .selected-chat {
+            background-color: #f2f2f2;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div id="left-panel">
+    <% chats.forEach((chat, index) => { %>
+        <div class="chat-option <%= index === selectedChatIndex ? 'selected-chat' : '' %>" onclick="selectChat(<%= index %>)">
+            <%= chat.name %>
+        </div>
+    <% }); %>
+</div>
+<div id="right-panel">
+    <% if (selectedChatIndex !== null) { %>
+        <h2><%= chats[selectedChatIndex].name %></h2>
+        <% chats[selectedChatIndex].messages.forEach((message) => { %>
+            <div class="message">
+                <%= message.message %>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>Select a chat to view messages</p>
+    <% } %>
+</div>
+
+<script>
+    let selectedChatIndex = null;
+
+    function selectChat(index) {
+        selectedChatIndex = index;
+        console.log(selectedChatIndex)
+        console.log(chats)
+        updateChatPanel();
+    }
+
+    function updateChatPanel() {
+        const chatOptions = document.querySelectorAll('.chat-option');
+        chatOptions.forEach((option, i) => {
+            if (i === selectedChatIndex) {
+                option.classList.add('selected-chat');
+            } else {
+                option.classList.remove('selected-chat');
+            }
+        });
+
+        const rightPanel = document.getElementById('right-panel');
+        if (selectedChatIndex !== null) {
+            const selectedChat = chats[selectedChatIndex];
+            const messagesHtml = selectedChat.messages.map(message => `<div class="message">${message}</div>`).join('');
+            rightPanel.innerHTML = `<h2>${selectedChat.name}</h2>${messagesHtml}`;
+        } else {
+            rightPanel.innerHTML = '<p>Select a chat to view messages</p>';
+        }
+    }
+</script>
+
+</body>
+</html>

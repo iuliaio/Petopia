@@ -21,7 +21,7 @@ class UserController {
                 };
                 res.redirect('/pets');
             } else {
-                res.redirect('/auth/login');
+                res.redirect('/user/login');
             }
         } catch (err) {
             next(err);

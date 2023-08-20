@@ -7,19 +7,12 @@ chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 describe('UserRepository', () => {
-
     let db;
     let userRepository;
 
     before(() => {
-        db = new sqlite3.Database("./database.db");
-    });
-
-    beforeEach(() => {
+        db = new sqlite3.Database("./database_test.db");
         userRepository = new UserRepository(db);
-    });
-
-    afterEach(() => {
     });
 
     describe('.all', () => {

@@ -11,13 +11,10 @@ describe('CommentController', () => {
     let commentRepository;
     let commentController;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         commentRepository = new CommentRepository();
         commentController = new CommentController(commentRepository);
-    });
-
-    afterEach(() => {
     });
 
     describe('.delete', () => {

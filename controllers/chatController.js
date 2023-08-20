@@ -4,22 +4,20 @@ class ChatController {
     }
 
     async index(req, res, next) {
+        if (req.session.user === undefined) {
+            const referer = req.header('Referer');
+            res.redirect(referer === undefined ? '/' : referer);
+            return;
+        }
+
         const user_id = req.session.user.id;
 
         try {
             const chats = await this.chatsRepository.all(user_id)
-            res.render('TODO', {chats: chats})
-        } catch (err) {
-            next(err)
-        }
-    }
-
-    async show(req, res, next) {
-        const chat_id = req.body.id;
-
-        try {
-            const chat = await this.chatsRepository.get(chat_id)
-            res.render('TODO', {chat: chat})
+            for (let i = 0; i < chats.length; i++) {
+                chats[i].messages = await this.chatsRepository.allMessages(chats[i].id)
+            }
+            res.render('chats', {chats: chats, selectedChatIndex: null})
         } catch (err) {
             next(err)
         }

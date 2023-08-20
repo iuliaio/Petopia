@@ -10,12 +10,9 @@ describe('ForumRepository', () => {
     let db;
     let forumRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         forumRepository = new ForumRepository(db);
-    });
-
-    afterEach(() => {
     });
 
     describe('.all', () => {
