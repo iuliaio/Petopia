@@ -1,92 +1,61 @@
+@font-face {
+  font-family: "Kufi";
+  src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
+    format("truetype");
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    background-color: #C154C1;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Kufi";
+  background-color: #f0f0f0;
+  display: flex;
+  background-color: #af7dff;
+  font-size: 1rem;
 }
 
 .box {
-    width: 27%;
-    height: 60vh;
-    background-color: #ffffff;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: orange;
-    transform: translate(-50%, -50%); 
+  width: 27%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffcf24;
+  transform: translate(-50%, -50%);
 }
 
 h2 {
-    text-align: center;
-    padding-right: 18px;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    padding-left: 60px;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-label {
-    margin-bottom: 5px;
-    font-size: 18px; 
-    font-weight: bold; 
-}
-
-input[type="email"],
-input[type="password"] {
-    padding: 15px;
-    margin-bottom: 17px;
-    width: 65%;
-    padding-right: 85px;
-    border-radius: 5px;
-     
-    border: 1px solid grey;
-    
+#inputs {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 70%;
+  border-radius: 5px;
+  border: 1px solid #272635;
 }
 
 .forgot-password {
-    margin-top: 5px;
-    color: #007bff;
+  color: #61988e;
 }
 
-input[type="submit"] {
-    background-color: black;
-    color: #fff;
-    border: none;
-    padding: 15px 5px;
-    cursor: pointer;
-    width: 35%;
-    
-    text-align: center;
-    /* margin: 20px auto; */
-    margin-left: 110px;
-    border-radius: 5px;
-     
-    border: 1px solid black;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-    
-}
-
-#signup-text {
-    padding-right: 60px; 
-    font-size: 20px; 
-    
-}
-
-input[type="password"]::placeholder {
-    font-size: 17px;
-}
-
-input[type="email"]::placeholder {
-    font-size: 17px;
+#styledButton {
+  color: white;
+  background-color: #272635;
+  border: none;
+  padding: 15px 5px;
+  cursor: pointer;
+  width: 35%;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 2rem;
 }
