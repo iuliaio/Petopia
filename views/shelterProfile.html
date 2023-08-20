@@ -1,13 +1,75 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shelter Profile</title>
+    <link rel="stylesheet" href="../css/shelterProfile.css" />
+    <script
+      src="https://kit.fontawesome.com/974a5cd720.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../upload-porfile-picture.js"></script>
+    <title>Shelter Account</title>
+    <!-- TODO: Can we add the name of the Shelter here in the title? -->
   </head>
   <body>
-    <main>
-      <h1>SHELTER PROFILE</h1>
-    </main>
+    <header>
+      <div class="navbar">
+        <span>
+          <img src="../png/logo-no-background.png" alt="Petopia Logo" />
+        </span>
+        <nav>
+          <ul>
+            <li><a href="">Some</a></li>
+            <li><a href="">Menu</a></li>
+            <li><a href="">Here</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="wrapper">
+      <div id="card">
+        <h3 id="empty-element">empty</h3>
+        <div id="upload-image">
+          <img class="profile-pic" src="../png/add-photo.png" />
+          <input class="file-upload" type="file" accept="image/*" />
+        </div>
+      </div>
+      <div id="card">
+        <h3>Your dogs for adoption <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-top" class="content">
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+        </div>
+      </div>
+      <div id="card">
+        <h3>Messages</h3>
+        <div id="messages-square" class="content">           
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+      </div>
+      </div>
+      <div id="card">
+        <h3>Your cats for adoption <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-bottom" class="content">
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+        </div>
+      </div>
+      </div>
+    </div>
   </body>
 </html>
