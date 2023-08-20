@@ -5,22 +5,6 @@ create table relationships
     name text    not null
 );
 
-create table species
-(
-    id   INTEGER not null
-        primary key autoincrement,
-    name TEXT    not null
-);
-
-create table breeds
-(
-    id         INTEGER not null
-        primary key autoincrement,
-    species_id INTEGER not null
-        references species,
-    name       TEXT    not null
-);
-
 create table users
 (
     id              INTEGER                   not null
@@ -28,7 +12,7 @@ create table users
     first_name      TEXT                      not null,
     last_name       TEXT                      not null,
     phone           TEXT                      not null,
-    email           TEXT                      not null,
+    email           TEXT                      not null unique,
     password        TEXT                      not null,
     profile_picture BLOB,
     charity_name    TEXT,
@@ -70,9 +54,9 @@ create table messages
     id           integer                   not null
         primary key autoincrement,
 
-    chat_id      integer not null
+    chat_id      integer                   not null
         references chats,
-    sender_id    integer not null
+    sender_id    integer                   not null
         references users,
     recipient_id integer                   not null
         references users,
@@ -83,39 +67,37 @@ create table messages
 
 create table pets
 (
-    id                 INTEGER not null
+    id                 INTEGER                   not null
         primary key autoincrement,
-    name               TEXT    not null,
-    species_id         INTEGER not null
-        references species,
-    breed_id           INTEGER not null
-        references breeds,
-    age                INTEGER not null,
-    gender             TEXT    not null,
-    size               TEXT    not null,
-    color              TEXT    not null,
-    weight             REAL    not null,
-    description        TEXT    not null,
-    vaccination_status TEXT    not null,
-    neutered           BOOLEAN not null,
+    name               TEXT                      not null,
+    species            text                      not null,
+    breed              text                      not null,
+    age                INTEGER                   not null,
+    gender             TEXT                      not null,
+    size               TEXT                      not null,
+    color              TEXT                      not null,
+    weight             REAL                      not null,
+    description        TEXT                      not null,
+    vaccination_status TEXT                      not null,
+    neutered           BOOLEAN                   not null,
     health_condition   TEXT,
     personality_traits TEXT,
-    available          BOOLEAN not null,
-    user_id            INTEGER not null
+    available          BOOLEAN                   not null,
+    user_id            INTEGER                   not null
         references users,
-    born_at            text    not null,
-    profile_photo      BLOB    not null
+    born_at            date default current_date not null,
+    profile_photo      BLOB
 );
 
 create table adoptions
 (
-    id         integer not null
+    id         integer                   not null
         primary key autoincrement,
-    user_id    integer not null
+    user_id    integer                   not null
         references users,
-    pet_id     integer not null
+    pet_id     integer                   not null
         references pets,
-    adopted_at date default current_date    not null
+    adopted_at date default current_date not null
 );
 
 create table pets_relationships
@@ -172,12 +154,12 @@ create table requests
 
 create table wish_list
 (
-    id         INTEGER not null
+    id         INTEGER                   not null
         primary key autoincrement,
-    user_id    INTEGER not null
+    user_id    INTEGER                   not null
         references users,
-    pet_id     INTEGER not null
+    pet_id     INTEGER                   not null
         references pets,
-    date_added date default current_date    not null
+    date_added date default current_date not null
 );
 

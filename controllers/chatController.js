@@ -1,41 +1,43 @@
-const chatsRepository = require('../repositories/chatRepository')
-
 class ChatController {
-    static async index(req, res, next) {
+    constructor(chatsRepository) {
+        this.chatsRepository = chatsRepository;
+    }
+
+    async index(req, res, next) {
         const user_id = req.session.user.id;
 
         try {
-            const chats = await chatsRepository.all(user_id)
+            const chats = await this.chatsRepository.all(user_id)
             res.render('TODO', {chats: chats})
         } catch (err) {
             next(err)
         }
     }
 
-    static async show(req, res, next) {
+    async show(req, res, next) {
         const chat_id = req.body.id;
 
         try {
-            const chat = await chatsRepository.get(chat_id)
+            const chat = await this.chatsRepository.get(chat_id)
             res.render('TODO', {chat: chat})
         } catch (err) {
             next(err)
         }
     }
 
-    static async store(req, res, next) {
+    async store(req, res, next) {
         const user1_id = req.session.user.id;
         const user2_id = req.body.user2_id;
 
         try {
-            await chatsRepository.insert(user1_id, user2_id)
+            await this.chatsRepository.insert(user1_id, user2_id)
             res.redirect('TODO')
         } catch (err) {
             next(err)
         }
     }
 
-    static async add_message(req, res, next) {
+    async add_message(req, res, next) {
         const messageDTO = {
             sender_id: req.session.user.id,
             recipient_id: req.body.recipient_id,
@@ -44,13 +46,12 @@ class ChatController {
         }
 
         try {
-            await chatsRepository.add_message(messageDTO)
+            await this.chatsRepository.add_message(messageDTO)
             res.redirect('TODO')
         } catch (err) {
             next(err)
         }
-
     }
 }
 
-module.exports = ChatController
+module.exports = ChatController;

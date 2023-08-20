@@ -1,46 +1,48 @@
-const commentRepository = require("../repositories/commentRepository");
-
 class CommentController {
-    static async delete(req, res, next) {
+    constructor(commentRepository) {
+        this.commentRepository = commentRepository
+    }
+
+    async delete(req, res, next) {
         const comment_id = req.params.id
 
         try {
-            await commentRepository.delete(comment_id)
+            await this.commentRepository.delete(comment_id)
             res.redirect('TODO')
         } catch (err) {
             next(err)
         }
     }
 
-    static async update(req, res, next) {
+    async update(req, res, next) {
         const comment = {
             comment_id: req.params.id, content: req.body.content
         }
 
         try {
-            await commentRepository.update(comment)
+            await this.commentRepository.update(comment)
             res.redirect('TODO')
         } catch (err) {
             next(err)
         }
     }
 
-    static async like(req, res, next) {
+    async like(req, res, next) {
         const comment_id = req.params.id
 
         try {
-            await commentRepository.add_like(comment_id)
+            await this.commentRepository.add_like(comment_id)
             res.redirect('TODO')
         } catch (err) {
             next(err)
         }
     }
 
-    static async dislike(req, res, next) {
+    async dislike(req, res, next) {
         const comment_id = req.params.id
 
         try {
-            await commentRepository.add_dislike(comment_id)
+            await this.commentRepository.add_dislike(comment_id)
             res.redirect('TODO')
         } catch (err) {
             next(err)

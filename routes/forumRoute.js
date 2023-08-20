@@ -1,25 +1,32 @@
 const express = require("express");
 const router = express.Router();
-const forumController = require("../controllers/forumController");
 
-router.get("/", forumController.index);
+const ForumRepository = require('../repositories/forumRepository')
+const CommentRepository = require('../repositories/commentRepository')
+const ForumController = require("../controllers/forumController");
 
-router.get("/:id", forumController.show);
+const forumRepository = new ForumRepository(db)
+const commentRepository = new CommentRepository(db)
+const forumController = new ForumController(forumRepository, commentRepository)
 
-router.get("/create", forumController.create);
+router.get("/", forumController.index.bind(forumController));
 
-router.post("/store", forumController.store);
+router.get("/:id", forumController.show.bind(forumController));
 
-router.get("/:id/edit", forumController.edit);
+router.get("/create", forumController.create.bind(forumController));
 
-router.post("/:id/update", forumController.update);
+router.post("/store", forumController.store.bind(forumController));
 
-router.post("/:id/delete", forumController.destroy);
+router.get("/:id/edit", forumController.edit.bind(forumController));
 
-router.post("/:id/like", forumController.like);
+router.post("/:id/update", forumController.update.bind(forumController));
 
-router.post("/:id/dislike", forumController.dislike);
+router.post("/:id/delete", forumController.destroy.bind(forumController));
 
-router.post("/:id/comment", forumController.add_comment);
+router.post("/:id/like", forumController.like.bind(forumController));
+
+router.post("/:id/dislike", forumController.dislike.bind(forumController));
+
+router.post("/:id/comment", forumController.add_comment.bind(forumController));
 
 module.exports = router;
