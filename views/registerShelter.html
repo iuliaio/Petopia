@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-    <title>Login</title>
+    <title>Register</title>
   </head>
   <body>
     <main>
       <div class="box">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <br />
         <br />
         <form>
@@ -27,19 +27,24 @@
             placeholder="Password"
             required
           />
-          <p class="forgot-password">Forgot password?</p>
+          <input
+            type="text"
+            id="inputs"
+            name="name"
+            placeholder="Charity Name"
+            required
+          />
+          <input
+            type="number"
+            id="inputs"
+            name="number"
+            placeholder="Charity ID"
+            required
+          />
           <br />
           <br />
           <a id="styledButton" href="../views/adopterProfile.html" type="submit"
-            >Login</a
-          >
-          <br />
-          <br />
-          <p id="signup-text">Do not have an account?</p>
-          <br />
-          <br />
-          <a id="styledButton" href="../views/adopterProfile.html" type="submit"
-            >Sign up now!</a
+            >Register</a
           >
         </form>
       </div>
