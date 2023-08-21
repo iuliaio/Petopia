@@ -11,14 +11,28 @@ class ChatController {
         }
 
         const user_id = req.session.user.id;
-        const selectedIndex = req.query.id;
+        const selectedChat = req.query.id;
 
         try {
             const chats = await this.chatsRepository.all(user_id)
             let chat;
-            if (selectedIndex !== undefined) chat = await this.chatsRepository.allMessages(chats[selectedIndex].id)
+            let recipient_id;
+            if (selectedChat !== undefined) {
+                chat = await this.chatsRepository.allMessages(selectedChat)
 
-            res.render('chats', {chats: chats, chat: chat, selectedIndex: selectedIndex})
+                for (let i = 0; i < chats.length; i++) {
+                    if (chats[i].id == selectedChat)
+                    {
+                        if (chats[i].user1_id === req.session.user.id) {
+                            recipient_id = chats[i].user1_id
+                        } else {
+                            recipient_id = chats[i].user2_id
+                        }
+                    }
+                }
+            }
+
+            res.render('chats', {chats: chats, chat: chat, selectedChat: selectedChat, recipient_id: recipient_id})
         } catch (err) {
             next(err)
         }
@@ -40,13 +54,14 @@ class ChatController {
         const messageDTO = {
             sender_id: req.session.user.id,
             recipient_id: req.body.recipient_id,
-            chat_id: req.body.id,
+            chat_id: req.body.chat_id,
             message: req.body.message
         }
 
         try {
             await this.chatsRepository.add_message(messageDTO)
-            res.redirect('TODO')
+            const referer = req.header('Referer');
+            res.redirect(referer === undefined ? '/chats' : referer);
         } catch (err) {
             next(err)
         }
