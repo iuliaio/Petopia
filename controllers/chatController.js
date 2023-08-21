@@ -11,13 +11,14 @@ class ChatController {
         }
 
         const user_id = req.session.user.id;
+        const selectedIndex = req.query.id;
 
         try {
             const chats = await this.chatsRepository.all(user_id)
-            for (let i = 0; i < chats.length; i++) {
-                chats[i].messages = await this.chatsRepository.allMessages(chats[i].id)
-            }
-            res.render('chats', {chats: chats, selectedChatIndex: null})
+            let chat;
+            if (selectedIndex !== undefined) chat = await this.chatsRepository.allMessages(chats[selectedIndex].id)
+
+            res.render('chats', {chats: chats, chat: chat, selectedIndex: selectedIndex})
         } catch (err) {
             next(err)
         }

@@ -19,7 +19,7 @@ class UserController {
                 req.session.user = {
                     id: user.id, name: `${user.first_name} ${user.last_name}`,
                 };
-                res.redirect('/pets');
+                res.redirect('/chats');
             } else {
                 res.redirect('/user/login');
             }

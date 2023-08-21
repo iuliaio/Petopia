@@ -13,28 +13,44 @@
             display: flex;
             font-family: Arial, sans-serif;
         }
+
         #left-panel {
             width: 30%;
             border-right: 1px solid #ccc;
             padding: 20px;
         }
+
         #right-panel {
             flex: 1;
             padding: 20px;
         }
+
         .chat-option {
             cursor: pointer;
             padding: 10px;
             border-bottom: 1px solid #ccc;
         }
+
         .selected-chat {
             background-color: #f2f2f2;
         }
+
         .message {
             margin-bottom: 10px;
             padding: 5px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
+            clear: both;
+        }
+
+        .sender-message {
+            float: right;
+            background-color: #d2eaf6; /* Adjust the color as needed */
+        }
+
+        .receiver-message {
+            float: left;
+            background-color: #f9f9f9; /* Adjust the color as needed */
         }
     </style>
 </head>
@@ -42,16 +58,16 @@
 
 <div id="left-panel">
     <% chats.forEach((chat, index) => { %>
-        <div class="chat-option <%= index === selectedChatIndex ? 'selected-chat' : '' %>" onclick="selectChat(<%= index %>)">
-            <%= chat.name %>
-        </div>
+        <a href="/chats?id=<%= index %>" class="chat-option <%= index === selectedIndex ? 'selected-chat' : '' %>">
+            This is ok
+        </a>
     <% }); %>
 </div>
 <div id="right-panel">
-    <% if (selectedChatIndex !== null) { %>
-        <h2><%= chats[selectedChatIndex].name %></h2>
-        <% chats[selectedChatIndex].messages.forEach((message) => { %>
-            <div class="message">
+    <% if (chat !== undefined) { %>
+        <h2><%=  %></h2>
+        <% chat.forEach((message) => { %>
+            <div class="message <%= message.sender_id === 1 ? 'sender-message' : 'receiver-message' %>">
                 <%= message.message %>
             </div>
         <% }); %>
@@ -60,36 +76,12 @@
     <% } %>
 </div>
 
-<script>
-    let selectedChatIndex = null;
-
-    function selectChat(index) {
-        selectedChatIndex = index;
-        console.log(selectedChatIndex)
-        console.log(chats)
-        updateChatPanel();
-    }
-
-    function updateChatPanel() {
-        const chatOptions = document.querySelectorAll('.chat-option');
-        chatOptions.forEach((option, i) => {
-            if (i === selectedChatIndex) {
-                option.classList.add('selected-chat');
-            } else {
-                option.classList.remove('selected-chat');
-            }
-        });
-
-        const rightPanel = document.getElementById('right-panel');
-        if (selectedChatIndex !== null) {
-            const selectedChat = chats[selectedChatIndex];
-            const messagesHtml = selectedChat.messages.map(message => `<div class="message">${message}</div>`).join('');
-            rightPanel.innerHTML = `<h2>${selectedChat.name}</h2>${messagesHtml}`;
-        } else {
-            rightPanel.innerHTML = '<p>Select a chat to view messages</p>';
-        }
-    }
-</script>
-
+<div>
+    <form action="/" method="post">
+        <input type="text">
+        <button type="submit">Send</button>
+    </form>
+</div>
+<script src="/public/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
