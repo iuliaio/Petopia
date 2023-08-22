@@ -58,6 +58,9 @@ class ChatController {
             message: req.body.message
         }
 
+        if (messageDTO.message === "")
+            return;
+
         try {
             await this.chatsRepository.add_message(messageDTO)
             const referer = req.header('Referer');

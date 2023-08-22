@@ -7,33 +7,43 @@
     <title>Petopia - Chats</title>
     <style>
         /* Custom styles */
+
+        .message-panel {
+            height: 400px; /* Set a fixed height for the chat panel */
+            overflow-y: scroll; /* Add vertical scrollbar when content overflows */
+            border: 1px solid #ccc;
+        }
+
         .message {
             margin-bottom: 10px;
             padding: 5px;
-            border: 1px solid #ccc;
             clear: both;
         }
 
         .sender-message {
             float: right;
-            background-color: #d2eaf6; /* Adjust the color as needed */
+            background-color: #61988E; /* Adjust the color as needed */
         }
 
         .receiver-message {
             float: left;
-            background-color: #f9f9f9; /* Adjust the color as needed */
+            background-color: #D9D9D9; /* Adjust the color as needed */
+        }
+
+        .bg-purple {
+            background-color: #AF7DFF;
         }
     </style>
 </head>
-<body>
+<body class="bg-purple">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3 bg-light">
+<div class="container mt-5 mb-5">
+    <div class="row align-items-center vh-100">
+        <div class="col-md-3 bg-warning">
             <div class="p-4">
                 <% chats.forEach(chat => { %>
                     <a href="/chats?id=<%= chat.id %>"
-                       class="d-block chat-option card <%= chat.id === selectedChat ? 'selected-chat' : '' %>">
+                       class="mb-2 d-block chat-option card <%= chat.id === selectedChat ? 'selected-chat' : '' %>">
                         <div class="card-body p-3">
                             Chat <%= chat.id %>
                         </div>
@@ -41,17 +51,19 @@
                 <% }); %>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8 bg-warning ms-5">
             <% if (chat !== undefined) { %>
                 <div class="p-4">
                     <h2>Chat Title</h2> <!-- Update with chat title if available -->
-                    <% chat.forEach((message) => { %>
-                        <div class="message <%= message.sender_id === 1 ? 'sender-message' : 'receiver-message' %>">
-                            <%= message.message %>
-                        </div>
-                <% }); %>
+                    <div class="message-panel bg-white p-3"> <!-- Add a panel for the messages -->
+                        <% chat.forEach((message) => { %>
+                            <div class="p-2 rounded-pill message <%= message.sender_id === 1 ? 'sender-message' : 'receiver-message' %>">
+                                <%= message.message %>
+                            </div>
+                        <% }); %>
+                    </div>
                 </div>
-                <div class="p-4">
+                <div class="p-4 pt-0">
                     <form action="chats/<%= selectedChat %>/message" method="post" class="input-group">
                         <input type="hidden" name="recipient_id" value="<%= recipient_id %>">
                         <input type="hidden" name="chat_id" value="<%= selectedChat %>">
@@ -67,5 +79,17 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Function to scroll the chat panel to the bottom
+    function scrollToBottom() {
+        var panel = document.querySelector('.message-panel');
+        panel.scrollTop = panel.scrollHeight;
+    }
+
+    // Call the scrollToBottom function when the page loads and new messages are added
+    window.onload = function () {
+        scrollToBottom();
+    };
+</script>
 </body>
 </html>
