@@ -28,6 +28,14 @@ class UserController {
         }
     }
 
+
+    //TODO: Pet Profile, All Pets, User Account, Rating Page
+
+
+
+
+
+    // TODO: RegisterShelter.html
     shelterRegister(req, res) {
         res.render('shelterRegister');
     }
@@ -41,6 +49,8 @@ class UserController {
         }
     }
 
+
+    // TODO: Registration for a person: RegisterIndividual.html
     adopterRegister(req, res) {
         res.render('adopterRegister');
     }
