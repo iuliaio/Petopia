@@ -11,13 +11,10 @@ describe('PetsController', () => {
     let petsController;
     let petsRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         petsRepository = new PetsRepository(db);
         petsController = new PetsController(petsRepository);
-    });
-
-    afterEach(() => {
     });
 
     describe('.index', () => {

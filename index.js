@@ -1,7 +1,6 @@
 const express = require("express");
 const sqlite3 = require("sqlite3");
 const session = require("express-session");
-const expressLayouts = require("express-ejs-layouts");
 
 const app = express();
 
@@ -10,9 +9,7 @@ app.use(session({
 }));
 
 app.set("view engine", "ejs");
-app.use(expressLayouts);
 app.set("views", __dirname + "/views/");
-app.set("layout", "shared/layout");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -30,9 +27,16 @@ global.db = new sqlite3.Database("./database.db", function (err) {
 app.use("/public", express.static(__dirname + "/public"));
 
 const homeRoutes = require("./routes/homeRoute");
-const petsRoutes = require("./routes/petsRoute");
 app.use("/", homeRoutes);
+
+const petsRoutes = require("./routes/petsRoute");
 app.use('/pets', petsRoutes);
+
+const chatRoute = require("./routes/chatRoute");
+app.use('/chats', chatRoute);
+
+const userRoute = require("./routes/userRoute");
+app.use('/user', userRoute);
 
 const port = 3000;
 

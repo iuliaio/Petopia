@@ -12,13 +12,10 @@ describe('ChatController', () => {
     let chatController
     let db;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         chatRepository = new ChatRepository(db)
         chatController = new ChatController(chatRepository)
-    });
-
-    afterEach(() => {
     });
 
     describe('.index', () => {

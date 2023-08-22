@@ -15,6 +15,22 @@ class ChatRepository {
         });
     }
 
+    allMessages(chat_id) {
+        return new Promise((resolve, reject) => {
+            this.db.all(`SELECT *
+                         FROM messages
+                         where chat_id = ?`, [chat_id], (err, rows) => {
+                if (err) {
+                    reject(err)
+
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
+
     get(chat_id) {
         return new Promise((resolve, reject) => {
             this.db.all('SELECT * FROM messages where chat_id = ?', [chat_id], (err, rows) => {

@@ -5,13 +5,6 @@ const HomeController = require('../controllers/homeController');
 const expect = chai.expect;
 
 describe('HomeController', () => {
-
-    beforeEach(() => {
-    });
-
-    afterEach(() => {
-    });
-
     describe('.index', () => {
         it('should render the home view', () => {
             const req = {};

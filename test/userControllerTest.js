@@ -11,13 +11,10 @@ describe('UserController', () => {
     let userController;
     let userRepository;
 
-    beforeEach(() => {
-        db = new sqlite3.Database("./database.db");
+    before(() => {
+        db = new sqlite3.Database("./database_test.db");
         userRepository = new UserRepository(db)
         userController = new UserController(userRepository);
-    });
-
-    afterEach(() => {
     });
 
     describe('.index', () => {

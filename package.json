@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build-db": "cat db_schema.sql | sqlite3 database.db",
-    "clean-db": "rm database.db",
+    "build-db": "cat db_schema.sql | sqlite3 database.db; cat db_schema.sql | sqlite3 database_test.db",
+    "clean-db": "rm database.db database_test.db",
     "start": "node index.js"
   },
   "dependencies": {
