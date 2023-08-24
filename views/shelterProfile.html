@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../public/css/shelterProfile.css" />
+    <link rel="stylesheet" href="../public/css/modal.css" />
     <script
       src="https://kit.fontawesome.com/974a5cd720.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../public/js/modal.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../upload-porfile-picture.js"></script>
+   <script src="../public/js/upload-porfile-picture.js"></script>
+
     <title>Shelter Account</title>
     <!-- TODO: Can we add the name of the Shelter here in the title? -->
   </head>
@@ -28,6 +31,34 @@
         </nav>
       </div>
     </header>
+
+
+  <!-- Modal -->
+  <div class="modal-button">
+    <button id="myBtn" class="align-right">Open Modal</button>
+  </div>
+  <div id="upload-content-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="profile-form">
+        <h2>Create Pet Profile</h2>
+        <div class="profile-picture">
+          <img id="profile-img" src="../public/img/profilepetpic.png" alt="Profile Picture" />
+          <input type="file" id="profile-image-upload" accept="image/*" />
+        </div>
+        <textarea id="profile-description" placeholder="Enter your profile description..."></textarea>
+        <div class="filter-options">
+          <h3>Apply Filters:</h3>
+          <form action="">
+            <label for="filter-pets"><input type="checkbox" id="filter-pets" name="filter-pets"> Likes other pets</label>
+            <label for="filter-indoor"> <input type="checkbox" id="filter-indoor" name="filter-indoor">Indoor pet</label>
+            <label for="filter-children"> <input type="checkbox" id="filter-children" name="filter-children"> Likes children</label>
+          </form>
+        </div>
+        <button id="create-profile-btn">Upload pet</button>
+      </div>
+    </div>
+  </div>
 
     <div class="wrapper">
       <div id="card1">
