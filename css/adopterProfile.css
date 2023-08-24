@@ -49,7 +49,7 @@
     transform: translate(5%, -10%);
     cursor: pointer;
     display: flex;
-    align-items: center; /* Center vertically */
+    align-items: center; 
     justify-content: center;
   }
 
@@ -93,7 +93,7 @@
   .wrapper {
     display: grid;
     gap: 20px;
-    grid-template-columns: min-content 1fr; /* Adjusted column widths */
+    grid-template-columns: min-content 1fr; 
     grid-auto-rows: min-content;
     padding-left: 65px;
     padding-right: 65px;
