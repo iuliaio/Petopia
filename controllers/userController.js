@@ -37,7 +37,7 @@ class UserController {
 
     // TODO: RegisterShelter.html
     shelterRegister(req, res) {
-        res.render('shelterRegister');
+        res.render('registerShelter');
     }
 
     async shelterStore(req, res, next) {
