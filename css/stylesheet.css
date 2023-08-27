@@ -1,0 +1,125 @@
+@font-face {
+    font-family: "Kufi";
+    src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
+      format("truetype");
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #af7dff;
+    font-family: "Kufi";
+    height: 100vh;
+}
+
+.box {
+    width: 30%;
+    height: 65%;
+    background-color: #ffffff;
+    padding: 1%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: orange;
+    justify-content: center;
+    transform: translate(-50%, -50%); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px; 
+   
+}
+
+h2 {
+    text-align: center;
+    padding-right: 18px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 11%;
+    
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 15px;
+    margin-bottom: 3%;
+    width: 65%;
+    padding-right: 85px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    
+}
+
+.forgot-password {
+    margin-top: 5px;
+    color: #007bff;
+}
+
+
+#loginButton {
+    background-color:black;
+    color: white;
+    padding: 3% 1%;
+    cursor: pointer;
+    width: 35%;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: absolute;
+    top:53%;
+    left:31%;
+}
+
+#signupButton {
+    background-color: black;
+    color: #fff;
+    padding: 3% 1%;
+    cursor: pointer;
+    width: 35%;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: absolute;
+    top:80%;
+    left:31%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    
+}
+
+#signup-text {
+    padding-right: 12%;
+    font-size: 20px; 
+    position: absolute;
+    top:65%;
+    left:32%;
+    
+}
+
+input[type="password"]::placeholder {
+    font-size: 17px;
+}
+
+input[type="email"]::placeholder {
+    font-size: 17px;
+}
+
+img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    padding-left: 10px;
+    top: 1%; 
+  }

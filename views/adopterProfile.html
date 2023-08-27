@@ -1,13 +1,103 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adopter Page</title>
+    <link rel="stylesheet" href="/public/css/adopterProfile.css" />
+    <script
+      src="https://kit.fontawesome.com/974a5cd720.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/public/js/upload-porfile-picture.js"></script>
+    <title>Adopter page</title>
+    
   </head>
   <body>
-    <main>
-      <h1>ADOPTER PAGE</h1>
-    </main>
+    <header>
+      <div class="navbar">
+        <span>
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
+        </span>
+      </div>
+    </header>
+
+    <div class="wrapper">
+      <div id="card">
+        <h3 id="empty-element">empty</h3>
+        <div id="upload-image">
+          <img class="profile-pic" src="/public/img/add-photo.png" />
+          <input class="file-upload" type="file" accept="image/*" />
+        </div>
+
+        <div id = "box3">
+          <p>Intro: </p>
+          
+          <p>Verified: </p>
+          
+          <p>Preferences:</p>
+    
+        </div>
+
+      </div>
+      <div id="card">
+        <h3>Contacted pets <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-top" class="content">
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+        </div>
+      </div>
+      <div id="card">
+        <h3>Messages</h3>
+        <div id="messages-square" class="content">           
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+      </div>
+      </div>
+      <div id="card">
+        <h3>Wish list<a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-bottom" class="content">
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-top"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+          <div class="inner-square-bottom"></div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <footer>
+      <nav>
+        <ul class="list">
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Resources</a></li>
+            <li id="petopia"><a href="#">Petopia</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Support</a></li>
+        </ul> 
+    </nav>
+  
+      <br>
+      <hr> <!-- Horizontal line -->
+      <br>
+      <div class="circle-container">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+      </div>
+    </footer>
   </body>
 </html>
