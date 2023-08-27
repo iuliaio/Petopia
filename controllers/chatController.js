@@ -59,7 +59,10 @@ class ChatController {
         }
 
         if (messageDTO.message === "")
+        {
+            res.redirect(referer === undefined ? '/chats' : referer);
             return;
+        }
 
         try {
             await this.chatsRepository.add_message(messageDTO)
