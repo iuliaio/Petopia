@@ -1,8 +1,9 @@
 @font-face {
   font-family: "Kufi";
-  src: url("/public/fonts/Reem Kufi Regular.ttf")
-    format("truetype");
+  src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
 }
+
+@import "modal.css";
 
 body {
   background-color: #af7dff;
@@ -56,7 +57,7 @@ img {
   height: fit-content;
 }
 
-input {
+#upload-image input {
   display: none;
 }
 

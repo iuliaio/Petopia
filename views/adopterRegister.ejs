@@ -12,7 +12,7 @@
         <h2>Register</h2>
         <br />
         <br />
-        <form>
+        <form method="post" action="/user/adopter/adopterProfile">
           <input
             type="email"
             id="inputs"
@@ -27,25 +27,10 @@
             placeholder="Password"
             required
           />
-          <input
-            type="text"
-            id="inputs"
-            name="name"
-            placeholder="Charity Name"
-            required
-          />
-          <input
-            type="number"
-            id="inputs"
-            name="number"
-            placeholder="Charity ID"
-            required
-          />
           <br />
           <br />
-          <a id="styledButton" href="../views/shelterProfile.html" type="submit"
-            >Register</a
-          >
+
+          <input type="submit" value="Register" id="styledButton" />
         </form>
       </div>
     </main>
