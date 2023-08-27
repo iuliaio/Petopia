@@ -8,7 +8,7 @@ class PetsController {
         // TODO: Get page number to implement pagination
         try {
             const pets = await this.petsRepository.all()
-            res.render('TODO', {pets: pets})
+            res.render('searchPage', {pets: pets})
         } catch (err) {
             next(err)
         }

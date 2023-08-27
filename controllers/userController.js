@@ -19,7 +19,7 @@ class UserController {
                 req.session.user = {
                     id: user.id, name: `${user.first_name} ${user.last_name}`,
                 };
-                res.redirect('/chats');
+                res.redirect('/pets');
             } else {
                 res.redirect('/user/login');
             }
@@ -28,14 +28,6 @@ class UserController {
         }
     }
 
-
-    //TODO: Pet Profile, All Pets, User Account, Rating Page
-
-
-
-
-
-    // TODO: RegisterShelter.html
     shelterRegister(req, res) {
         res.render('registerShelter');
     }
@@ -43,14 +35,12 @@ class UserController {
     async shelterStore(req, res, next) {
         try {
             await this.userRepository.insert(req.body);
-            res.redirect('/auth/login');
+            res.redirect('/user/login');
         } catch (err) {
             next(err);
         }
     }
 
-
-    // TODO: Registration for a person: RegisterIndividual.html
     adopterRegister(req, res) {
         res.render('adopterRegister');
     }
@@ -58,7 +48,7 @@ class UserController {
     async adopterStore(req, res, next) {
         try {
             await this.userRepository.insert(req.body);
-            res.redirect('/');
+            res.redirect('/user/login');
         } catch (err) {
             next(err);
         }

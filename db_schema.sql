@@ -9,9 +9,9 @@ create table users
 (
     id              INTEGER                   not null
         primary key autoincrement,
-    first_name      TEXT                      not null,
-    last_name       TEXT                      not null,
-    phone           TEXT                      not null,
+    first_name      TEXT,
+    last_name       TEXT,
+    phone           TEXT,
     email           TEXT                      not null unique,
     password        TEXT                      not null,
     profile_picture BLOB,
@@ -22,7 +22,7 @@ create table users
     county          text,
     zip_code        text,
     address         text,
-    created_at      date default current_date not null
+    created_at      date default current_date
 );
 
 create table chats

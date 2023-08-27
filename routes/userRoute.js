@@ -13,16 +13,12 @@ router.get("/login", userController.login.bind(userController));
 
 router.post("/login", userController.authenticate.bind(userController));
 
-// TODO: Anand
 router.get("/shelter/register", userController.shelterRegister.bind(userController));
 
-// TODO: Anand
 router.post("/shelter/register", userController.shelterStore.bind(userController));
 
-// TODO: Anand
 router.get("/adopter/register", userController.adopterRegister.bind(userController));
 
-// TODO: Anand
 router.post("/adopter/register", userController.adopterStore.bind(userController));
 
 router.get("/edit", userController.edit.bind(userController));
