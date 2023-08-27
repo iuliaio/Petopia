@@ -1,35 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/userController");
 
-// This route will return a view for the user to select what type of account they need
-router.get("/", userController.index);
+const UserController = require("../controllers/userController");
+const UserRepository = require("../repositories/userRepository")
 
-// This route will return a view for login
-router.get("/login", userController.login);
+const userRepository = new UserRepository(db)
+const userController = new UserController(userRepository)
 
-// This is the route where the credentials will be submitted
-router.post("/login", userController.authenticate);
+router.get("/", userController.index.bind(userController));
 
-// This route will return a view for a shelter to register
-router.get("/shelter/register", userController.shelterRegister);
+router.get("/login", userController.login.bind(userController));
 
-// This is the route where the shelter information will be submitted to
-router.post("/shelter/register", userController.shelterStore);
+router.post("/login", userController.authenticate.bind(userController));
 
-// This route will return a view for a shelter to register
-router.get("/adopter/register", userController.adopterRegister);
+router.get("/shelter/register", userController.shelterRegister.bind(userController));
 
-// This is the route where the shelter information will be submitted to
-router.post("/adopter/register", userController.adopterStore);
+router.post("/shelter/register", userController.shelterStore.bind(userController));
 
-// This is the route where a user will edit his details
-router.get("/edit", userController.edit);
+router.get("/adopter/register", userController.adopterRegister.bind(userController));
 
-// This is the route where a user will send the information to update.
-router.post("/edit", userController.update)
+router.post("/adopter/register", userController.adopterStore.bind(userController));
 
-// This route will log out the authenticated user
-router.get("/logout", userController.logout)
+router.get("/edit", userController.edit.bind(userController));
+
+router.post("/edit", userController.update.bind(userController));
+
+router.get("/logout", userController.logout.bind(userController));
 
 module.exports = router;

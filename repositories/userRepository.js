@@ -1,7 +1,11 @@
 class UserRepository {
-    static all() {
+    constructor(db) {
+        this.db = db;
+    }
+
+    all() {
         return new Promise((resolve, reject) => {
-            db.all('SELECT * FROM users', (err, rows) => {
+            this.db.all('SELECT * FROM users', (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -11,9 +15,9 @@ class UserRepository {
         });
     }
 
-    static getById(id) {
+    getById(id) {
         return new Promise((resolve, reject) => {
-            db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
+            this.db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -23,11 +27,11 @@ class UserRepository {
         });
     }
 
-    static getByEmailPassword(user) {
+    getByEmailPassword(user) {
         const {email, password} = user;
 
         return new Promise((resolve, reject) => {
-            db.get('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, row) => {
+            this.db.get('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, row) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -37,7 +41,7 @@ class UserRepository {
         });
     }
 
-    static insert(user) {
+    insert(user) {
         const {
             first_name,
             last_name,
@@ -56,7 +60,10 @@ class UserRepository {
         } = user;
 
         return new Promise((resolve, reject) => {
-            db.run('INSERT INTO users (first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, created_at], function (err) {
+            this.db.run(`INSERT INTO users (first_name, last_name, phone, email, password, profile_picture,
+                                            charity_name, charity_id, description, country, county, zip_code, address,
+                                            created_at)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, created_at], function (err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -66,7 +73,7 @@ class UserRepository {
         });
     }
 
-    static update(user) {
+    update(user) {
         const {
             id,
             first_name,
@@ -85,23 +92,37 @@ class UserRepository {
         } = user;
 
         return new Promise((resolve, reject) => {
-            db.run('UPDATE users SET first_name = ?, last_name = ?, phone = ?, email = ?, password = ?, profile_picture = ?, charity_name = ?, charity_id = ?, description = ?, country = ?, county = ?, zip_code = ?, address = ? WHERE id = ?', [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, id], function (err) {
+            this.db.run(`UPDATE users
+                         SET first_name      = ?,
+                             last_name       = ?,
+                             phone           = ?,
+                             email           = ?,
+                             password        = ?,
+                             profile_picture = ?,
+                             charity_name    = ?,
+                             charity_id      = ?,
+                             description     = ?,
+                             country         = ?,
+                             county          = ?,
+                             zip_code        = ?,
+                             address         = ?
+                         WHERE id = ?`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, id], function (err) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             });
         });
     }
 
-    static delete(id) {
+    delete(id) {
         return new Promise((resolve, reject) => {
-            db.run('DELETE FROM users WHERE id = ?', id, function (err) {
+            this.db.run('DELETE FROM users WHERE id = ?', id, function (err) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(this.lastID);
                 }
             });
         });

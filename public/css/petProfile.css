@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Kufi";
-  src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
+  src: url("/public/fonts/Reem Kufi Regular.ttf")
     format("truetype");
 }
 
 body {
   background-color: #af7dff;
-  font-family: "Kufi";
+  font-family: "Kufi", serif;
   margin: 0;
   padding: 0;
 }
@@ -199,8 +199,8 @@ article:has(:hover, :focus) {
   --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0,
+    rgba(0, 0, 0, 0.06) 0 0 0 1px;
 }
 
 .articles {

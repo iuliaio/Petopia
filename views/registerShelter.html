@@ -4,40 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/stylesheet.css" />
-    <title>Login</title>
+    <title>Register</title>
   </head>
   <body>
     <main>
-      <img src="../png/logo-no-background.png" alt="Petopia Logo" />
       <div class="box">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <br />
-        
+        <br />
         <form>
           <input
             type="email"
-            id="email"
+            id="inputs"
             name="email"
             placeholder="Email"
             required
           />
           <input
             type="password"
-            id="password"
+            id="inputs"
             name="password"
             placeholder="Password"
             required
           />
-          <p class="forgot-password">Forgot password?</p>
-          
+          <input
+            type="text"
+            id="inputs"
+            name="name"
+            placeholder="Charity Name"
+            required
+          />
+          <input
+            type="number"
+            id="inputs"
+            name="number"
+            placeholder="Charity ID"
+            required
+          />
           <br />
-          <input type="submit" value="Log In" id = "loginButton"/>
           <br />
-          
-          <h2 id="signup-text">Do not have an account?</h2>
-          <br />
-          <br />
-          <input type="submit" value="Sign up now!" id = "signupButton"/>
+          <a id="styledButton" href="../views/shelterProfile.html" type="submit"
+            >Register</a
+          >
         </form>
       </div>
     </main>
