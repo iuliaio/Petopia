@@ -1,29 +1,28 @@
 @font-face {
     font-family: "Kufi";
-    src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
-      format("truetype");
-  }
-  
-  body {
+    src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
+}
+
+body {
     background-color: #af7dff;
     font-family: "Kufi";
     margin: 0;
     padding: 0;
-  }
-  
+}
+
 .navbar {
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     vertical-align: middle;
-  }
+}
 
-#MyaccountButton  {
+#MyaccountButton {
     width: 9%;
     height: 3.5%;
     position: absolute;
     top: 18px;
-    right: 30px; 
+    right: 30px;
     background-color: black;
     color: white;
 }
@@ -33,22 +32,22 @@
     height: 210px;
     width: 480px;
     top: 80%;
-    transform: translate(178%,-10%);
+    transform: translate(178%, -10%);
 }
 
 
 #heading {
     width: 100%;
     color: black;
-    top:8%;
-    background-color: orange; 
+    top: 8%;
+    background-color: orange;
     position: absolute;
     height: 375px;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     right: 0px;
-    
+
 }
 
 #heading p {
@@ -57,7 +56,7 @@
     padding-left: 18.5%;
     padding-bottom: 0px;
     top: 33%;
-    
+
 }
 
 #heading h2 {
@@ -65,83 +64,83 @@
     color: black;
     padding-left: 18.5%;
     top: 18%
-   
+
 }
 
 #grey-text {
-  position: absolute;
-  transform: translate(0%,240%);
-  color: rgb(185, 188, 190);
-  font-size: 14px;
+    position: absolute;
+    transform: translate(0%, 240%);
+    color: rgb(185, 188, 190);
+    font-size: 14px;
 }
 
 
 #box1 {
-    width: 90%; 
-    max-width: 200px; 
+    width: 90%;
+    max-width: 200px;
     background-color: orange;
-    transform: translate(20%,80%);
-    padding: 20px; 
-    border-radius: 10px; 
-    Height:490px;
-  }
-  
-  #box1 p {
-    margin: 10px 0; 
-  }
-  
-  #box1 input {
+    transform: translate(20%, 80%);
+    padding: 20px;
+    border-radius: 10px;
+    Height: 490px;
+}
+
+#box1 p {
+    margin: 10px 0;
+}
+
+#box1 input {
     width: 80%;
     padding: 10px;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     border: 1px solid grey;
     border-radius: 5px;
-  }
+}
 
 #filterButton {
     position: absolute;
     background-color: black;
     color: white;
-    bottom: 35px; 
+    bottom: 35px;
     left: 25%;
     width: 60%;
     Height: 30px;
-    transform: translate(-11%,80%);
+    transform: translate(-11%, 80%);
 }
 
-  
+
 .parent-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    grid-gap: 100px; 
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 100px;
     height: 400px;
     width: 190%;
     margin: 0 auto;
     transform: translate(-100%, 5%);
-    right:50%;
-  }
+    right: 50%;
+}
 
-  .grey-box {
+.grey-box {
     background-color: lightgray;
-    height: 70%; 
-    width: 200%; 
+    height: 70%;
+    width: 200%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .container {
+.container {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     gap: 5%;
 }
 
 .inner-square-top {
     margin-top: 40px;
+    background-size: cover;
     width: 300px;
     height: 250px;
-    background-color: grey;
     border: none;
     transform: translate(130%, -60%);
 }
@@ -164,59 +163,59 @@ footer {
     width: 100%;
     position: relative;
     top: 10px;
-    height: 200px; 
-  }
-  
-  
-  footer nav ul {
+    height: 200px;
+}
+
+
+footer nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; 
+    display: flex;
     justify-content: center;
-  }
-  
-  footer nav ul li {
+}
+
+footer nav ul li {
     display: inline-block;
     margin: 0 40px;
     margin-right: 85px;
-    
-  }
-  
-  footer nav ul li a {
+
+}
+
+footer nav ul li a {
     color: #333;
     text-decoration: none;
-    
-  }
-  
-  hr {
+
+}
+
+hr {
     border: 0;
     border-top: 1px solid #ccc;
     margin: 20px auto;
     width: 60%;
     border-top: 1px solid lightblue;
-  }
-  
-  .circle-container {
+}
+
+.circle-container {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .circle {
+}
+
+.circle {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid lightblue; 
+    border: 2px solid lightblue;
     margin: 0 10px;
     background-color: transparent;
-  }
-  
-  .list li a {
-    color: lightblue; 
-    font-size: 15px; 
-  }
-  
-  .list li#petopia a {
-    font-size: 28px; 
-  }
+}
+
+.list li a {
+    color: lightblue;
+    font-size: 15px;
+}
+
+.list li#petopia a {
+    font-size: 28px;
+}

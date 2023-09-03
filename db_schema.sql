@@ -1,19 +1,12 @@
-create table relationships
-(
-    id   integer not null
-        primary key autoincrement,
-    name text    not null
-);
-
 create table users
 (
-    id              INTEGER                   not null
+    id              INTEGER not null
         primary key autoincrement,
     first_name      TEXT,
     last_name       TEXT,
     phone           TEXT,
-    email           TEXT                      not null unique,
-    password        TEXT                      not null,
+    email           TEXT    not null unique,
+    password        TEXT    not null,
     profile_picture BLOB,
     charity_name    TEXT,
     charity_id      INTEGER,
@@ -23,17 +16,6 @@ create table users
     zip_code        text,
     address         text,
     created_at      date default current_date
-);
-
-create table chats
-(
-    id         integer                   not null
-        primary key autoincrement,
-    user1_id   integer                   not null
-        references users,
-    user2_id   integer                   not null
-        references users,
-    created_at date default current_date not null
 );
 
 create table feedback
@@ -47,6 +29,17 @@ create table feedback
     rating      INTEGER                   not null,
     comment     TEXT                      not null,
     created_at  date default current_date not null
+);
+
+create table chats
+(
+    id         integer                   not null
+        primary key autoincrement,
+    user1_id   integer                   not null
+        references users,
+    user2_id   integer                   not null
+        references users,
+    created_at date default current_date not null
 );
 
 create table messages
@@ -67,26 +60,67 @@ create table messages
 
 create table pets
 (
-    id                 INTEGER                   not null
+    id                 INTEGER not null
         primary key autoincrement,
-    name               TEXT                      not null,
-    species            text                      not null,
-    breed              text                      not null,
-    age                INTEGER                   not null,
-    gender             TEXT                      not null,
-    size               TEXT                      not null,
-    color              TEXT                      not null,
-    weight             REAL                      not null,
-    description        TEXT                      not null,
-    vaccination_status TEXT                      not null,
-    neutered           BOOLEAN                   not null,
+    name               TEXT,
+    species            text,
+    breed              text,
+    age                INTEGER,
+    gender             TEXT,
+    size               TEXT,
+    color              TEXT,
+    weight             REAL,
+    description        TEXT,
+    vaccination_status TEXT,
+    neutered           BOOLEAN,
     health_condition   TEXT,
     personality_traits TEXT,
-    available          BOOLEAN                   not null,
-    user_id            INTEGER                   not null
+    available          BOOLEAN,
+    user_id            INTEGER not null
         references users,
-    born_at            date default current_date not null,
+    born_at            date default current_date,
     profile_photo      BLOB
+);
+
+create table relationships
+(
+    id   integer not null
+        primary key autoincrement,
+    name text    not null
+);
+
+create table pets_relationships
+(
+    pet_id          integer not null
+        references pets,
+    relationship_id integer not null
+        references relationships,
+    companion       text    not null,
+    primary key (pet_id, relationship_id)
+);
+
+create table wish_list
+(
+    id         INTEGER                   not null
+        primary key autoincrement,
+    user_id    INTEGER                   not null
+        references users,
+    pet_id     INTEGER                   not null
+        references pets,
+    date_added date default current_date not null
+);
+
+create table requests
+(
+    id         integer                   not null
+        primary key autoincrement,
+    user_id    integer                   not null
+        references users,
+    pet_id     integer                   not null
+        references pets,
+    owner_id   integer                   not null
+        references users,
+    created_at date default current_date not null
 );
 
 create table adoptions
@@ -98,16 +132,6 @@ create table adoptions
     pet_id     integer                   not null
         references pets,
     adopted_at date default current_date not null
-);
-
-create table pets_relationships
-(
-    pet_id          integer not null
-        references pets,
-    relationship_id integer not null
-        references relationships,
-    companion       text    not null,
-    primary key (pet_id, relationship_id)
 );
 
 create table posts
@@ -139,27 +163,31 @@ create table comments
     created_at date    default current_date not null
 );
 
-create table requests
-(
-    id         integer                   not null
-        primary key autoincrement,
-    user_id    integer                   not null
-        references users,
-    pet_id     integer                   not null
-        references pets,
-    owner_id   integer                   not null
-        references users,
-    created_at date default current_date not null
-);
+insert into users (first_name, last_name, email, password, charity_name, charity_id)
+values ('Test', 'Test', 'example@email.com', 'password', '', ''),
+       ('First', 'Adopter', 'first.adopter@email.com', 'password', '', ''),
+       ('Second', 'Adopter', 'second.adopter@email.com', 'password', '', ''),
+       ('Third', 'Adopter', 'third.adopter@email.com', 'password', '', ''),
+       ('First', 'Shelter', 'first.shelter@email.com', 'password', 'Shelter 1', '1234'),
+       ('Second', 'Shelter', 'second.shelter@email.com', 'password', 'Shelter 2', '5678');
 
-create table wish_list
-(
-    id         INTEGER                   not null
-        primary key autoincrement,
-    user_id    INTEGER                   not null
-        references users,
-    pet_id     INTEGER                   not null
-        references pets,
-    date_added date default current_date not null
-);
+insert into pets (name, species, age, gender, size, color, weight, description, available, user_id, profile_photo)
+values ('Max', 'Dog', 2, 'male', 'medium', 'black', 17, 'A very cute dog and my favourite!', 1, 6, ''),
+       ('Luna', 'Dog', 1, 'female', 'small', 'white', 5, 'Small and nice dog!', 1, 5, ''),
+       ('Thor', 'Dog', 3, 'male', 'large', 'gold', 25, 'Best companion!', 1, 5, ''),
+       ('Nova', 'Cat', 2, 'female', 'small', 'multi-color', 4, 'Quick reflexes.', 1, 6, ''),
+       ('Bella', 'Cat', 2, 'female', 'small', 'orange', 3, 'Sharp teeth', 1, 6, ''),
+       ('Felix', 'Cat', 2, 'male', 'small', 'black', 4, 'Funny', 1, 5, '');
 
+insert into wish_list (user_id, pet_id, date_added)
+values (2, 1, current_date),
+       (3, 2, current_date),
+       (4, 3, current_date);
+
+insert into requests (user_id, pet_id, owner_id, created_at)
+values (2, 1, 6, current_date),
+       (2, 2, 5, current_date);
+
+insert into chats (user1_id, user2_id, created_at)
+values (2, 5, current_date),
+       (3, 5, current_date);

@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/css/adopterProfile.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/public/css/adopterProfile.css"/>
     <script
-      src="https://kit.fontawesome.com/974a5cd720.js"
-      crossorigin="anonymous"
+            src="https://kit.fontawesome.com/974a5cd720.js"
+            crossorigin="anonymous"
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/upload-porfile-picture.js"></script>
     <title>Adopter page</title>
-    
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <span>
-          <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
-        </span>
-      </div>
-    </header>
 
-    <div class="wrapper">
-      <div id="card">
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <span>
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
+        </span>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div id="card">
         <h3 id="empty-element">empty</h3>
         <div id="upload-image">
-          <img class="profile-pic" src="/public/img/add-photo.png" />
-          <input class="file-upload" type="file" accept="image/*" />
+            <img class="profile-pic" src="/public/img/add-photo.png"/>
+            <input class="file-upload" type="file" accept="image/*"/>
         </div>
 
-        <div id = "box3">
-          <p>Intro: </p>
-          
-          <p>Verified: </p>
-          
-          <p>Preferences:</p>
-    
+        <div id="box3">
+            <p>Intro: </p>
+
+            <p>Verified: </p>
+
+            <p>Preferences:</p>
+
         </div>
 
-      </div>
-      <div id="card">
+    </div>
+    <div id="card">
         <h3>Contacted pets <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-top" class="content">
-          <div class="inner-square-top"></div>
-          <div class="inner-square-top"></div>
-          <div class="inner-square-top"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
+            <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
+                <img class="inner-square-top" src="/public/img/profilepetpic.png">
+            <% } %>
+            <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
+                <div class="inner-square-bottom"></div>
+            <% } %>
         </div>
-      </div>
-      <div id="card">
+    </div>
+    <div id="card">
         <h3>Messages</h3>
-        <div id="messages-square" class="content">           
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-      </div>
-      </div>
-      <div id="card">
+        <div id="messages-square" class="content">
+            <%= messages.length === 0 ? 'No messages yet!' : '' %>
+
+            <% for (let i = 0; i < Math.min(5, messages.length); i++){ %>
+                <div class="inner-square-bottom"></div>
+            <% } %>
+        </div>
+    </div>
+    <div id="card">
         <h3>Wish list<a ref=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-bottom" class="content">
-          <div class="inner-square-top"></div>
-          <div class="inner-square-top"></div>
-          <div class="inner-square-top"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
-          <div class="inner-square-bottom"></div>
+            <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
+                <img class="inner-square-top" src="/public/img/profilepetpic.png">
+            <% } %>
+            <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
+                <div class="inner-square-bottom"></div>
+            <% } %>
         </div>
-      </div>
-      </div>
     </div>
+</div>
+</div>
 
-    <footer>
-      <nav>
+<footer>
+    <nav>
         <ul class="list">
             <li><a href="#">Product</a></li>
             <li><a href="#">Features</a></li>
@@ -85,19 +85,19 @@
             <li><a href="#">About</a></li>
             <li><a href="#">Blog</a></li>
             <li><a href="#">Support</a></li>
-        </ul> 
+        </ul>
     </nav>
-  
-      <br>
-      <hr> <!-- Horizontal line -->
-      <br>
-      <div class="circle-container">
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
-      </div>
-    </footer>
-  </body>
+
+    <br>
+    <hr> <!-- Horizontal line -->
+    <br>
+    <div class="circle-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+</footer>
+</body>
 </html>
