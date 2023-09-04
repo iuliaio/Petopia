@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const requireLogin = require('../middlewares/requireLogin')
 
 const ChatController = require("../controllers/chatController");
 const ChatsRepository = require("../repositories/chatRepository");
@@ -7,8 +8,8 @@ const ChatsRepository = require("../repositories/chatRepository");
 const chatsRepository = new ChatsRepository(db);
 const chatController = new ChatController(chatsRepository);
 
-router.get("/", chatController.index.bind(chatController));
-router.post("/:id/message", chatController.add_message.bind(chatController));
-router.post('/store', chatController.store.bind(chatController));
+router.get("/", requireLogin, chatController.index.bind(chatController));
+router.post("/:id/message", requireLogin, chatController.add_message.bind(chatController));
+router.post('/store', requireLogin, chatController.store.bind(chatController));
 
 module.exports = router;

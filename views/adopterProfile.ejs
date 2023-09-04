@@ -56,8 +56,15 @@
         <div id="messages-square" class="content">
             <%= messages.length === 0 ? 'No messages yet!' : '' %>
 
-            <% for (let i = 0; i < Math.min(5, messages.length); i++){ %>
+            <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
                 <div class="inner-square-bottom"></div>
+            <% } %>
+
+            <% if (messages.length !== 0) { %>
+                <a href="/chats"
+                   style="width: 75%;text-align: center;background: white;padding: 0.5rem 0 0.5rem 0;border-radius: 10px">
+                    Go to messages ...
+                </a>
             <% } %>
         </div>
     </div>

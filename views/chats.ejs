@@ -39,13 +39,13 @@
 
 <div class="container mt-5 mb-5">
     <div class="mb-3">
-        <a href="" class="btn btn-light">Return To Account</a>
+        <a href="/user/account" class="btn btn-light">Return To Account</a>
     </div>
     <div class="row justify-content-between">
         <div class="col-md-3 bg-warning border border-dark">
             <div class="p-3">
                 <% chats.forEach(chat => { %>
-<!--TODO: Owner profile picture, owner name - pet requested name -->
+                    <!--TODO: Owner profile picture, owner name - pet requested name -->
                     <a href="/chats?id=<%= chat.id %>"
                        class="mb-2 d-block chat-option card <%= chat.id === selectedChat ? 'selected-chat' : '' %>">
                         <div class="card-body p-3">
