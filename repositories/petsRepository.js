@@ -165,7 +165,7 @@ class PetsRepository {
 
     contactedPets(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('select * from Pets inner join requests r on r.user_id = ? and r.pet_id = pets.id', [user_id], function (err, rows) {
+            this.db.all('select * from Pets inner join requests r on r.adopter_id = ? and r.pet_id = pets.id', [user_id], function (err, rows) {
                 if (err) {
                     reject(err)
                 } else {

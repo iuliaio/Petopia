@@ -45,11 +45,11 @@
         <div class="col-md-3 bg-warning border border-dark">
             <div class="p-3">
                 <% chats.forEach(chat => { %>
-                    <!--TODO: Owner profile picture, owner name - pet requested name -->
+                    <!--TODO: Owner profile picture-->
                     <a href="/chats?id=<%= chat.id %>"
                        class="mb-2 d-block chat-option card <%= chat.id === selectedChat ? 'selected-chat' : '' %>">
                         <div class="card-body p-3">
-                            Chat <%= chat.id %>
+                            <%= chat.name %>
                         </div>
                     </a>
                 <% }); %>
@@ -61,7 +61,7 @@
                     <h2 class="text-center">Chat Title</h2>
                     <div class="message-panel bg-white p-3">
                         <% chat.forEach((message) => { %>
-                            <div class="p-2 rounded-pill message <%= message.sender_id === 1 ? 'sender-message' : 'receiver-message' %>">
+                            <div class="p-2 rounded-pill message <%= message.sender_id !== recipient_id ? 'sender-message' : 'receiver-message' %>">
                                 <%= message.message %>
                             </div>
                         <% }); %>

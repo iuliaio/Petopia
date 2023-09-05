@@ -26,7 +26,7 @@
     <div id="card">
         <h3 id="empty-element">empty</h3>
         <div id="upload-image">
-            <img class="profile-pic" src="/public/img/add-photo.png"/>
+            <img class="profile-pic" src="/public/img/add-photo.png" alt=""/>
             <input class="file-upload" type="file" accept="image/*"/>
         </div>
 
@@ -41,13 +41,28 @@
 
     </div>
     <div id="card">
-        <h3>Contacted pets <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <h3>Contacted pets <a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-top" class="content">
             <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
-                <img class="inner-square-top" src="/public/img/profilepetpic.png">
+                <% if (contactedPets[i] === undefined) { %>
+                    <div class="inner-square-top" style="background: none"></div>
+                <% } else { %>
+                    <img src="<%= contactedPets[i].profile_photo %>" alt="" class="inner-square-top">
+                <% } %>
             <% } %>
+
             <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
-                <div class="inner-square-bottom"></div>
+                <% if (contactedPets[i] === undefined) { %>
+                    <div class="inner-square-bottom" style="background: none"></div>
+                <% } else { %>
+                    <div class="inner-square-bottom">
+                        <h4 style="text-align: center; width: 100%"><%= contactedPets[i].name %></h4>
+                        <br>
+                        <%= contactedPets[i].description %>
+                        <br>
+                        <a href="/pets/<%= contactedPets[i].id %>" style="margin-top: auto;">See more ></a>
+                    </div>
+                <% } %>
             <% } %>
         </div>
     </div>
@@ -57,7 +72,11 @@
             <%= messages.length === 0 ? 'No messages yet!' : '' %>
 
             <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
-                <div class="inner-square-bottom"></div>
+                <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center;">
+                    <a href="/chats?id=<%= messages[i].id %>">
+                        <%= messages[i].name %>
+                    </a>
+                </div>
             <% } %>
 
             <% if (messages.length !== 0) { %>
@@ -69,17 +88,31 @@
         </div>
     </div>
     <div id="card">
-        <h3>Wish list<a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <h3>Wish list<a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-bottom" class="content">
             <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
-                <img class="inner-square-top" src="/public/img/profilepetpic.png">
+                <% if (wishlist[i] === undefined) { %>
+                    <div class="inner-square-top" style="background: none"></div>
+                <% } else { %>
+                    <img src="<%= wishlist[i].profile_photo %>" alt="" class="inner-square-top">
+                <% } %>
             <% } %>
+
             <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
-                <div class="inner-square-bottom"></div>
+                <% if (wishlist[i] === undefined) { %>
+                    <div class="inner-square-bottom" style="background: none"></div>
+                <% } else { %>
+                    <div class="inner-square-bottom">
+                        <h4 style="text-align: center; width: 100%"><%= wishlist[i].name %></h4>
+                        <br>
+                        <%= wishlist[i].description %>
+                        <br>
+                        <a href="/pets/<%= wishlist[i].id %>" style="margin-top: auto;">See more ></a>
+                    </div>
+                <% } %>
             <% } %>
         </div>
     </div>
-</div>
 </div>
 
 <footer>

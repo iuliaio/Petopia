@@ -13,14 +13,12 @@
        style="text-decoration: none; text-align: center; padding-top: 0.125rem">My account</a>
 
     <div id="heading">
-        <div id="grey-box">
-
-        </div>
-        <h2>Lorem ipsum dolor sit amet</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <br> eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. <br>Duis sagittis ipsum. </p>
-        <p id="grey-text">eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit</p>
+        <div id="grey-box"></div>
+        <h2>Discover Your Ideal Pet!</h2>
+        <p>Explore a variety of wonderful pets in our listings and refine your <br>
+            search using our convenient filter panel. Whether you're a seasoned <br>
+            pet owner or a first-time adopter, you're just a click away from <br>
+            finding your perfect match.</p>
     </div>
 
     <div id="box1">
@@ -40,38 +38,44 @@
     </div>
 
     <div class="container">
+        <!--TODO: Rearrange this like 3 pictures then 3 descriptions-->
         <% let n = Math.min(pets.length, 3) %>
         <% for(let i = 0; i < n; i++) { %>
-            <div style="flex-direction: column">
-                <div>
-                    <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
-                         alt="" class="inner-square-top">
-                </div>
-                <div class="inner-square-bottom" style="flex-direction: column;border: 1px solid black">
-                    <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
-                    <br>
-                    <%= pets[i].description %>
-                    <br>
-                    <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
-                </div>
+            <div>
+                <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
+                     alt="" class="inner-square-top" style="object-fit: cover">
+            </div>
+        <% } %>
+    </div>
+
+    <div class="container">
+        <% for(let i = 0; i < n; i++) { %>
+            <div class="inner-square-bottom" style="flex-direction: column">
+                <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
+                <br>
+                <%= pets[i].description %>
+                <br>
+                <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
             </div>
         <% } %>
     </div>
 
     <div class="container">
         <% for(let i = 3; i < Math.min(pets.length, 6); i++) { %>
-            <div style="flex-direction: column">
-                <div>
-                    <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
-                         alt="" class="inner-square-top">
-                </div>
-                <div class="inner-square-bottom" style="flex-direction: column;border: 1px solid black">
-                    <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
-                    <br>
-                    <%= pets[i].description %>
-                    <br>
-                    <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
-                </div>
+            <div>
+                <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
+                     alt="" class="inner-square-top" style="object-fit: cover">
+            </div>
+        <% } %>
+    </div>
+    <div class="container">
+        <% for(let i = 3; i < Math.min(pets.length, 6); i++) { %>
+            <div class="inner-square-bottom" style="flex-direction: column;">
+                <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
+                <br>
+                <%= pets[i].description %>
+                <br>
+                <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
             </div>
         <% } %>
     </div>

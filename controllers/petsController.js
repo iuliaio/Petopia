@@ -32,6 +32,13 @@ class PetsController {
     }
 
     async store(req, res, next) {
+        let imgPath;
+        if (req.file.path === undefined || req.file.path === "") {
+            imgPath = "/public/img/profilepetpic.png";
+        } else {
+            imgPath = "/" + req.file.path
+        }
+
         const pet = {
             name: req.body.name,
             species: req.body.species,
@@ -49,7 +56,7 @@ class PetsController {
             available: 1,
             user_id: req.session.user.id,
             born_at: 'current_date',
-            profile_photo: req.body.profile_photo
+            profile_photo: imgPath
         }
 
         try {

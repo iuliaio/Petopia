@@ -35,9 +35,11 @@ create table chats
 (
     id         integer                   not null
         primary key autoincrement,
-    user1_id   integer                   not null
+    adopter_id integer                   not null
         references users,
-    user2_id   integer                   not null
+    pet_id     integer                   not null
+        references pets,
+    owner_id   integer                   not null
         references users,
     created_at date default current_date not null
 );
@@ -114,12 +116,13 @@ create table requests
 (
     id         integer                   not null
         primary key autoincrement,
-    user_id    integer                   not null
+    adopter_id integer                   not null
         references users,
     pet_id     integer                   not null
         references pets,
     owner_id   integer                   not null
         references users,
+    status     text                      null,
     created_at date default current_date not null
 );
 
@@ -172,22 +175,23 @@ values ('Test', 'Test', 'example@email.com', 'password', '', ''),
        ('Second', 'Shelter', 'second.shelter@email.com', 'password', 'Shelter 2', '5678');
 
 insert into pets (name, species, age, gender, size, color, weight, description, available, user_id, profile_photo)
-values ('Max', 'Dog', 2, 'male', 'medium', 'black', 17, 'A very cute dog and my favourite!', 1, 6, ''),
-       ('Luna', 'Dog', 1, 'female', 'small', 'white', 5, 'Small and nice dog!', 1, 5, ''),
-       ('Thor', 'Dog', 3, 'male', 'large', 'gold', 25, 'Best companion!', 1, 5, ''),
-       ('Nova', 'Cat', 2, 'female', 'small', 'multi-color', 4, 'Quick reflexes.', 1, 6, ''),
-       ('Bella', 'Cat', 2, 'female', 'small', 'orange', 3, 'Sharp teeth', 1, 6, ''),
-       ('Felix', 'Cat', 2, 'male', 'small', 'black', 4, 'Funny', 1, 5, '');
+values ('Max', 'Dog', 2, 'male', 'medium', 'black', 17, 'A very cute dog and my favourite!', 1, 6,
+        '/public/uploads/dog3.jpeg'),
+       ('Luna', 'Dog', 1, 'female', 'small', 'white', 5, 'Small and nice dog!', 1, 5, '/public/uploads/dog6.jpeg'),
+       ('Thor', 'Dog', 3, 'male', 'large', 'gold', 25, 'Best companion!', 1, 5, '/public/uploads/dog5.jpeg'),
+       ('Nova', 'Cat', 2, 'female', 'small', 'multi-color', 4, 'Quick reflexes.', 1, 6, '/public/uploads/cat10.jpeg'),
+       ('Bella', 'Cat', 2, 'female', 'small', 'orange', 3, 'Sharp teeth', 1, 6, '/public/uploads/cat5.jpeg'),
+       ('Felix', 'Cat', 2, 'male', 'small', 'black', 4, 'Funny', 1, 5, '/public/uploads/cat6.jpeg');
 
 insert into wish_list (user_id, pet_id, date_added)
 values (2, 1, current_date),
        (3, 2, current_date),
        (4, 3, current_date);
 
-insert into requests (user_id, pet_id, owner_id, created_at)
+insert into requests (adopter_id, pet_id, owner_id, created_at)
 values (2, 1, 6, current_date),
        (2, 2, 5, current_date);
 
-insert into chats (user1_id, user2_id, created_at)
-values (2, 5, current_date),
-       (3, 5, current_date);
+insert into chats (adopter_id, pet_id, owner_id, created_at)
+values (2, 1, 6, current_date),
+       (2, 2, 5, current_date);
