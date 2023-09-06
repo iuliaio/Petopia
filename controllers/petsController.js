@@ -25,7 +25,8 @@ class PetsController {
 
         try {
             const pet = await this.petsRepository.get(pet_id)
-            res.render('petProfile', {pet: pet})
+            const randomPets = await this.petsRepository.getRandom(pet_id)
+            res.render('petProfile', {pet: pet, pets: randomPets})
         } catch (err) {
             next(err)
         }

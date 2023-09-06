@@ -200,6 +200,18 @@ class PetsRepository {
             })
         })
     }
+
+    getRandom(pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.all('SELECT * FROM pets where id <> ? order by random() limit 4', [pet_id], (err, rows) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
 }
 
 
