@@ -41,6 +41,9 @@ app.use('/chats', chatRoute);
 const userRoute = require("./routes/userRoute");
 app.use('/user', userRoute);
 
+const reviewRoute = require("./routes/reviewRoute");
+app.use('/review', reviewRoute);
+
 const port = 3000;
 
 app.listen(port, () => {

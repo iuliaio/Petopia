@@ -44,7 +44,7 @@ class ChatController {
 
         try {
             await this.chatsRepository.insert(user1_id, user2_id)
-            res.redirect('TODO')
+            res.redirect('/chats')
         } catch (err) {
             next(err)
         }
@@ -59,6 +59,7 @@ class ChatController {
         }
 
         if (messageDTO.message === "") {
+            const referer = req.header('Referer');
             res.redirect(referer === undefined ? '/chats' : referer);
             return;
         }

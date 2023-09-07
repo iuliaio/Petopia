@@ -55,13 +55,44 @@ class UserController {
         }
     }
 
-    async myAccount(req, res) {
+    // async myAccount(req, res) {
+    //     if (req.session.user === undefined) {
+    //         res.redirect('/');
+    //         return;
+    //     }
+    //
+    //     const user_id = req.session.user.id;
+    //
+    //     let messages = await this.chatRepository.all(user_id)
+    //     for (let i = 0; i < messages.length; i++) {
+    //         let userName = messages[i].adopter_id === user_id ? messages[i].owner_name : messages[i].adopter_name
+    //         messages[i].name = userName + " - " + messages[i].pet_name;
+    //     }
+    //
+    //     const user_details = await this.userRepository.getById(user_id)
+    //     if (req.session.user.charity_id === "" || req.session.user.charity_id === undefined || req.session.user.charity_id === null) {
+    //         let wishlist = await this.petsRepository.getWishlist(user_id)
+    //         let contactedPets = await this.petsRepository.contactedPets(user_id)
+    //
+    //         res.render('adopterProfile', {
+    //             details: user_details, messages: messages, wishlist: wishlist, contactedPets: contactedPets
+    //         })
+    //     } else {
+    //         let dogs = await this.petsRepository.getDogs(user_id)
+    //         let cats = await this.petsRepository.getCats(user_id)
+    //
+    //         res.render('shelterProfile', {details: user_details, messages: messages, dogs: dogs, cats: cats})
+    //     }
+    // }
+
+    async account(req, res) {
         if (req.session.user === undefined) {
             res.redirect('/');
             return;
         }
 
-        const user_id = req.session.user.id;
+        let user_id = req.params.id;
+        if (user_id === undefined || isNaN(user_id)) user_id = req.session.user.id
 
         let messages = await this.chatRepository.all(user_id)
         for (let i = 0; i < messages.length; i++) {
@@ -84,6 +115,7 @@ class UserController {
             res.render('shelterProfile', {details: user_details, messages: messages, dogs: dogs, cats: cats})
         }
     }
+
 
     logout(req, res, next) {
         req.session.destroy((err) => {

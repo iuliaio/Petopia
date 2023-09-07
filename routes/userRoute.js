@@ -28,8 +28,8 @@ router.get("/adopter/register", requireAnonymous, userController.adopterRegister
 router.post("/adopter/register", requireAnonymous, userController.adopterStore.bind(userController));
 
 
-router.get('/account', requireLogin, userController.myAccount.bind(userController));
-
+// router.get('/account', requireLogin, userController.myAccount.bind(userController));
+router.get('/account/:id?', requireLogin, userController.account.bind(userController));
 
 router.get("/logout", requireLogin, userController.logout.bind(userController));
 
