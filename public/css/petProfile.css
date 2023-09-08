@@ -1,7 +1,6 @@
 @font-face {
   font-family: "Kufi";
-  src: url("/public/fonts/Reem Kufi Regular.ttf")
-    format("truetype");
+  src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
 }
 
 body {
@@ -63,17 +62,16 @@ h3 {
   grid-row: 1;
   width: 89%;
   height: 98%;
-  position:relative;
+  position: relative;
   margin-left: 5%;
 }
 
-.inner-rectangle  {
+.inner-rectangle {
   background-color: white;
   width: 80%;
   height: 80%;
-  margin-left:10%;
-  margin-top:7%;
-  
+  margin-left: 10%;
+  margin-top: 7%;
 }
 
 .square3 {
@@ -93,7 +91,6 @@ h3 {
   background-color: white;
   padding: 5%;
   border: 1px solid #272635;
-  
 }
 
 .square4 {
@@ -199,8 +196,7 @@ article:has(:hover, :focus) {
   --title-color: #28666e;
   --link-icon-translate: 0;
   --link-icon-opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0,
-    rgba(0, 0, 0, 0.06) 0 0 0 1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px;
 }
 
 .articles {

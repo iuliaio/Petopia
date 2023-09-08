@@ -32,7 +32,7 @@ describe('UserRepository', () => {
 
     describe('.getByEmailPassword', () => {
         it('should return a user by email and password', async () => {
-            const userCredentials = {email: 'john@example.com', password: 'password'};
+            const userCredentials = {email: 'example@email.com', password: 'password'};
             const user = await userRepository.getByEmailPassword(userCredentials);
             expect(user).to.be.an('object');
         });

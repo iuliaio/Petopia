@@ -9,25 +9,11 @@ const expect = chai.expect;
 describe('PetsRepository', () => {
     let db;
     let petsRepository;
+    let lastID;
 
     before(() => {
         db = new sqlite3.Database("./database_test.db");
         petsRepository = new PetsRepository(db);
-    });
-
-    describe('.all', () => {
-        it('should return a list of pets', async () => {
-            const posts = await petsRepository.all();
-            expect(posts).to.be.an('array');
-        });
-    });
-
-    describe('.get', () => {
-        it('should return a pet by ID', async () => {
-            const pet_id = 1;
-            const pet = await petsRepository.get(pet_id);
-            expect(pet).to.be.an('object');
-        });
     });
 
     describe('.insert', () => {
@@ -49,7 +35,22 @@ describe('PetsRepository', () => {
                 user_id: 1
             };
             const inserted_id = await petsRepository.insert(pet_data);
+            lastID = inserted_id
             expect(inserted_id).to.be.a('number');
+        });
+    });
+
+    describe('.all', () => {
+        it('should return a list of pets', async () => {
+            const posts = await petsRepository.all({});
+            expect(posts).to.be.an('array');
+        });
+    });
+
+    describe('.get', () => {
+        it('should return a pet by ID', async () => {
+            const pet = await petsRepository.get(lastID);
+            expect(pet).to.be.an('object');
         });
     });
 

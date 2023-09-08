@@ -1,0 +1,93 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/public/css/petProfile.css"/>
+    <title>Pet Account</title>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <span>
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
+        </span>
+
+        <nav>
+            <ul>
+                <li><a href="">Some</a></li>
+                <li><a href="">Menu</a></li>
+                <li><a href="">Here</a></li>
+            </ul>
+        </nav>
+    </div>
+    <a href="/pets" class="butttonReturn" style="padding: .5rem 5rem;">Return</a>
+</header>
+<div class="wrapper">
+    <div class="square square1 container">
+        <% for (let i = 0; i < 2; i++) { %>
+            <% if (pets[i] === undefined) continue; %>
+            <div class="card">
+                <section class="articles">
+                    <article>
+                        <div class="article-wrapper">
+                            <figure>
+                                <img src="<%= pets[i].profile_photo %>" alt="Pet Image"/>
+                            </figure>
+                            <div class="article-body">
+                                <h2><%= pets[i].name %></h2>
+                                <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="square square2">
+        <img src="<%= pet.profile_photo %>" alt="Pet Profile Photo" class="inner-rectangle">
+    </div>
+
+    <div class="square square3">
+        <!--<div class="filters">
+            <h2>Filters</h2>
+            <p>Filter options go here...</p>
+        </div>-->
+
+        <div class="description">
+            <h1><%= pet.name %></h1>
+            <h2>Description</h2>
+            <p><%= pet.description %></p>
+            <p>Species: <%= pet.species %></p>
+            <p>Age: <%= pet.age %></p>
+            <p>Gender: <%= pet.gender %></p>
+            <p>Size: <%= pet.size %></p>
+            <p>Color: <%= pet.color %></p>
+            <p>Weight: <%= pet.weight %></p>
+        </div>
+    </div>
+
+    <div class="square square4 container">
+        <% for (let i = 2; i < 4; i++) { %>
+            <% if (pets[i] === undefined) continue; %>
+            <div class="card">
+                <section class="articles">
+                    <article>
+                        <div class="article-wrapper">
+                            <figure>
+                                <img src="<%= pets[i].profile_photo %>" alt="Pet Image"/>
+                            </figure>
+                            <div class="article-body">
+                                <h2><%= pets[i].name %></h2>
+                                <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

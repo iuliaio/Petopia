@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/public/css/shelterProfile.css"/>
+    <link rel="stylesheet" href="/public/css/modal.css"/>
+    <script
+            src="https://kit.fontawesome.com/974a5cd720.js"
+            crossorigin="anonymous"
+    ></script>
+    <script src="/public/js/modal.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/public/js/upload-porfile-picture.js"></script>
+
+    <title>Shelter Account</title>
+    <!-- TODO: Can we add the name of the Shelter here in the title? -->
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <span>
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
+        </span>
+        <nav>
+            <ul>
+                <li><a href="">Some</a></li>
+                <li><a href="">Menu</a></li>
+                <li><a href="">Here</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<!-- Modal -->
+<div class="modal-button">
+    <button id="myBtn" class="align-right">Open Modal</button>
+</div>
+<div id="upload-content-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="profile-form">
+            <h2>Create Pet Profile</h2>
+            <form action="/pets/store" method="post" enctype="multipart/form-data">
+                <div class="profile-picture">
+                    <img id="profile-img" src="/public/img/profilepetpic.png" alt="Profile Picture"/>
+                    <input type="file" id="profile-image-upload" accept="image/*" name="profile_photo"/>
+                </div>
+
+                <label>
+                    Name
+                    <input type="text" name="name">
+                </label>
+
+                <label for="profile-description">
+                    Description
+                    <textarea id="profile-description" placeholder="Enter your profile description..."
+                              name="description"></textarea>
+                </label>
+
+                <label>
+                    Species
+                    <input type="text" name="species">
+                </label>
+                <label>
+                    Age
+                    <input type="number" name="age">
+                </label>
+                <label>
+                    Gender
+                    <input type="text" name="gender">
+                </label>
+                <label>
+                    Size
+                    <input type="text" name="size">
+                </label>
+                <label>
+                    Color
+                    <input type="text" name="color">
+                </label>
+                <label>
+                    Weight
+                    <input type="text" name="weight">
+                </label>
+
+                <button id="create-profile-btn" type="submit">Upload pet</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div id="card1">
+        <h3 id="empty-element">empty</h3>
+        <div id="upload-image">
+            <img class="profile-pic" src="/public/img/add-photo.png"/>
+            <input class="file-upload" type="file" accept="image/*"/>
+        </div>
+    </div>
+    <div id="card2">
+        <h3>Your dogs for adoption <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-top" class="content">
+            <% for (let i = 0; i < Math.max(3, dogs.length); i++){ %>
+                <% if (dogs[i] === undefined) { %>
+                    <div class="inner-square-top" style="background: none"></div>
+                <% } else { %>
+                    <img src="<%= dogs[i].profile_photo %>" alt="" class="inner-square-top">
+                <% } %>
+            <% } %>
+
+            <% for (let i = 0; i < Math.max(3, dogs.length); i++){ %>
+                <% if (dogs[i] === undefined) { %>
+                    <div class="inner-square-bottom" style="background: none"></div>
+                <% } else { %>
+                    <div class="inner-square-bottom">
+                        <h4 style="text-align: center; width: 100%"><%= dogs[i].name %></h4>
+                        <br>
+                        <%= dogs[i].description %>
+                        <br>
+                        <a href="/pets/<%= dogs[i].id %>" style="margin-top: auto;">See more ></a>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+    <div id="card3">
+        <h3>Messages</h3>
+        <div id="messages-square" class="content">
+            <%= messages.length === 0 ? 'No messages yet!' : '' %>
+
+            <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
+                <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center;">
+                    <a href="/chats?id=<%= messages[i].id %>">
+                        <%= messages[i].name %>
+                    </a>
+                </div>
+            <% } %>
+
+            <% if (messages.length !== 0) { %>
+                <a href="/chats"
+                   style="width: 75%;text-align: center;background: white;padding: 0.5rem 0 0.5rem 0;border-radius: 10px">
+                    Go to messages ...
+                </a>
+            <% } %>
+        </div>
+    </div>
+    <div id="card4">
+        <h3>Your cats for adoption <a ref=""><i class="fas fa-chevron-right"></i></a></h3>
+        <div id="profile-square-big-bottom" class="content">
+            <% for (let i = 0; i < Math.max(3, cats.length); i++){ %>
+                <% if (cats[i] === undefined) { %>
+                    <div class="inner-square-top" style="background: none"></div>
+                <% } else { %>
+                    <img src="<%= cats[i].profile_photo %>" alt="" class="inner-square-top">
+                <% } %>
+            <% } %>
+
+            <% for (let i = 0; i < Math.max(3, cats.length); i++){ %>
+                <% if (cats[i] === undefined) { %>
+                    <div class="inner-square-bottom" style="background: none"></div>
+                <% } else { %>
+                    <div class="inner-square-bottom">
+                        <h4 style="text-align: center; width: 100%"><%= cats[i].name %></h4>
+                        <br>
+                        <%= cats[i].description %>
+                        <br>
+                        <a href="/pets/<%= cats[i].id %>" style="margin-top: auto;">See more ></a>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
+</body>
+</html>

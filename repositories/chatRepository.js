@@ -5,7 +5,22 @@ class ChatRepository {
 
     all(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * FROM chats where user1_id = ? or user2_id = ?', [user_id, user_id], (err, rows) => {
+            let query = `select c.id,
+                                a.id                               as adopter_id,
+                                a.first_name || ' ' || a.last_name as adopter_name,
+                                a.profile_picture                  as adopter_picture,
+                                o.id                               as owner_id,
+                                o.first_name || ' ' || o.last_name as owner_name,
+                                o.profile_picture                  as owner_picture,
+                                p.name                             as pet_name
+                         from chats c
+                                  inner join users a on a.id = c.adopter_id
+                                  inner join users o on o.id = c.owner_id
+                                  inner join pets p on p.id = c.pet_id
+                         where c.adopter_id = ?
+                            or c.owner_id = ?`
+
+            this.db.all(query, [user_id, user_id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -43,10 +58,10 @@ class ChatRepository {
         });
     }
 
-    insert(user1_id, user2_id) {
+    insert(user1_id, user2_id, pet_id) {
         return new Promise((resolve, reject) => {
-            this.db.run(`INSERT INTO chats (user1_id, user2_id)
-                         values (?, ?)`, [user1_id, user2_id], function (err) {
+            this.db.run(`INSERT INTO chats (adopter_id, pet_id, owner_id)
+                         values (?, ?, ?)`, [user1_id, pet_id, user2_id], function (err) {
                 if (err) {
                     reject(err)
                 } else {

@@ -38,26 +38,30 @@
 <body class="bg-purple">
 
 <div class="container mt-5 mb-5">
-    <div class="row align-items-center vh-100">
-        <div class="col-md-3 bg-warning">
-            <div class="p-4">
+    <div class="mb-3">
+        <a href="/user/account" class="btn btn-light">Return To Account</a>
+    </div>
+    <div class="row justify-content-between">
+        <div class="col-md-3 bg-warning border border-dark">
+            <div class="p-3">
                 <% chats.forEach(chat => { %>
+                    <!--TODO: Owner profile picture-->
                     <a href="/chats?id=<%= chat.id %>"
                        class="mb-2 d-block chat-option card <%= chat.id === selectedChat ? 'selected-chat' : '' %>">
                         <div class="card-body p-3">
-                            Chat <%= chat.id %>
+                            <%= chat.name %>
                         </div>
                     </a>
                 <% }); %>
             </div>
         </div>
-        <div class="col-md-8 bg-warning ms-5">
+        <div class="col-md-8 bg-warning ms-5 border border-dark">
             <% if (chat !== undefined) { %>
-                <div class="p-4">
-                    <h2>Chat Title</h2> <!-- Update with chat title if available -->
-                    <div class="message-panel bg-white p-3"> <!-- Add a panel for the messages -->
+                <div class="p-3">
+                    <h2 class="text-center">Chat Title</h2>
+                    <div class="message-panel bg-white p-3">
                         <% chat.forEach((message) => { %>
-                            <div class="p-2 rounded-pill message <%= message.sender_id === 1 ? 'sender-message' : 'receiver-message' %>">
+                            <div class="p-2 rounded-pill message <%= message.sender_id !== recipient_id ? 'sender-message' : 'receiver-message' %>">
                                 <%= message.message %>
                             </div>
                         <% }); %>

@@ -17,17 +17,17 @@ class ChatController {
             const chats = await this.chatsRepository.all(user_id)
             let chat;
             let recipient_id;
+            for (let i = 0; i < chats.length; i++) {
+                let userName = chats[i].adopter_id === user_id ? chats[i].owner_name : chats[i].adopter_name
+                chats[i].name = userName + " - " + chats[i].pet_name;
+            }
+
             if (selectedChat !== undefined) {
                 chat = await this.chatsRepository.allMessages(selectedChat)
 
                 for (let i = 0; i < chats.length; i++) {
-                    if (chats[i].id == selectedChat)
-                    {
-                        if (chats[i].user1_id === req.session.user.id) {
-                            recipient_id = chats[i].user1_id
-                        } else {
-                            recipient_id = chats[i].user2_id
-                        }
+                    if (chats[i].id == selectedChat) {
+                        recipient_id = chats[i].adopter_id === req.session.user.id ? chats[i].owner_id : chats[i].adopter_id;
                     }
                 }
             }
@@ -44,7 +44,7 @@ class ChatController {
 
         try {
             await this.chatsRepository.insert(user1_id, user2_id)
-            res.redirect('TODO')
+            res.redirect('/chats')
         } catch (err) {
             next(err)
         }
@@ -58,8 +58,11 @@ class ChatController {
             message: req.body.message
         }
 
-        if (messageDTO.message === "")
+        if (messageDTO.message === "") {
+            const referer = req.header('Referer');
+            res.redirect(referer === undefined ? '/chats' : referer);
             return;
+        }
 
         try {
             await this.chatsRepository.add_message(messageDTO)

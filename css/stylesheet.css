@@ -1,8 +1,7 @@
 @font-face {
     font-family: "Kufi";
-    src: url("../petopia-brand-board-your-branding-colors-and-fonts/fonts/Reem Kufi Regular.ttf")
-      format("truetype");
-  }
+    src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
+}
 
 body {
     margin: 0;
@@ -24,10 +23,10 @@ body {
     left: 50%;
     background-color: orange;
     justify-content: center;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px; 
-   
+    border-radius: 10px;
+
 }
 
 h2 {
@@ -39,13 +38,13 @@ form {
     display: flex;
     flex-direction: column;
     padding-left: 11%;
-    
+
 }
 
 label {
     margin-bottom: 5px;
-    font-size: 18px; 
-    font-weight: bold; 
+    font-size: 18px;
+    font-weight: bold;
 }
 
 input[type="email"],
@@ -56,7 +55,7 @@ input[type="password"] {
     padding-right: 85px;
     border-radius: 5px;
     border: 1px solid grey;
-    
+
 }
 
 .forgot-password {
@@ -66,7 +65,7 @@ input[type="password"] {
 
 
 #loginButton {
-    background-color:black;
+    background-color: black;
     color: white;
     padding: 3% 1%;
     cursor: pointer;
@@ -75,8 +74,8 @@ input[type="password"] {
     border-radius: 5px;
     border: 1px solid black;
     position: absolute;
-    top:53%;
-    left:31%;
+    top: 53%;
+    left: 31%;
 }
 
 #signupButton {
@@ -89,22 +88,22 @@ input[type="password"] {
     border-radius: 5px;
     border: 1px solid black;
     position: absolute;
-    top:80%;
-    left:31%;
+    top: 80%;
+    left: 31%;
 }
 
 input[type="submit"]:hover {
     background-color: #0056b3;
-    
+
 }
 
 #signup-text {
     padding-right: 12%;
-    font-size: 20px; 
+    font-size: 20px;
     position: absolute;
-    top:65%;
-    left:32%;
-    
+    top: 65%;
+    left: 32%;
+
 }
 
 input[type="password"]::placeholder {
@@ -121,5 +120,5 @@ img {
     left: 0;
     width: 15%;
     padding-left: 10px;
-    top: 1%; 
-  }
+    top: 1%;
+}

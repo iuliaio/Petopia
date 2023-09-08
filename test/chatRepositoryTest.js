@@ -36,7 +36,7 @@ describe('ChatRepository', () => {
             const user1Id = 123;
             const user2Id = 456;
             const insertedId = await chatRepository.insert(user1Id, user2Id);
-            expect(insertedId).to.be.an('int');
+            expect(insertedId).to.be.a('number');
         });
     });
 
@@ -46,7 +46,7 @@ describe('ChatRepository', () => {
                 sender_id: 1, recipient_id: 2, chat_id: 1, message: "This is a message"
             };
             const insertedId = await chatRepository.add_message(messageDTO);
-            expect(insertedId).to.be.an('int');
+            expect(insertedId).to.be.a('number');
         });
     });
 });
