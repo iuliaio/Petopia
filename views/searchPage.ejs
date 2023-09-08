@@ -1,109 +1,100 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="/public/css/searchPage.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/public/css/searchPage.css" />
     <title>Search Page</title>
-</head>
-<body>
-<main>
-    <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
-    <a href="/user/account" id="MyaccountButton"
-       style="text-decoration: none; text-align: center; padding-top: 0.125rem">My account</a>
+  </head>
+  <body>
+    <header>
+      <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
+      <a
+        href="/user/account"
+        id="MyaccountButton"
+        style="text-decoration: none; text-align: center; padding-top: 0.125rem"
+        >My account</a
+      >
+    </header>
 
     <div id="heading">
-        <div id="grey-box"></div>
+      <div id="heading-text">
         <h2>Discover Your Ideal Pet!</h2>
-        <p>Explore a variety of wonderful pets in our listings and refine your <br>
-            search using our convenient filter panel. Whether you're a seasoned <br>
-            pet owner or a first-time adopter, you're just a click away from <br>
-            finding your perfect match.</p>
+        <p>
+          Explore a variety of wonderful pets in our listings and refine your
+          <br />
+          search using our convenient filter panel. Whether you're a seasoned
+          <br />
+          pet owner or a first-time adopter, you're just a click away from
+          <br />
+          finding your perfect match.
+        </p>
+      </div>
+      <div id="grey-box"></div>
     </div>
 
-    <div id="box1">
+    <div class="search-wrapper">
+      <div id="filter-box">
         <form action="/pets/" method="get">
+          <div>
             <p>Species</p>
-            <input class="search" name="species" placeholder="Species">
+            <input class="search" name="species" placeholder="Species" />
             <p>Age</p>
-            <input class="search" name="age" placeholder="Age">
+            <input class="search" name="age" placeholder="Age" />
             <p>Size</p>
-            <input class="search" name="size" placeholder="Size">
+            <input class="search" name="size" placeholder="Size" />
             <p>Color</p>
-            <input class="search" name="color" placeholder="Color">
+            <input class="search" name="color" placeholder="Color" />
             <p>Gender</p>
-            <input class="search" name="gender" placeholder="Gender">
-            <button id="filterButton" type="submit">Filter</button>
+            <input class="search" name="gender" placeholder="Gender" />
+          </div>
+          <button id="filterButton" type="submit">Filter</button>
         </form>
-    </div>
+      </div>
 
-    <div class="container">
-        <!--TODO: Rearrange this like 3 pictures then 3 descriptions-->
-        <% let n = Math.min(pets.length, 3) %>
-        <% for(let i = 0; i < n; i++) { %>
-            <div>
-                <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
-                     alt="" class="inner-square-top" style="object-fit: cover">
+      <div class="search-container">
+        <div class="container">
+          <% for(let i = 0; i < pets.length; i++) { %>
+          <div class="card">
+            <img
+              src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
+              alt=""
+              class="card-image"
+            />
+            <div class="card-description">
+              <h4><%= pets[i].name %></h4>
+              <p><%= pets[i].description %></p>
+              <a href="/pets/<%= pets[i].id %>">See more ></a>
             </div>
-        <% } %>
+          </div>
+          <% if ((i + 1) % 3 === 0 || i === pets.length - 1) { %>
+        </div>
+        <div class="container"><% } %> <% } %></div>
+      </div>
     </div>
-
-    <div class="container">
-        <% for(let i = 0; i < n; i++) { %>
-            <div class="inner-square-bottom" style="flex-direction: column">
-                <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
-                <br>
-                <%= pets[i].description %>
-                <br>
-                <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
-            </div>
-        <% } %>
-    </div>
-
-    <div class="container">
-        <% for(let i = 3; i < Math.min(pets.length, 6); i++) { %>
-            <div>
-                <img src="<%= pets[i].profile_photo !== '' ? pets[i].profile_photo : '/public/img/profilepetpic.png' %>"
-                     alt="" class="inner-square-top" style="object-fit: cover">
-            </div>
-        <% } %>
-    </div>
-    <div class="container">
-        <% for(let i = 3; i < Math.min(pets.length, 6); i++) { %>
-            <div class="inner-square-bottom" style="flex-direction: column;">
-                <h4 style="text-align: center; width: 100%"><%= pets[i].name %></h4>
-                <br>
-                <%= pets[i].description %>
-                <br>
-                <a href="/pets/<%= pets[i].id %>" style="margin-top: auto;">See more ></a>
-            </div>
-        <% } %>
-    </div>
-
-</main>
-<footer>
-    <nav>
+    <footer>
+      <nav>
         <ul class="list">
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Resources</a></li>
-            <li id="petopia"><a href="#">Petopia</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Support</a></li>
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Resources</a></li>
+          <li id="petopia"><a href="#">Petopia</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Support</a></li>
         </ul>
-    </nav>
+      </nav>
 
-    <br>
-    <hr>
-    <br>
-    <div class="circle-container">
+      <br />
+      <hr />
+      <br />
+      <div class="circle-container">
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
-    </div>
-</footer>
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

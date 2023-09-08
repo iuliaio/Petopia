@@ -1,221 +1,234 @@
 @font-face {
-    font-family: "Kufi";
-    src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
+  font-family: "Kufi";
+  src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
 }
 
 body {
-    background-color: #af7dff;
-    font-family: "Kufi";
-    margin: 0;
-    padding: 0;
+  background-color: #af7dff;
+  font-family: "Kufi";
+  margin: 0;
+  padding: 0;
 }
 
 .navbar {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
 }
 
 #MyaccountButton {
-    width: 9%;
-    height: 3.5%;
-    position: absolute;
-    top: 18px;
-    right: 30px;
-    background-color: black;
-    color: white;
+  width: 9%;
+  height: 3.5%;
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  background-color: #272635;
+  color: white;
+}
+
+#heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #272635;
+  background-color: #ffcf24;
+  height: 300px;
+  padding: 40px 40px;
+  margin: 40px 0px 40px 0px;
+}
+
+#heading-text {
+  width: 50%;
 }
 
 #grey-box {
-    background-color: grey;
-    height: 210px;
-    width: 480px;
-    top: 80%;
-    transform: translate(178%, -10%);
-}
-
-
-#heading {
-    width: 100%;
-    color: black;
-    top: 8%;
-    background-color: orange;
-    position: absolute;
-    height: 375px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    right: 0px;
-
+  background-color: grey;
+  height: 210px;
+  width: 480px;
+  height: 100%;
 }
 
 #heading p {
-    position: absolute;
-    color: black;
-    padding-left: 18.5%;
-    padding-bottom: 0px;
-    top: 33%;
-
+  color: #272635;
+  padding-left: 18.5%;
 }
 
 #heading h2 {
-    position: absolute;
-    color: black;
-    padding-left: 18.5%;
-    top: 18%
-
+  color: #272635;
+  padding-left: 18.5%;
 }
 
 #grey-text {
-    position: absolute;
-    transform: translate(0%, 240%);
-    color: rgb(185, 188, 190);
-    font-size: 14px;
+  color: rgb(185, 188, 190);
+  font-size: 14px;
 }
 
-
-#box1 {
-    width: 90%;
-    max-width: 200px;
-    background-color: orange;
-    transform: translate(20%, 80%);
-    padding: 20px;
-    border-radius: 10px;
-    Height: 490px;
+.search-wrapper {
+  display: flex;
+  margin-top: 20px;
 }
 
-#box1 p {
-    margin: 10px 0;
+#filter-box {
+  display: flex;
+  min-width: 250px;
+  background-color: #ffcf24;
+  margin-left: 40px;
+  flex-direction: column;
+  align-items: center;
+  border: #272635 solid 1px;
 }
 
-#box1 input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid grey;
-    border-radius: 5px;
+#filter-box input {
+  padding: 10px;
+  border: 1px solid #61988e;
 }
 
 #filterButton {
-    position: absolute;
-    background-color: black;
-    color: white;
-    bottom: 35px;
-    left: 25%;
-    width: 60%;
-    Height: 30px;
-    transform: translate(-11%, 80%);
+  background-color: #272635;
+  color: white;
+  padding: 10px;
+  margin: 30px 0px 30px 0px;
+  width: 100%;
 }
 
-
 .parent-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 100px;
-    height: 400px;
-    width: 190%;
-    margin: 0 auto;
-    transform: translate(-100%, 5%);
-    right: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 100px;
+  height: 400px;
+  width: 190%;
+  margin: 0 auto;
+  transform: translate(-100%, 5%);
+  right: 50%;
 }
 
 .grey-box {
-    background-color: lightgray;
-    height: 70%;
-    width: 200%;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: lightgray;
+  height: 70%;
+  width: 200%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 5%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 5%;
 }
 
-.inner-square-top {
-    margin-top: 40px;
-    background-size: cover;
-    width: 300px;
-    height: 250px;
-    border: none;
-    transform: translate(130%, -60%);
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  border: 1px solid #ffcf24;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0px 0px 40px 40px;
+  transition: transform 0.2s;
 }
 
-.inner-square-bottom {
-    width: 300px;
-    height: 150px;
-    background-color: white;
-    border: none;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    transform: translate(130%, -120%);
+.card:hover {
+  transform: scale(1.05);
 }
 
+.card-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-description {
+  padding: 20px;
+  text-align: center;
+  display: none;
+  background-color: rgba(255, 236, 236, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .card-description {
+  display: block;
+  opacity: 1;
+}
+
+.card-description h4 {
+  margin: 0;
+}
+
+.card-description p {
+  margin: 10px 0;
+}
+
+.card-description a {
+  color: #61988e;
+  text-decoration: none;
+  font-size: 15px;
+}
+/* footer section */
 footer {
-    background-color: black;
-    text-align: center;
-    padding: 30px 0;
-    width: 100%;
-    position: relative;
-    top: 10px;
-    height: 200px;
+  background-color: #272635;
+  text-align: center;
+  padding: 30px 0;
+  width: 100%;
+  position: relative;
+  top: 10px;
+  height: 200px;
 }
-
 
 footer nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 footer nav ul li {
-    display: inline-block;
-    margin: 0 40px;
-    margin-right: 85px;
-
+  display: inline-block;
+  margin: 0 40px;
+  margin-right: 85px;
 }
 
 footer nav ul li a {
-    color: #333;
-    text-decoration: none;
-
+  color: #333;
+  text-decoration: none;
 }
 
 hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 20px auto;
-    width: 60%;
-    border-top: 1px solid lightblue;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 20px auto;
+  width: 60%;
+  border-top: 1px solid lightblue;
 }
 
 .circle-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid lightblue;
-    margin: 0 10px;
-    background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid lightblue;
+  margin: 0 10px;
+  background-color: transparent;
 }
 
 .list li a {
-    color: lightblue;
-    font-size: 15px;
+  color: lightblue;
+  font-size: 15px;
 }
 
 .list li#petopia a {
-    font-size: 28px;
+  font-size: 28px;
 }

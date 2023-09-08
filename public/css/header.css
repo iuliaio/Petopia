@@ -1,0 +1,28 @@
+body {
+  background-color: #af7dff;
+  font-family: "Kufi", serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+ul {
+  display: flex;
+}
+
+li {
+  margin-right: 40px;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #272635;
+  cursor: pointer;
+}
