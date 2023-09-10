@@ -1,0 +1,61 @@
+footer {
+  background-color: #272635;
+  text-align: center;
+  padding: 30px 0;
+  width: 100%;
+  position: relative;
+  top: 10px;
+  height: 200px;
+  margin-top: 5%;
+}
+
+footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer nav ul li {
+  display: inline-block;
+  margin: 0 40px;
+  margin-right: 85px;
+}
+
+footer nav ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 20px auto;
+  width: 60%;
+  border-top: 1px solid lightblue;
+}
+
+.circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid lightblue;
+  margin: 0 10px;
+  background-color: transparent;
+}
+
+.list li a {
+  color: lightblue;
+  font-size: 15px;
+}
+
+.list li#petopia a {
+  font-size: 28px;
+}

@@ -1,93 +1,138 @@
 <!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/public/css/petProfile.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/css/petProfile.css" />
+    <link rel="stylesheet" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/footer.css" />
     <title>Pet Account</title>
-</head>
-<body>
-<header>
-    <div class="navbar">
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
         <span>
-          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
         </span>
 
         <nav>
-            <ul>
-                <li><a href="">Some</a></li>
-                <li><a href="">Menu</a></li>
-                <li><a href="">Here</a></li>
-            </ul>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/user/account">My Profile</a></li>
+          </ul>
         </nav>
-    </div>
-    <a href="/pets" class="butttonReturn" style="padding: .5rem 5rem;">Return</a>
-</header>
-<div class="wrapper">
-    <div class="square square1 container">
-        <% for (let i = 0; i < 2; i++) { %>
-            <% if (pets[i] === undefined) continue; %>
-            <div class="card">
-                <section class="articles">
-                    <article>
-                        <div class="article-wrapper">
-                            <figure>
-                                <img src="<%= pets[i].profile_photo %>" alt="Pet Image"/>
-                            </figure>
-                            <div class="article-body">
-                                <h2><%= pets[i].name %></h2>
-                                <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
-                            </div>
-                        </div>
-                    </article>
-                </section>
+      </div>
+    </header>
+
+    <a href="/pets" class="butttonReturn" style="padding: 0.5rem 5rem"
+      >Return</a
+    >
+    <div class="wrapper">
+      <div class="square square1">
+        <% for (let i = 0; i < 3; i++) { %> <% if (pets[i] === undefined)
+        continue; %>
+        <div class="card">
+          <div class="card-content">
+            <figure class="card-image">
+              <img src="<%= pets[i].profile_photo %>" alt="Pet Image" />
+            </figure>
+            <div class="card-body">
+              <h2><%= pets[i].name %></h2>
+              <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
             </div>
+          </div>
+        </div>
         <% } %>
-    </div>
+      </div>
 
-    <div class="square square2">
-        <img src="<%= pet.profile_photo %>" alt="Pet Profile Photo" class="inner-rectangle">
-    </div>
+      <div class="square square2">
+        <div><h1><%= pet.name %></h1></div>
+        <div class="mySlides fade">
+          <img src="<%= pet.profile_photo %>" style="width: 100%" />
+        </div>
 
-    <div class="square square3">
+        <div class="mySlides fade">
+          <img src="<%= pet.profile_photo %>" style="width: 100%" />
+        </div>
+
+        <div class="mySlides fade">
+          <img src="<%= pet.profile_photo %>" style="width: 100%" />
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+        <div style="text-align: center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+      </div>
+
+      <div class="square square3">
         <!--<div class="filters">
             <h2>Filters</h2>
             <p>Filter options go here...</p>
         </div>-->
 
         <div class="description">
-            <h1><%= pet.name %></h1>
-            <h2>Description</h2>
-            <p><%= pet.description %></p>
-            <p>Species: <%= pet.species %></p>
-            <p>Age: <%= pet.age %></p>
-            <p>Gender: <%= pet.gender %></p>
-            <p>Size: <%= pet.size %></p>
-            <p>Color: <%= pet.color %></p>
-            <p>Weight: <%= pet.weight %></p>
+          <h2>Description</h2>
+          <p><%= pet.description %></p>
+          <p>Species: <%= pet.species %></p>
+          <p>Age: <%= pet.age %></p>
+          <p>Gender: <%= pet.gender %></p>
+          <p>Size: <%= pet.size %></p>
+          <p>Color: <%= pet.color %></p>
+          <p>Weight: <%= pet.weight %></p>
         </div>
-    </div>
+      </div>
 
-    <div class="square square4 container">
-        <% for (let i = 2; i < 4; i++) { %>
-            <% if (pets[i] === undefined) continue; %>
-            <div class="card">
-                <section class="articles">
-                    <article>
-                        <div class="article-wrapper">
-                            <figure>
-                                <img src="<%= pets[i].profile_photo %>" alt="Pet Image"/>
-                            </figure>
-                            <div class="article-body">
-                                <h2><%= pets[i].name %></h2>
-                                <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
-                            </div>
-                        </div>
-                    </article>
-                </section>
+      <div class="square square4">
+        <p>Visit the shelter page: *SHELTER NAME*</p>
+      </div>
+
+      <div class="square square5">
+        <% for (let i = 1; i < 4; i++) { %> <% if (pets[i] === undefined)
+        continue; %>
+        <div class="card">
+          <div class="card-content">
+            <figure class="card-image">
+              <img src="<%= pets[i].profile_photo %>" alt="Pet Image" />
+            </figure>
+            <div class="card-body">
+              <h2><%= pets[i].name %></h2>
+              <a href="/pets/<%= pets[i].id %>" class="read-more">Visit</a>
             </div>
+          </div>
+        </div>
         <% } %>
+      </div>
+
+      <script type="text/javascript" src="../public/js/slideshow.js"></script>
     </div>
-</div>
-</body>
+    <footer>
+      <nav>
+        <ul class="list">
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Resources</a></li>
+          <li id="petopia"><a href="#">Petopia</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </nav>
+
+      <br />
+      <hr />
+      <br />
+      <div class="circle-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </footer>
+  </body>
 </html>
