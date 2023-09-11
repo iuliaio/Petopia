@@ -53,9 +53,9 @@ h3 {
   justify-content: center;
 }
 
-img {
+/* img {
   height: fit-content;
-}
+} */
 
 #upload-image input {
   display: none;
@@ -112,28 +112,51 @@ img {
 #profile-square-big-bottom {
   display: grid; /* Use grid layout for the inner squares */
   grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  grid-template-rows: 2fr 1fr; /* 2 rows */
+  grid-template-rows: 1fr;
   justify-items: center; /* Center horizontally */
-}
-
-.inner-square-top {
-  margin-top: 40px;
-  width: 80%;
-  height: 80%;
-  background-color: lightgrey;
-  border: none;
-}
-
-.inner-square-bottom {
-  width: 80%;
-  height: 80%;
-  background-color: white;
-  border: none;
-  display: flex;
-  align-items: flex-start; /* Center vertically */
-  justify-content: flex-start; /* Center horizontally */
+  width: auto;
+  height: auto;
 }
 
 #card i {
   font-size: small;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-image {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card-body {
+  text-align: center;
+  padding: 10px;
+}
+
+.card-body h2 {
+  color: #28666e;
+}
+
+.card-body a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #28666e;
+  margin-top: 10px;
+}
+
+.card-body a:hover {
+  text-decoration: underline;
+}
+
+.card-body img {
+  max-width: 100%;
+  height: auto;
 }

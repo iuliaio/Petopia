@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Kufi";
+  src: url("/public/fonts/Reem Kufi Regular.ttf") format("truetype");
+}
+
 /* The Modal (background) */
 .modal {
   display: none;
@@ -28,15 +33,14 @@
 }
 
 #myBtn.align-right {
+  font-family: "Kufi", serif;
   color: white;
   background-color: #272635;
   border: none;
   padding: 15px 15px;
   cursor: pointer;
   text-align: center;
-  border-radius: 5px;
   text-decoration: none;
-  margin-bottom: 2rem;
   position: relative;
   right: 65px;
 }
