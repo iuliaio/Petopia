@@ -10,6 +10,7 @@ body {
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
+  margin-bottom: 50px;
 }
 
 ul {

@@ -7,27 +7,30 @@ class PetsRepository {
         const {species, age, size, color, gender} = filters
 
         // Start with a valid query
-        let query = 'SELECT * FROM pets WHERE 1 = 1 '
+        let query = `SELECT pets.*, u.first_name || ' ' || u.last_name as user_name
+                     FROM pets
+                              inner join users u on pets.user_id = u.id
+                     WHERE 1 = 1`
         let args = []
 
         if (species && species !== '') {
-            query += 'AND species = ?'
+            query += 'AND pets.species = ?'
             args.push(species)
         }
         if (age && age !== '') {
-            query += 'AND age = ?'
+            query += 'AND pets.age = ?'
             args.push(age)
         }
         if (size && size !== '') {
-            query += 'AND size = ?'
+            query += 'AND pets.size = ?'
             args.push(size)
         }
         if (color && color !== '') {
-            query += 'AND color = ?'
+            query += 'AND pets.color = ?'
             args.push(color)
         }
         if (gender && gender !== '') {
-            query += 'AND gender = ?'
+            query += 'AND pets.gender = ?'
             args.push(gender)
         }
 
@@ -44,7 +47,11 @@ class PetsRepository {
 
     get(pet_id) {
         return new Promise((resolve, reject) => {
-            this.db.get('SELECT * FROM pets WHERE id = ?', [pet_id], function (err, row) {
+            this.db.get(`SELECT pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         FROM pets
+                                  inner join main.users u on u.id = pets.user_id
+                         WHERE pets.id = ?`, [pet_id], function (err, row) {
                 if (err) {
                     reject(err)
                 } else {
@@ -152,7 +159,11 @@ class PetsRepository {
 
     getWishlist(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('select * from Pets inner join wish_list wl on wl.user_id = ? and wl.pet_id = Pets.id', [user_id], function (err, rows) {
+            this.db.all(`select pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         from Pets
+                                  inner join main.users u on Pets.user_id = u.id
+                                  inner join wish_list wl on wl.user_id = ? and wl.pet_id = Pets.id`, [user_id], function (err, rows) {
                 if (err) {
                     reject(err)
                 } else {
@@ -165,7 +176,11 @@ class PetsRepository {
 
     contactedPets(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('select * from Pets inner join requests r on r.adopter_id = ? and r.pet_id = pets.id', [user_id], function (err, rows) {
+            this.db.all(`select pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         from Pets
+                                  inner join main.users u on Pets.user_id = u.id
+                                  inner join requests r on r.adopter_id = ? and r.pet_id = pets.id`, [user_id], function (err, rows) {
                 if (err) {
                     reject(err)
                 } else {
@@ -178,7 +193,12 @@ class PetsRepository {
 
     getDogs(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('select * from Pets where species like \'Dog\' and user_id = ?', [user_id], function (err, rows) {
+            this.db.all(`select pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         from Pets
+                                  inner join main.users u on u.id = Pets.user_id
+                         where species like \'Dog\'
+                           and user_id = ?`, [user_id], function (err, rows) {
                 if (err) {
                     reject(err)
                 } else {
@@ -191,7 +211,12 @@ class PetsRepository {
 
     getCats(user_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('select * from Pets where species like \'Cat\' and user_id = ?', [user_id], function (err, rows) {
+            this.db.all(`select pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         from Pets
+                                  inner join main.users u on u.id = Pets.user_id
+                         where species like \'Cat\'
+                           and user_id = ?`, [user_id], function (err, rows) {
                 if (err) {
                     reject(err)
                 } else {
@@ -203,7 +228,13 @@ class PetsRepository {
 
     getRandom(pet_id) {
         return new Promise((resolve, reject) => {
-            this.db.all('SELECT * FROM pets where id <> ? order by random() limit 4', [pet_id], (err, rows) => {
+            this.db.all(`SELECT pets.*,
+                                u.first_name || ' ' || u.last_name as user_name
+                         FROM pets
+                                  inner join main.users u on u.id = pets.user_id
+                         where pets.id <> ?
+                         order by random()
+                         limit 4`, [pet_id], (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
