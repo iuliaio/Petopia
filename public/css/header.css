@@ -26,3 +26,9 @@ a {
   color: #272635;
   cursor: pointer;
 }
+
+#signout-button {
+  background-color: #272635;
+  color: white;
+  padding: 10px;
+}
