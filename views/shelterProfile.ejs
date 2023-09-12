@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/public/css/shelterProfile.css" />
     <link rel="stylesheet" href="/public/css/modal.css" />
     <link rel="stylesheet" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/footer.css" />
     <script
       src="https://kit.fontawesome.com/974a5cd720.js"
       crossorigin="anonymous"
@@ -65,7 +66,7 @@
               <input type="text" name="name" />
             </label>
 
-            <label for="profile-description">
+            <label type="text" for="profile-description">
               Description
               <textarea
                 id="profile-description"
@@ -95,7 +96,7 @@
               <input type="text" name="color" />
             </label>
             <label>
-              Weight
+              Location
               <input type="text" name="weight" />
             </label>
 
@@ -106,44 +107,15 @@
     </div>
 
     <div class="wrapper">
-      <!--
-      Card 3 
-      <div class="card">
-        <h3>Messages</h3>
-        <div class="card-content">
-          <%= messages.length === 0 ? 'No messages yet!' : '' %> <% for (let i =
-          0; i < Math.min(4, messages.length); i++){ %>
-          <div
-            class="inner-square-bottom"
-            style="display: flex; align-items: center; justify-content: center"
-          >
-            <a href="/chats?id=<%= messages[i].id %>">
-              <%= messages[i].name %>
-            </a>
-          </div>
-          <% } %> <% if (messages.length !== 0) { %>
-          <a
-            href="/chats"
-            style="
-              width: 75%;
-              text-align: center;
-              background: white;
-              padding: 0.5rem 0 0.5rem 0;
-              border-radius: 10px;
-            "
-          >
-            Go to messages ...
-          </a>
-          <% } %>
-        </div>
-      </div>
-      </div> -->
-
       <div id="card">
         <h3 id="empty-element">empty</h3>
         <div id="upload-image">
-          <img class="profile-pic" src="/public/img/add-photo.png" />
+          <img class="profile-pic" src="/public/img/profile-pic.jpg" />
           <input class="file-upload" type="file" accept="image/*" />
+          <div id="box3">
+            <p>Intro: </p>
+            <p>Verified: </p>
+            </div>
         </div>
       </div>
 
@@ -162,34 +134,23 @@
       </div>
 
       <div id="card">
-        <h3>Messages</h3>
+        <h3 class="messages-square-h3">Messages</h3>
         <div id="messages-square" class="content">
-          <%= messages.length === 0 ? 'No messages yet!' : '' %> <% for (let i =
-          0; i < Math.min(4, messages.length); i++){ %>
-          <div
-            class="inner-square-bottom"
-            style="display: flex; align-items: center; justify-content: center"
-          >
+          <%= messages.length === 0 ? 'No messages yet!' : '' %>
+          <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
+          <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center">
             <a href="/chats?id=<%= messages[i].id %>">
-              <%= messages[i].name %>
+              <%= messages[i].name %>   
+              <i class="fas fa-chevron-right"></i>
             </a>
           </div>
-          <% } %> <% if (messages.length !== 0) { %>
-          <a
-            href="/chats"
-            style="
-              width: 75%;
-              text-align: center;
-              background: white;
-              padding: 0.5rem 0 0.5rem 0;
-              border-radius: 10px;
-            "
-          >
-            Go to messages ...
-          </a>
+          <% } %>
+          <% if (messages.length !== 0) { %>
+          <a href="/chats" class="messages-button">Go to messages ...</a>
           <% } %>
         </div>
       </div>
+      
 
       <div class="card">
         <h3>Your cats for adoption</h3>
@@ -205,4 +166,28 @@
         </div>
     </div>
   </body>
+  <footer>
+    <nav>
+      <ul class="list">
+        <li><a href="#">Product</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Resources</a></li>
+        <li id="petopia"><a href="#">Petopia</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+
+    <br />
+    <hr />
+    <br />
+    <div class="circle-container">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </footer>
 </html>
