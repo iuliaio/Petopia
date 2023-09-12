@@ -1,143 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/public/css/adopterProfile.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/css/adopterProfile.css" />
+    <link rel="stylesheet" href="/public/css/modal.css" />
+    <link rel="stylesheet" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/footer.css" />
     <script
-            src="https://kit.fontawesome.com/974a5cd720.js"
-            crossorigin="anonymous"
+      src="https://kit.fontawesome.com/974a5cd720.js"
+      crossorigin="anonymous"
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/upload-porfile-picture.js"></script>
     <title>Adopter page</title>
+  </head>
+  <body>
+    <header>
+        <div class="navbar">
+          <span>
+            <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
+          </span>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/pets">Find a pet</a></li>
+              <li><a href="/user/logout" id="signout-button">Sign out</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
-</head>
-<body>
-<header>
-    <div class="navbar">
-        <span>
-          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
-        </span>
-    </div>
-</header>
-
-<div class="wrapper">
-    <div id="card">
+    <div class="wrapper">
+      <div id="card">
         <h3 id="empty-element">empty</h3>
         <div id="upload-image">
-            <img class="profile-pic" src="/public/img/add-photo.png" alt=""/>
-            <input class="file-upload" type="file" accept="image/*"/>
+          <img class="profile-pic" src="/public/img/profile-pic.jpg" alt="" />
+          <input class="file-upload" type="file" accept="image/*" />
         </div>
 
         <div id="box3">
-            <p>Intro: </p>
+          <p>Intro:</p>
 
-            <p>Verified: </p>
+          <p>Verified:</p>
 
-            <p>Preferences:</p>
-
+          <p>Preferences:</p>
         </div>
-
-    </div>
-    <div id="card">
+      </div>
+      <div class="card">
         <h3>Contacted pets <a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-top" class="content">
-            <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
-                <% if (contactedPets[i] === undefined) { %>
-                    <div class="inner-square-top" style="background: none"></div>
-                <% } else { %>
-                    <img src="<%= contactedPets[i].profile_photo %>" alt="" class="inner-square-top">
-                <% } %>
-            <% } %>
-
-            <% for (let i = 0; i < Math.max(3, contactedPets.length); i++){ %>
-                <% if (contactedPets[i] === undefined) { %>
-                    <div class="inner-square-bottom" style="background: none"></div>
-                <% } else { %>
-                    <div class="inner-square-bottom">
-                        <h4 style="text-align: center; width: 100%"><%= contactedPets[i].name %></h4>
-                        <br>
-                        <%= contactedPets[i].description %>
-                        <br>
-                        <a href="/pets/<%= contactedPets[i].id %>" style="margin-top: auto;">See more ></a>
-                    </div>
-                <% } %>
-            <% } %>
+          <% for (let i = 0; i < Math.min(3, contactedPets.length); i++) { %>
+            <div class="card-body">
+              <img src="<%= contactedPets[i].profile_photo %>" alt="<%= contactedPets[i].name %>" />
+              <h2><%= contactedPets[i].name %></h2>
+              <p><%= contactedPets[i].description %></p>
+              <a href="/pets/<%= contactedPets[i].id %>">See more ></a>
+            </div>
+          <% } %>
         </div>
-    </div>
-    <div id="card">
-        <h3>Messages</h3>
+      </div>
+      
+      
+      <div id="card">
+        <h3 class="messages-square-h3">Messages</h3>
         <div id="messages-square" class="content">
-            <%= messages.length === 0 ? 'No messages yet!' : '' %>
-
-            <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
-                <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center;">
-                    <a href="/chats?id=<%= messages[i].id %>">
-                        <%= messages[i].name %>
-                    </a>
-                </div>
-            <% } %>
-
-            <% if (messages.length !== 0) { %>
-                <a href="/chats"
-                   style="width: 75%;text-align: center;background: white;padding: 0.5rem 0 0.5rem 0;border-radius: 10px">
-                    Go to messages ...
-                </a>
-            <% } %>
+          <%= messages.length === 0 ? 'No messages yet!' : '' %> <% for (let i =
+          0; i < Math.min(4, messages.length); i++){ %>
+          <div
+            class="inner-square-bottom"
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <a href="/chats?id=<%= messages[i].id %>">
+              <%= messages[i].name %>
+            </a>
+          </div>
+          <% } %> <% if (messages.length !== 0) { %>
+          <a
+            href="/chats"
+            style="
+              width: 75%;
+              text-align: center;
+              background: white;
+              padding: 0.5rem 0 0.5rem 0;
+              border-radius: 10px;
+            "
+          >
+            Go to messages ...
+          </a>
+          <% } %>
         </div>
-    </div>
-    <div id="card">
+      </div>
+      <div class="card">
         <h3>Wish list<a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-bottom" class="content">
-            <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
-                <% if (wishlist[i] === undefined) { %>
-                    <div class="inner-square-top" style="background: none"></div>
-                <% } else { %>
-                    <img src="<%= wishlist[i].profile_photo %>" alt="" class="inner-square-top">
-                <% } %>
-            <% } %>
-
-            <% for (let i = 0; i < Math.max(3, wishlist.length); i++){ %>
-                <% if (wishlist[i] === undefined) { %>
-                    <div class="inner-square-bottom" style="background: none"></div>
-                <% } else { %>
-                    <div class="inner-square-bottom">
-                        <h4 style="text-align: center; width: 100%"><%= wishlist[i].name %></h4>
-                        <br>
-                        <%= wishlist[i].description %>
-                        <br>
-                        <a href="/pets/<%= wishlist[i].id %>" style="margin-top: auto;">See more ></a>
-                    </div>
-                <% } %>
-            <% } %>
+          <% for (let i = 0; i < Math.min(3, wishlist.length); i++) { %>
+            <div class="card-body">
+              <img src="<%= wishlist[i].profile_photo %>" alt="<%= wishlist[i].name %>" />
+              <h2><%= wishlist[i].name %></h2>
+              <p><%= wishlist[i].description %></p>
+              <a href="/pets/<%= wishlist[i].id %>">See more ></a>
+            </div>
+          <% } %>
         </div>
-    </div>
-</div>
-
-<footer>
+      </div>
+  </body>
+  <footer>
     <nav>
-        <ul class="list">
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Resources</a></li>
-            <li id="petopia"><a href="#">Petopia</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Support</a></li>
-        </ul>
+      <ul class="list">
+        <li><a href="#">Product</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Resources</a></li>
+        <li id="petopia"><a href="#">Petopia</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
     </nav>
 
-    <br>
-    <hr> <!-- Horizontal line -->
-    <br>
+    <br />
+    <hr />
+    <!-- Horizontal line -->
+    <br />
     <div class="circle-container">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
     </div>
-</footer>
-</body>
+  </footer>
 </html>

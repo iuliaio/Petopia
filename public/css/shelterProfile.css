@@ -5,35 +5,6 @@
 
 @import "modal.css";
 
-body {
-  background-color: #af7dff;
-  font-family: "Kufi", serif;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  vertical-align: middle;
-}
-
-nav {
-  display: flex;
-}
-
-li {
-  margin-right: 40px;
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: #272635;
-  cursor: pointer;
-}
-
 h3 {
   margin-bottom: 2px;
 }
@@ -42,19 +13,21 @@ h3 {
   color: #af7dff;
 }
 
+.card {
+  padding-right: 65px;
+}
+
 /*profile pic section*/
 #upload-image {
   overflow: hidden;
   width: 300px;
-  height: 400px;
   cursor: pointer;
   display: flex;
-  align-items: center; /* Center vertically */
+  flex-direction: column;
   justify-content: center;
-}
-
-img {
-  height: fit-content;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  padding-left: 65px;
 }
 
 #upload-image input {
@@ -80,18 +53,26 @@ img {
   gap: 20px;
   grid-template-columns: min-content 1fr; /* Adjusted column widths */
   grid-auto-rows: min-content;
-  padding-left: 65px;
-  padding-right: 65px;
 }
 
-#messages-square {
-  grid-column: 1;
-  grid-row: 2;
+#box3 {
+  background-color: lightgray;
+  height: 165px;
+  width: 310px;
+  transform: translate(-1%, -14%);
+  padding: 1.2vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  border: 1px solid #272635;
 }
 
 #profile-square-big-top {
   grid-column: 2;
   grid-row: 1;
+  margin-right: 65px;
 }
 
 #profile-square-big-bottom {
@@ -100,40 +81,88 @@ img {
 }
 
 #messages-square {
+  grid-column: 1;
+  grid-row: 2;
   padding-block: 10px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(5, 1fr);
   align-items: center;
   justify-items: center;
+  margin-left: 65px;
 }
 
-#profile-square-big-top,
-#profile-square-big-bottom {
-  display: grid; /* Use grid layout for the inner squares */
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  grid-template-rows: 2fr 1fr; /* 2 rows */
-  justify-items: center; /* Center horizontally */
-}
-
-.inner-square-top {
-  margin-top: 40px;
-  width: 80%;
-  height: 80%;
-  background-color: lightgrey;
-  border: none;
+.messages-square-h3 {
+  margin-left: 65px;
 }
 
 .inner-square-bottom {
   width: 80%;
-  height: 80%;
   background-color: white;
-  border: none;
-  display: flex;
-  align-items: flex-start; /* Center vertically */
-  justify-content: flex-start; /* Center horizontally */
+  padding: 1rem;
+}
+
+.messages-button {
+  width: 90%;
+  text-align: center;
+  background: #272635;
+  color: white;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+#profile-square-big-top,
+#profile-square-big-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: 1fr;
+  justify-items: center;
+  width: auto;
+  height: auto;
 }
 
 #card i {
   font-size: small;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-image {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card-body {
+  text-align: center;
+  padding: 10px;
+}
+
+.card-body h2 {
+  color: #28666e;
+}
+
+.card-body a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #28666e;
+  margin-top: 10px;
+}
+
+.card-body a:hover {
+  text-decoration: underline;
+}
+
+.card-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  grid-column: 1 / span 2;
 }
