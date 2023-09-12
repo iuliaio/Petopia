@@ -23,6 +23,9 @@ const petsController = new PetsController(petsRepository)
 router.get("/", requireLogin, petsController.index.bind(petsController));
 router.get("/:id", requireLogin, petsController.show.bind(petsController));
 
+router.get("/:id/wish", requireLogin, petsController.wish.bind(petsController));
+router.get("/:id/request", requireLogin, petsController.request.bind(petsController));
+
 router.post("/store", upload.single('profile_photo'), petsController.store.bind(petsController));
 
 module.exports = router;
