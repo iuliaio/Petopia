@@ -85,6 +85,50 @@ class ChatRepository {
             })
         })
     }
+
+    delete(chat_id) {
+        return new Promise((resolve, reject) => {
+            this.db.run(`delete
+                         from requests
+                         where adopter_id = (select chats.adopter_id from chats where chats.id = ?)
+                           and pet_id = (select chats.pet_id from chats where chats.id = ?)`, [chat_id, chat_id], function (err) {
+                if (err) {
+                    reject(err)
+                }
+            })
+            this.db.run(`delete
+                         from chats
+                         where id = ?`, [chat_id], function (err) {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            })
+        })
+    }
+
+    accept_request(chat_id) {
+        return new Promise((resolve, reject) => {
+            this.db.run(`insert into adoptions (user_id, pet_id)
+                         select chats.adopter_id, chats.pet_id
+                         from chats
+                         where chats.id = ?`, [chat_id], function (err) {
+                if (err) {
+                    reject(err)
+                }
+            })
+            this.db.run(`update pets
+                         set available = 0
+                         where id = (select pet_id from chats where chats.id = ?)`, [chat_id], function (err) {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            })
+        })
+    }
 }
 
 module.exports = ChatRepository;

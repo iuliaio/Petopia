@@ -32,7 +32,11 @@ class ChatController {
                 }
             }
 
-            res.render('chats', {chats: chats, chat: chat, selectedChat: selectedChat, recipient_id: recipient_id})
+            let isShelter = req.session.user.charity_id !== ''
+
+            res.render('chats', {
+                chats: chats, chat: chat, selectedChat: selectedChat, recipient_id: recipient_id, isShelter: isShelter
+            })
         } catch (err) {
             next(err)
         }
@@ -68,6 +72,27 @@ class ChatController {
             await this.chatsRepository.add_message(messageDTO)
             const referer = req.header('Referer');
             res.redirect(referer === undefined ? '/chats' : referer);
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async accept_request(req, res, next) {
+        const chat_id = req.params.id
+        try {
+            await this.chatsRepository.accept_request(chat_id)
+            await this.chatsRepository.delete(chat_id)
+            res.redirect("/chats")
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async reject_request(req, res, next) {
+        const chat_id = req.params.id
+        try {
+            await this.chatsRepository.delete(chat_id)
+            res.redirect("/chats")
         } catch (err) {
             next(err)
         }
