@@ -11,50 +11,25 @@
     <a href="/user/account/<%= receiver_id %>" id="returnButton">Return to account</a>
 
     <div id="box">
-        <h2 id="shelter-name">Shelter Name</h2>
+        <h2 id="shelter-name"><%= shelter.first_name %> <%= shelter.last_name %></h2>
         <img class="profile-pic" src="/public/img/add-photo.png" id="profile-pic"/>
     </div>
 
-    <!--TODO: User this somehow-->
     <div id="box1">
         <div id="white-box">
-            <div class="blue-box">
-                <img class="quote" src="/public/img/quotes.png" alt="Quote 1">
-            </div>
-            <div class="blue-box">
-                <img class="quote" src="/public/img/quotes.png" alt="Quote 2">
-            </div>
-            <div class="blue-box">
-                <img class="quote" src="/public/img/quotes.png" alt="Quote 3">
-            </div>
+            <% for (let i = 0; i < reviews.length; i++) { %>
+                <div class="comment">
+                    <img class="quote" src="/public/img/quotes.png" alt="Quote 1">
+                    <p><strong><%= reviews[i].user_name %></strong> writes "<%= reviews[i].comment %>"</p>
+                </div>
+            <% } %>
         </div>
-        <div id="white-box1">
-            <div id="line"></div>
-            <img id="send" src="/public/img/send.png" alt="" width="67" height="74">
-        </div>
-    </div>
-
-    <div>
-        <% for (let i = 0; i < reviews.length; i++) { %>
-            <%= reviews[i].user_name %>
-            <%= reviews[i].comment %>
-            <%= reviews[i].rating %>
-        <% } %>
-    </div>
-
-    <form action="/review" method="post">
-        <input type="hidden" name="receiver_id" value="<%= receiver_id %>">
-        <label>
-            Comment
+        <form action="/review" method="post" id="white-box1">
+            <input type="hidden" name="receiver_id" value="<%= receiver_id %>">
             <input type="text" name="comment">
-        </label>
-        <label>
-            Rating
-            <input type="number" name="rating">
-        </label>
-        <button type="submit">Submit</button>
-    </form>
-
+            <input type="image" src="/public/img/send.png" alt="" width="67" height="74">
+        </form>
+    </div>
 
     <footer>
         <nav>
