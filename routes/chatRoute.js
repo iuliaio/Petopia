@@ -12,4 +12,7 @@ router.get("/", requireLogin, chatController.index.bind(chatController));
 router.post("/:id/message", requireLogin, chatController.add_message.bind(chatController));
 router.post('/store', requireLogin, chatController.store.bind(chatController));
 
+router.get("/:id/accept", requireLogin, chatController.accept_request.bind(chatController));
+router.get("/:id/reject", requireLogin, chatController.reject_request.bind(chatController));
+
 module.exports = router;

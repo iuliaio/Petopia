@@ -91,6 +91,10 @@
         <p>Visit the shelter page: <a href="/user/account/<%= pet.user_id %>"><%= pet.user_name %></a></p>
       </div>
 
+<!--      TODO: Use those somewhere-->
+<!--      <a href="/pets/<%= pet.id%>/wish"></a>-->
+<!--      <a href="/pets/<%= pet.id%>/request"></a>-->
+
       <div class="square square5">
         <% for (let i = 1; i < 4; i++) { %> <% if (pets[i] === undefined)
         continue; %>
