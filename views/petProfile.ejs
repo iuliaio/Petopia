@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="/public/css/petProfile.css" />
     <link rel="stylesheet" href="/public/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/footer.css" />
+    <script
+      src="https://kit.fontawesome.com/974a5cd720.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Pet Account</title>
   </head>
   <body>
@@ -46,7 +50,17 @@
       </div>
 
       <div class="square square2">
-        <div><h1><%= pet.name %></h1></div>
+        <!--      TODO: Use those somewhere-->
+        <!--      <a href="/pets/<%= pet.id%>/wish"></a>-->
+        <!--      <a href="/pets/<%= pet.id%>/request"></a>-->
+        <div class="wishlist-icon">
+          <h1><%= pet.name %></h1>
+          <button id="heartButton">
+            <i class="far fa-heart" id="emptyHeartIcon"></i>
+            <i class="fas fa-heart" id="filledHeartIcon"></i>
+          </button>
+        </div>
+        <script src="../public/js/wishlisticon.js"></script>
         <div class="mySlides fade">
           <img src="<%= pet.profile_photo %>" style="width: 100%" />
         </div>
@@ -88,12 +102,11 @@
       </div>
 
       <div class="square square4">
-        <p>Visit the shelter page: <a href="/user/account/<%= pet.user_id %>"><%= pet.user_name %></a></p>
+        <p>
+          Visit the shelter page:
+          <a href="/user/account/<%= pet.user_id %>"><%= pet.user_name %></a>
+        </p>
       </div>
-
-<!--      TODO: Use those somewhere-->
-<!--      <a href="/pets/<%= pet.id%>/wish"></a>-->
-<!--      <a href="/pets/<%= pet.id%>/request"></a>-->
 
       <div class="square square5">
         <% for (let i = 1; i < 4; i++) { %> <% if (pets[i] === undefined)
