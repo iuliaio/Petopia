@@ -1,5 +1,6 @@
 class ReviewController {
-    constructor(reviewRepository) {
+    constructor(userRepository, reviewRepository) {
+        this.userRepository = userRepository
         this.reviewRepository = reviewRepository;
     }
 
@@ -11,10 +12,18 @@ class ReviewController {
         }
 
         const user_id = req.params.id;
+        const user = await this.userRepository.getById(user_id)
+
+        if (user.charity_id === "") {
+            const referer = req.header('Referer');
+            res.redirect(referer === undefined ? '/user/account/' + user_id : referer);
+        }
 
         try {
             const reviews = await this.reviewRepository.all(user_id)
-            res.render('reviewPage', {reviews: reviews, sender_id: req.session.user.id, receiver_id: user_id})
+            res.render('reviewPage', {
+                reviews: reviews, sender_id: req.session.user.id, receiver_id: user_id, shelter: user
+            })
         } catch (err) {
             next(err)
         }
@@ -30,14 +39,19 @@ class ReviewController {
 
         let user_id = req.session.user.id
 
-        if (review.comment === "" || review.sender_id === review.receiver_id || review.rating === "") {
+        if (review.rating === undefined) review.rating = 5;
+
+        if (review.comment === "" || review.sender_id === review.receiver_id) {
             const referer = req.header('Referer');
             res.redirect(referer === undefined ? '/review/' + user_id : referer);
             return;
         }
 
         try {
-            await this.reviewRepository.add_review(review)
+            let review_exists = await this.reviewRepository.review_exists(review.sender_id, review.receiver_id)
+            if (review_exists === undefined) {
+                await this.reviewRepository.add_review(review)
+            }
 
             const referer = req.header('Referer');
             res.redirect(referer === undefined ? '/review/' + user_id : referer);

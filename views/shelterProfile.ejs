@@ -33,6 +33,9 @@
       </div>
     </header>
 
+    <!--    TODO: Use this-->
+<!--    <a href="/review/<%= details.id %>">Review</a>-->
+
     <!-- Modal -->
     <div class="modal-button">
       <button id="myBtn" class="align-right">Upload pet</button>
@@ -140,7 +143,7 @@
           <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
           <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center">
             <a href="/chats?id=<%= messages[i].id %>">
-              <%= messages[i].name %>   
+              <%= messages[i].name %>
               <i class="fas fa-chevron-right"></i>
             </a>
           </div>
@@ -150,7 +153,6 @@
           <% } %>
         </div>
       </div>
-      
 
       <div class="card">
         <h3>Your cats for adoption</h3>
@@ -164,6 +166,7 @@
           </div>
           <% } %>
         </div>
+    </div>
     </div>
   </body>
   <footer>
