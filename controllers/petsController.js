@@ -67,6 +67,38 @@ class PetsController {
             next(err)
         }
     }
+
+    async wish(req, res, next) {
+        const user_id = req.session.user.id;
+        const pet_id = req.params.id
+        try {
+            let already_wished = await this.petsRepository.already_wished(user_id, pet_id)
+            if (already_wished !== undefined) {
+                await this.petsRepository.un_wish_pet(user_id, pet_id)
+            } else {
+                await this.petsRepository.wish_pet(user_id, pet_id)
+            }
+
+            res.redirect('/pets/' + pet_id)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async request(req, res, next) {
+        const user_id = req.session.user.id;
+        const pet_id = req.params.id
+        try {
+            let already_requested = await this.petsRepository.already_requested(user_id, pet_id)
+            if (already_requested === undefined) {
+                await this.petsRepository.request_pet(user_id, pet_id)
+            }
+
+            res.redirect('/pets/' + pet_id)
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = PetsController;

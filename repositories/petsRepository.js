@@ -243,7 +243,87 @@ class PetsRepository {
             })
         })
     }
-}
 
+    already_wished(user_id, pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.get(`select 1
+                         from wish_list
+                         where user_id = ?
+                           and pet_id = ?`, [user_id, pet_id], (err, row) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(row)
+                }
+            })
+        })
+    }
+
+    wish_pet(user_id, pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.run(`insert into wish_list (user_id, pet_id)
+                         values (?, ?)`, [user_id, pet_id], (err) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            })
+        })
+    }
+
+    un_wish_pet(user_id, pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.run(`delete
+                         from wish_list
+                         where user_id = ?
+                           and pet_id = ?`, [user_id, pet_id], (err) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            })
+        })
+    }
+
+    already_requested(user_id, pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.get(`select 1
+                         from requests
+                         where adopter_id = ?
+                           and pet_id = ?`, [user_id, pet_id], (err, row) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(row)
+                }
+            })
+        })
+    }
+
+    request_pet(user_id, pet_id) {
+        return new Promise((resolve, reject) => {
+            this.db.run(`insert into requests (adopter_id, pet_id, owner_id, status)
+                         select ?, ?, p.user_id, 'IN PROGRESS'
+                         from pets p
+                         where p.id = ?`, [user_id, pet_id, pet_id], (err) => {
+                if (err) {
+                    reject(err)
+                }
+            })
+            this.db.run(`insert into chats (adopter_id, pet_id, owner_id, created_at)
+                         select ?, ?, p.user_id, current_date
+                         from pets p
+                         where p.id = ?;`, [user_id, pet_id, pet_id], (err) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve()
+                }
+            })
+        })
+    }
+}
 
 module.exports = PetsRepository;
