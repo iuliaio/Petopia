@@ -169,6 +169,7 @@
 
 .wishlist-icon {
   display: flex;
+  align-items: center;
 }
 
 .wishlist-icon i {

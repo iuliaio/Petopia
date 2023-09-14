@@ -22,11 +22,14 @@ class PetsController {
 
     async show(req, res, next) {
         const pet_id = req.params.id;
-
+        const user_id = req.session.user.id
         try {
             const pet = await this.petsRepository.get(pet_id)
             const randomPets = await this.petsRepository.getRandom(pet_id)
-            res.render('petProfile', {pet: pet, pets: randomPets})
+            const addedToWishlist = await this.petsRepository.already_wished(user_id, pet_id)
+            res.render('petProfile', {
+                pet: pet, pets: randomPets, addedToWishlist: addedToWishlist
+            })
         } catch (err) {
             next(err)
         }

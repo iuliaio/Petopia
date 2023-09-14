@@ -50,17 +50,16 @@
       </div>
 
       <div class="square square2">
-        <!--      TODO: Use those somewhere-->
-        <!--      <a href="/pets/<%= pet.id%>/wish"></a>-->
-        <!--      <a href="/pets/<%= pet.id%>/request"></a>-->
         <div class="wishlist-icon">
           <h1><%= pet.name %></h1>
-          <button id="heartButton">
-            <i class="far fa-heart" id="emptyHeartIcon"></i>
-            <i class="fas fa-heart" id="filledHeartIcon"></i>
-          </button>
+            <a href="/pets/<%= pet.id%>/wish">
+            <% if (addedToWishlist) { %>
+              <i class="fas fa-heart"></i>
+            <% } else { %>
+              <i class="far fa-heart"></i>
+            <% } %>
+            </a>
         </div>
-        <script src="../public/js/wishlisticon.js"></script>
         <div class="mySlides fade">
           <img src="<%= pet.profile_photo %>" style="width: 100%" />
         </div>
@@ -84,10 +83,6 @@
       </div>
 
       <div class="square square3">
-        <!--<div class="filters">
-            <h2>Filters</h2>
-            <p>Filter options go here...</p>
-        </div>-->
 
         <div class="description">
           <h2>Description</h2>
@@ -101,11 +96,13 @@
         </div>
       </div>
 
-      <div class="square square4">
+      <div class="square square4" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
         <p>
           Visit the shelter page:
           <a href="/user/account/<%= pet.user_id %>"><%= pet.user_name %></a>
         </p>
+
+        <a href="/pets/<%= pet.id%>/request" style="margin-right: 1rem; padding: .5rem; background-color: #1e7e34; color: white; border-radius: 10px">Request pet!</a>
       </div>
 
       <div class="square square5">
