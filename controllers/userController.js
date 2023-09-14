@@ -61,11 +61,11 @@ class UserController {
             return;
         }
 
-        let canAdd = false;
+        let isPersonalAccount = false;
         let user_id = req.params.id;
         if (user_id === undefined || isNaN(user_id)) {
             user_id = req.session.user.id
-            canAdd = true;
+            isPersonalAccount = true;
         }
 
         let messages = await this.chatRepository.all(user_id)
@@ -80,14 +80,18 @@ class UserController {
             let contactedPets = await this.petsRepository.contactedPets(user_id)
 
             res.render('adopterProfile', {
-                details: user_details, messages: messages, wishlist: wishlist, contactedPets: contactedPets
+                details: user_details,
+                messages: messages,
+                wishlist: wishlist,
+                contactedPets: contactedPets,
+                isPersonalAccount: isPersonalAccount
             })
         } else {
             let dogs = await this.petsRepository.getDogs(user_id)
             let cats = await this.petsRepository.getCats(user_id)
 
             res.render('shelterProfile', {
-                details: user_details, messages: messages, dogs: dogs, cats: cats, canAdd: canAdd
+                details: user_details, messages: messages, dogs: dogs, cats: cats, isPersonalAccount: isPersonalAccount
             })
         }
     }
