@@ -4,13 +4,13 @@ class PetsRepository {
     }
 
     all(filters) {
-        const {species, age, size, color, gender} = filters
+        const {species, age, size, color, gender, location} = filters
 
         // Start with a valid query
         let query = `SELECT pets.*, u.first_name || ' ' || u.last_name as user_name
                      FROM pets
                               inner join users u on pets.user_id = u.id
-                     WHERE 1 = 1`
+                     WHERE pets.available = 1 `
         let args = []
 
         if (species && species !== '') {
@@ -33,6 +33,11 @@ class PetsRepository {
             query += 'AND pets.gender = ?'
             args.push(gender)
         }
+        if (location && location !== '') {
+            query += 'AND u.location = ?'
+            args.push(location)
+        }
+
 
         return new Promise((resolve, reject) => {
             this.db.all(query, args, function (err, rows) {
@@ -48,7 +53,8 @@ class PetsRepository {
     get(pet_id) {
         return new Promise((resolve, reject) => {
             this.db.get(`SELECT pets.*,
-                                u.first_name || ' ' || u.last_name as user_name
+                                u.first_name || ' ' || u.last_name as user_name,
+                                u.location
                          FROM pets
                                   inner join main.users u on u.id = pets.user_id
                          WHERE pets.id = ?`, [pet_id], function (err, row) {
@@ -307,7 +313,7 @@ class PetsRepository {
             this.db.run(`insert into requests (adopter_id, pet_id, owner_id, status)
                          select ?, ?, p.user_id, 'IN PROGRESS'
                          from pets p
-                         where p.id = ?`, [user_id, pet_id, pet_id], (err) => {
+                         where p.id = ? and p.available = 1`, [user_id, pet_id, pet_id], (err) => {
                 if (err) {
                     reject(err)
                 }
@@ -315,7 +321,7 @@ class PetsRepository {
             this.db.run(`insert into chats (adopter_id, pet_id, owner_id, created_at)
                          select ?, ?, p.user_id, current_date
                          from pets p
-                         where p.id = ?;`, [user_id, pet_id, pet_id], (err) => {
+                         where p.id = ? and p.available = 1;`, [user_id, pet_id, pet_id], (err) => {
                 if (err) {
                     reject(err)
                 } else {

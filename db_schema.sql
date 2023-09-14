@@ -14,7 +14,7 @@ create table users
     country         TEXT,
     county          text,
     zip_code        text,
-    address         text,
+    location        text,
     created_at      date default current_date
 );
 
