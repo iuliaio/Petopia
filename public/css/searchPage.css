@@ -133,7 +133,7 @@ body {
 
 .card-image {
   max-width: 100%;
-  height: auto;
+  height: 174px;
   object-fit: cover;
 }
 

@@ -9,7 +9,8 @@ class PetsController {
             age: req.query.age,
             size: req.query.size,
             color: req.query.color,
-            gender: req.query.gender
+            gender: req.query.gender,
+            location: req.query.location
         }
 
         try {
@@ -34,7 +35,9 @@ class PetsController {
 
     async store(req, res, next) {
         let imgPath;
-        if (req.file.path === undefined || req.file.path === "") {
+        if (req.file === undefined) {
+            imgPath = "/public/img/profilepetpic.png";
+        } else if (req.file.path === undefined || req.file.path === "") {
             imgPath = "/public/img/profilepetpic.png";
         } else {
             imgPath = "/" + req.file.path

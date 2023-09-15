@@ -14,7 +14,7 @@ create table users
     country         TEXT,
     county          text,
     zip_code        text,
-    address         text,
+    location        text,
     created_at      date default current_date
 );
 
@@ -166,13 +166,13 @@ create table comments
     created_at date    default current_date not null
 );
 
-insert into users (first_name, last_name, email, password, charity_name, charity_id)
-values ('Test', 'Test', 'example@email.com', 'password', '', ''),
-       ('First', 'Adopter', 'first.adopter@email.com', 'password', '', ''),
-       ('Second', 'Adopter', 'second.adopter@email.com', 'password', '', ''),
-       ('Third', 'Adopter', 'third.adopter@email.com', 'password', '', ''),
-       ('First', 'Shelter', 'first.shelter@email.com', 'password', 'Shelter 1', '1234'),
-       ('Second', 'Shelter', 'second.shelter@email.com', 'password', 'Shelter 2', '5678');
+insert into users (first_name, last_name, email, password, charity_name, charity_id, location)
+values ('Test', 'Test', 'example@email.com', 'password', '', '', 'Loc1'),
+       ('First', 'Adopter', 'first.adopter@email.com', 'password', '', '', 'Loc2'),
+       ('Second', 'Adopter', 'second.adopter@email.com', 'password', '', '', 'Loc3'),
+       ('Third', 'Adopter', 'third.adopter@email.com', 'password', '', '', 'Loc4'),
+       ('First', 'Shelter', 'first.shelter@email.com', 'password', 'Shelter 1', '1234', 'Loc5'),
+       ('Second', 'Shelter', 'second.shelter@email.com', 'password', 'Shelter 2', '5678', 'Loc6');
 
 insert into pets (name, species, age, gender, size, color, weight, description, available, user_id, profile_photo)
 values ('Max', 'Dog', 2, 'male', 'medium', 'black', 17, 'A very cute dog and my favourite!', 1, 6,

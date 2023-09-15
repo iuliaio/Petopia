@@ -55,15 +55,15 @@ class UserRepository {
             country,
             county,
             zip_code,
-            address,
+            location,
             created_at
         } = user;
 
         return new Promise((resolve, reject) => {
             this.db.run(`INSERT INTO users (first_name, last_name, phone, email, password, profile_picture,
-                                            charity_name, charity_id, description, country, county, zip_code, address,
+                                            charity_name, charity_id, description, country, county, zip_code, location,
                                             created_at)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, created_at], function (err) {
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, location, created_at], function (err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -88,7 +88,7 @@ class UserRepository {
             country,
             county,
             zip_code,
-            address
+            location
         } = user;
 
         return new Promise((resolve, reject) => {
@@ -105,8 +105,8 @@ class UserRepository {
                              country         = ?,
                              county          = ?,
                              zip_code        = ?,
-                             address         = ?
-                         WHERE id = ?`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, address, id], function (err) {
+                             location         = ?
+                         WHERE id = ?`, [first_name, last_name, phone, email, password, profile_picture, charity_name, charity_id, description, country, county, zip_code, location, id], function (err) {
                 if (err) {
                     reject(err);
                 } else {
