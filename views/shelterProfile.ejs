@@ -1,196 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/css/shelterProfile.css" />
-    <link rel="stylesheet" href="/public/css/modal.css" />
-    <link rel="stylesheet" href="/public/css/header.css" />
-    <link rel="stylesheet" type="text/css" href="/public/css/footer.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/public/css/shelterProfile.css"/>
+    <link rel="stylesheet" href="/public/css/modal.css"/>
+    <link rel="stylesheet" href="/public/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/footer.css"/>
     <script
-      src="https://kit.fontawesome.com/974a5cd720.js"
-      crossorigin="anonymous"
+            src="https://kit.fontawesome.com/974a5cd720.js"
+            crossorigin="anonymous"
     ></script>
     <script src="/public/js/modal.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/public/js/upload-porfile-picture.js"></script>
     <title>
-      Shelter Account - <%= details.first_name %> <%= details.last_name %>
+        Shelter Account - <%= details.first_name %> <%= details.last_name %>
     </title>
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
+</head>
+<body>
+<header>
+    <div class="navbar">
         <span>
-          <img src="/public/img/logo-no-background.png" alt="Petopia Logo" />
+          <img src="/public/img/logo-no-background.png" alt="Petopia Logo"/>
         </span>
         <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/user/logout" id="signout-button">Sign out</a></li>
-          </ul>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/logout" id="signout-button">Sign out</a></li>
+            </ul>
         </nav>
-      </div>
-    </header>
-
-    <!--    TODO: Use this-->
-<!--    <a href="/review/<%= details.id %>">Review</a>-->
-
-    <!-- Modal -->
-    <div class="modal-button">
-      <button id="myBtn" class="align-right">Upload pet</button>
     </div>
-    <div id="upload-content-modal" class="modal">
-      <div class="modal-content">
+</header>
+
+<!-- Modal -->
+<% if (isPersonalAccount) { %>
+    <div class="modal-button">
+        <button id="myBtn" class="align-right">Upload pet</button>
+    </div>
+<% } %>
+
+<div id="upload-content-modal" class="modal">
+    <div class="modal-content">
         <span class="close">&times;</span>
         <div class="profile-form">
-          <h2>Create Pet Profile</h2>
-          <form
-            action="/pets/store"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <div class="profile-picture">
-              <img
-                id="profile-img"
-                src="/public/img/profilepetpic.png"
-                alt="Profile Picture"
-              />
-              <input
-                type="file"
-                id="profile-image-upload"
-                accept="image/*"
-                name="profile_photo"
-              />
-            </div>
+            <h2>Create Pet Profile</h2>
+            <form
+                    action="/pets/store"
+                    method="post"
+                    enctype="multipart/form-data"
+            >
+                <div class="profile-picture">
+                    <img
+                            id="profile-img"
+                            src="/public/img/profilepetpic.png"
+                            alt="Profile Picture"
+                    />
+                    <input
+                            type="file"
+                            id="profile-image-upload"
+                            accept="image/*"
+                            name="profile_photo"
+                    />
+                </div>
 
-            <label>
-              Name
-              <input type="text" name="name" />
-            </label>
+                <label>
+                    Name
+                    <input type="text" name="name"/>
+                </label>
 
-            <label type="text" for="profile-description">
-              Description
-              <textarea
-                id="profile-description"
-                placeholder="Enter your profile description..."
-                name="description"
-              ></textarea>
-            </label>
+                <label type="text" for="profile-description">
+                    Description
+                    <textarea
+                            id="profile-description"
+                            placeholder="Enter your profile description..."
+                            name="description"
+                    ></textarea>
+                </label>
 
-            <label>
-              Species
-              <input type="text" name="species" />
-            </label>
-            <label>
-              Age
-              <input type="number" name="age" />
-            </label>
-            <label>
-              Gender
-              <input type="text" name="gender" />
-            </label>
-            <label>
-              Size
-              <input type="text" name="size" />
-            </label>
-            <label>
-              Color
-              <input type="text" name="color" />
-            </label>
-            <label>
-              Weight
-              <input type="text" name="weight" />
-            </label>
+                <label>
+                    Species
+                    <input type="text" name="species"/>
+                </label>
+                <label>
+                    Age
+                    <input type="number" name="age"/>
+                </label>
+                <label>
+                    Gender
+                    <input type="text" name="gender"/>
+                </label>
+                <label>
+                    Size
+                    <input type="text" name="size"/>
+                </label>
+                <label>
+                    Color
+                    <input type="text" name="color"/>
+                </label>
+                <label>
+                    Location
+                    <input type="text" name="weight"/>
+                </label>
 
-            <button id="create-profile-btn" type="submit">Upload pet</button>
-          </form>
+                <button id="create-profile-btn" type="submit">Upload pet</button>
+            </form>
         </div>
-      </div>
     </div>
+</div>
 
-    <div class="wrapper">
-      <div id="card">
+<div class="wrapper">
+    <div id="card">
         <h3 id="empty-element">empty</h3>
         <div id="upload-image">
-          <img class="profile-pic" src="/public/img/profile-pic.jpg" />
-          <input class="file-upload" type="file" accept="image/*" />
-          <div id="box3">
-            <p>Intro: </p>
-            <p>Verified: </p>
+            <img class="profile-pic" src="/public/img/profile-pic.jpg"/>
+            <input class="file-upload" type="file" accept="image/*"/>
+            <div id="box3">
+                <p>Intro: </p>
+                <p>Verified: </p>
+                <a href="/review/<%= details.id %>"
+                   style="text-align: center; padding: .5rem; background-color: #1e7e34; color: white; margin-bottom: .2rem; border-radius: 10px">Review</a>
             </div>
         </div>
-      </div>
+    </div>
 
-      <div id="card">
+    <div id="card">
         <h3>Your dogs for adoption</h3>
         <div id="profile-square-big-top" class="content">
-          <% for (let i = 0; i < Math.min(3, dogs.length); i++) { %>
-          <div class="card-body">
-            <img src="<%= dogs[i].profile_photo %>" alt="<%= dogs[i].name %>" />
-            <h2><%= dogs[i].name %></h2>
-            <p><%= dogs[i].description %></p>
-            <a href="/pets/<%= dogs[i].id %>">See more ></a>
-          </div>
-          <% } %>
+            <% for (let i = 0; i < Math.min(3, dogs.length); i++) { %>
+                <div class="card-body">
+                    <img src="<%= dogs[i].profile_photo %>" alt="<%= dogs[i].name %>"/>
+                    <h2><%= dogs[i].name %></h2>
+                    <p><%= dogs[i].description %></p>
+                    <a href="/pets/<%= dogs[i].id %>">See more ></a>
+                </div>
+            <% } %>
         </div>
-      </div>
+    </div>
 
-      <div id="card">
-        <h3 class="messages-square-h3">Messages</h3>
-        <div id="messages-square" class="content">
-          <%= messages.length === 0 ? 'No messages yet!' : '' %>
-          <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
-          <div class="inner-square-bottom" style="display: flex; align-items: center; justify-content: center">
-            <a href="/chats?id=<%= messages[i].id %>">
-              <%= messages[i].name %>
-              <i class="fas fa-chevron-right"></i>
-            </a>
-          </div>
-          <% } %>
-          <% if (messages.length !== 0) { %>
-          <a href="/chats" class="messages-button">Go to messages ...</a>
-          <% } %>
-        </div>
-      </div>
+    <div id="card">
+        <% if (isPersonalAccount) { %>
+            <h3 class="messages-square-h3">Messages</h3>
+            <div id="messages-square" class="content">
+                <%= messages.length === 0 ? 'No messages yet!' : '' %>
+                <% for (let i = 0; i < Math.min(4, messages.length); i++){ %>
+                    <div class="inner-square-bottom"
+                         style="display: flex; align-items: center; justify-content: center">
+                        <a href="/chats?id=<%= messages[i].id %>">
+                            <%= messages[i].name %>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                <% } %>
+                <% if (messages.length !== 0) { %>
+                    <a href="/chats" class="messages-button">Go to messages ...</a>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
 
-      <div class="card">
+    <div class="card">
         <h3>Your cats for adoption</h3>
         <div id="profile-square-big-bottom" class="content">
-          <% for (let i = 0; i < Math.min(3, cats.length); i++) { %>
-          <div class="card-body">
-            <img src="<%= cats[i].profile_photo %>" alt="<%= cats[i].name %>" />
-            <h2><%= cats[i].name %></h2>
-            <p><%= cats[i].description %></p>
-            <a href="/pets/<%= cats[i].id %>">See more ></a>
-          </div>
-          <% } %>
+            <% for (let i = 0; i < Math.min(3, cats.length); i++) { %>
+                <div class="card-body">
+                    <img src="<%= cats[i].profile_photo %>" alt="<%= cats[i].name %>"/>
+                    <h2><%= cats[i].name %></h2>
+                    <p><%= cats[i].description %></p>
+                    <a href="/pets/<%= cats[i].id %>">See more ></a>
+                </div>
+            <% } %>
         </div>
     </div>
-    </div>
-  </body>
-  <footer>
+</div>
+</body>
+<footer>
     <nav>
-      <ul class="list">
-        <li><a href="#">Product</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Resources</a></li>
-        <li id="petopia"><a href="#">Petopia</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Support</a></li>
-      </ul>
+        <ul class="list">
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Resources</a></li>
+            <li id="petopia"><a href="#">Petopia</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
     </nav>
 
-    <br />
-    <hr />
-    <br />
+    <br/>
+    <hr/>
+    <br/>
     <div class="circle-container">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
-  </footer>
+</footer>
 </html>
