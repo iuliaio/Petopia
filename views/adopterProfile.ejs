@@ -50,6 +50,9 @@
       <div class="card">
         <h3>Contacted pets <a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-top" class="content">
+          <% if(contactedPets.length == 0) { %>
+            <p id="no-contacted-pet-message">Go on a pet profile and click on 'Request Pet!' button to start a conversation with the shelter...</p>
+            <% } else {%>
           <% for (let i = 0; i < Math.min(3, contactedPets.length); i++) { %>
             <div class="card-body">
               <img src="<%= contactedPets[i].profile_photo %>" alt="<%= contactedPets[i].name %>" />
@@ -57,6 +60,7 @@
               <p><%= contactedPets[i].description %></p>
               <a href="/pets/<%= contactedPets[i].id %>">See more ></a>
             </div>
+          <% } %>
           <% } %>
         </div>
       </div>
@@ -94,6 +98,9 @@
       <div class="card">
         <h3>Wish list<a href=""><i class="fas fa-chevron-right"></i></a></h3>
         <div id="profile-square-big-bottom" class="content">
+          <% if(wishlist.length == 0) { %>
+            <p id="no-wishlist-pet-message">Go on a pet profile and click on the heart next to their name to add them to your wishlist...</p>
+            <% } else {%>
           <% for (let i = 0; i < Math.min(3, wishlist.length); i++) { %>
             <div class="card-body">
               <img src="<%= wishlist[i].profile_photo %>" alt="<%= wishlist[i].name %>" />
@@ -102,6 +109,7 @@
               <a href="/pets/<%= wishlist[i].id %>">See more ></a>
             </div>
           <% } %>
+          <% }%>
         </div>
       </div>
   </body>
