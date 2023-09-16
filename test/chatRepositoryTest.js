@@ -35,7 +35,8 @@ describe('ChatRepository', () => {
         it('should insert a new chat', async () => {
             const user1Id = 123;
             const user2Id = 456;
-            const insertedId = await chatRepository.insert(user1Id, user2Id);
+            const pet_id = 1;
+            const insertedId = await chatRepository.insert(user1Id, user2Id, pet_id);
             expect(insertedId).to.be.a('number');
         });
     });
